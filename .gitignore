@@ -1,1 +1,4 @@
+atpg
 *.swp
+*.o
+*.swo

@@ -1,0 +1,746 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ABORT	typeemu.h	/^enum FAULT_STATUS { UNKNOWN, DETECTED, REDUNDANT, ABORT };$/;"	e	enum:FAULT_STATUS
+ALL_ASSIGNED	typeemu.h	/^enum FLAGS { ALL_ASSIGNED, MARKED, FAULT_INJECTED, FAULTY, SCHEDULED, OUTPUT, NumFlags };$/;"	e	enum:FLAGS
+ATPG_STATUS	typeemu.h	/^enum ATPG_STATUS { TRUE, CONFLICT, FALSE };$/;"	g
+AddGate	circuit.h	/^        void AddGate(GATE* gptr) { Netlist.push_back(gptr); }$/;"	f	class:CIRCUIT
+AddInput_list	gate.h	/^        void AddInput_list(GATE* gptr){Input_list.push_back(gptr);}$/;"	f	class:GATE
+AddOutput_list	gate.h	/^        void AddOutput_list(GATE* gptr){Output_list.push_back(gptr);}$/;"	f	class:GATE
+AndTable	typeemu.h	/^const VALUE AndTable[5][5] =  { { S0,  S0,  S0,  S0,  S0 },$/;"	v
+Atpg	atpg.cc	/^void CIRCUIT::Atpg()$/;"	f	class:CIRCUIT
+B	typeemu.h	/^enum VALUE {S0, S1, X, D, B, ILLIGAL};$/;"	e	enum:VALUE
+BEGIN	lex.yy.cc	125;"	d	file:
+BackTrackLimit	circuit.h	/^        unsigned BackTrackLimit; \/\/backtrack limit for Podem$/;"	m	class:CIRCUIT
+BackwardImply	atpg.cc	/^ATPG_STATUS CIRCUIT::BackwardImply(GATEPTR gptr, VALUE value)$/;"	f	class:CIRCUIT
+BackwardImply_t	tfatpg.cc	/^ATPG_STATUS CIRCUIT::BackwardImply_t(GATEPTR gptr, VALUE value)$/;"	f	class:CIRCUIT
+Branch	fault.h	/^        bool Branch; \/\/fault is on branch$/;"	m	class:FAULT
+Branch	tfault.h	/^        bool Branch; \/\/fault is on branch$/;"	m	class:TFAULT
+CIRCUIT	circuit.h	/^        CIRCUIT(): MaxLevel(0), BackTrackLimit(10000) {$/;"	f	class:CIRCUIT
+CIRCUIT	circuit.h	/^        CIRCUIT(unsigned NO_GATE, unsigned NO_PI = 128, unsigned NO_PO = 512,$/;"	f	class:CIRCUIT
+CIRCUIT	circuit.h	/^class CIRCUIT$/;"	c
+CIRCUIT_H	circuit.h	2;"	d
+COMMA	readcircuit.tab.cc	/^    COMMA = 270,$/;"	e	enum:yytokentype	file:
+COMMA	readcircuit.tab.h	/^    COMMA = 270,$/;"	e	enum:yytokentype
+CONFLICT	typeemu.h	/^enum ATPG_STATUS { TRUE, CONFLICT, FALSE };$/;"	e	enum:ATPG_STATUS
+CV	typeemu.h	/^const VALUE CV[] = {X, X, X, X, X, S0, S0, S1, S1, X, X, X};$/;"	v
+CXX	Makefile	/^CXX      = g++$/;"	m
+CXXFLAGS	Makefile	/^CXXFLAGS = -O2 -Wall -DDEBUG$/;"	m
+Cache	hash.h	/^    Cache(int s = 8191) : bucket(s) { _size = s; }$/;"	f	class:Cache
+Cache	hash.h	/^class Cache$/;"	c
+Cell	GetLongOpt.h	/^            Cell() { option = description = value = 0; next = 0; }$/;"	f	struct:GetLongOpt::Cell
+Cell	GetLongOpt.h	/^        struct Cell$/;"	s	class:GetLongOpt
+ChangeFanin	gate.h	/^        void ChangeFanin(int i, GATE* g) {Input_list[i] = g;}$/;"	f	class:GATE
+ChangeFanout	gate.h	/^        void ChangeFanout(int i, GATE* g) {Output_list[i] = g;}$/;"	f	class:GATE
+CheckFaultyGate	fsim.cc	/^bool CIRCUIT::CheckFaultyGate(FAULT* fptr)$/;"	f	class:CIRCUIT
+CheckTFaultyGate	stfsim.cc	/^bool CIRCUIT::CheckTFaultyGate(TFAULT* fptr)$/;"	f	class:CIRCUIT
+CheckTFaultyGate_t	stfsim.cc	/^bool CIRCUIT::CheckTFaultyGate_t(TFAULT* fptr)$/;"	f	class:CIRCUIT
+CheckTest	atpg.cc	/^bool CIRCUIT::CheckTest()$/;"	f	class:CIRCUIT
+Check_Levelization	circuit.cc	/^void CIRCUIT::Check_Levelization()$/;"	f	class:CIRCUIT
+Circuit	readcircuit.tab.cc	/^CIRCUIT Circuit;$/;"	v
+Count	gate.h	/^        unsigned Count[2]; \/\/used by Levelize(), FindStaticPivot(),PathSearch$/;"	m	class:GATE
+CreateBuf	readcircuit.tab.cc	/^GATE* CreateBuf(GATE* in, GATE* out){$/;"	f
+D	typeemu.h	/^enum VALUE {S0, S1, X, D, B, ILLIGAL};$/;"	e	enum:VALUE
+DEL_FILE	Makefile	/^DEL_FILE = rm -f$/;"	m
+DETECTED	typeemu.h	/^enum FAULT_STATUS { UNKNOWN, DETECTED, REDUNDANT, ABORT };$/;"	e	enum:FAULT_STATUS
+DecCount	gate.h	/^        void DecCount(unsigned i = 0) {Count[i]--;}$/;"	f	class:GATE
+ECHO	lex.yy.cc	597;"	d	file:
+EOB_ACT_CONTINUE_SCAN	lex.yy.cc	173;"	d	file:
+EOB_ACT_END_OF_FILE	lex.yy.cc	174;"	d	file:
+EOB_ACT_LAST_MATCH	lex.yy.cc	175;"	d	file:
+EOLINE	readcircuit.tab.cc	/^    EOLINE = 267,$/;"	e	enum:yytokentype	file:
+EOLINE	readcircuit.tab.h	/^    EOLINE = 267,$/;"	e	enum:yytokentype
+EQUAL	readcircuit.tab.cc	/^    EQUAL = 271,$/;"	e	enum:yytokentype	file:
+EQUAL	readcircuit.tab.h	/^    EQUAL = 271,$/;"	e	enum:yytokentype
+EXIT_SUCCESS	readcircuit.tab.cc	311;"	d	file:
+EXIT_SUCCESS	readcircuit.tab.cc	339;"	d	file:
+EqvFaultNum	fault.h	/^        unsigned EqvFaultNum; \/\/equivalent fault number (includes itself)$/;"	m	class:FAULT
+EqvFaultNum	tfault.h	/^        unsigned EqvFaultNum; \/\/equivalent fault number (includes itself)$/;"	m	class:TFAULT
+EqvTable	typeemu.h	/^const VALUE EqvTable[5][5] =  { { S1,  S0,  X,  B,  D },$/;"	v
+Evaluate	sim.cc	/^VALUE CIRCUIT::Evaluate(GATEPTR gptr)$/;"	f	class:CIRCUIT
+Evaluate_t	stfsim.cc	/^VALUE CIRCUIT::Evaluate_t(GATEPTR gptr)$/;"	f	class:CIRCUIT
+Exec	hash.h	/^class Exec$/;"	c
+FALSE	typeemu.h	/^enum ATPG_STATUS { TRUE, CONFLICT, FALSE };$/;"	e	enum:ATPG_STATUS
+FAULT	fault.h	/^        FAULT(GATE* gptr, GATE* ogptr, VALUE value): Value(value), Input(gptr),$/;"	f	class:FAULT
+FAULT	fault.h	/^class FAULT$/;"	c
+FAULTY	typeemu.h	/^enum FLAGS { ALL_ASSIGNED, MARKED, FAULT_INJECTED, FAULTY, SCHEDULED, OUTPUT, NumFlags };$/;"	e	enum:FLAGS
+FAULT_H	fault.h	2;"	d
+FAULT_INJECTED	typeemu.h	/^enum FLAGS { ALL_ASSIGNED, MARKED, FAULT_INJECTED, FAULTY, SCHEDULED, OUTPUT, NumFlags };$/;"	e	enum:FLAGS
+FAULT_STATUS	typeemu.h	/^enum FAULT_STATUS { UNKNOWN, DETECTED, REDUNDANT, ABORT };$/;"	g
+FLAGS	typeemu.h	/^enum FLAGS { ALL_ASSIGNED, MARKED, FAULT_INJECTED, FAULTY, SCHEDULED, OUTPUT, NumFlags };$/;"	g
+FLEXINT_H	lex.yy.cc	29;"	d	file:
+FLEX_BETA	lex.yy.cc	13;"	d	file:
+FLEX_SCANNER	lex.yy.cc	8;"	d	file:
+Fanin	gate.h	/^        GATE* Fanin(int i) { return Input_list[i];}$/;"	f	class:GATE
+Fanout	gate.h	/^        GATE* Fanout(int i) { return Output_list[i];}$/;"	f	class:GATE
+FanoutList	circuit.cc	/^void CIRCUIT::FanoutList()$/;"	f	class:CIRCUIT
+FaultEvaluate	atpg.cc	/^bool CIRCUIT::FaultEvaluate(FAULT* fptr)$/;"	f	class:CIRCUIT
+FaultFlag	gate.h	/^        bitset<PatternNum> FaultFlag;$/;"	m	class:GATE
+FaultSim	fsim.cc	/^void CIRCUIT::FaultSim()$/;"	f	class:CIRCUIT
+FaultSimEvaluate	fsim.cc	/^void CIRCUIT::FaultSimEvaluate(GATEPTR gptr)$/;"	f	class:CIRCUIT
+FaultSimVectors	fsim.cc	/^void CIRCUIT::FaultSimVectors()$/;"	f	class:CIRCUIT
+FindEasiestControl	atpg.cc	/^GATEPTR CIRCUIT::FindEasiestControl(GATEPTR gptr)$/;"	f	class:CIRCUIT
+FindEasiestControl_t	tfatpg.cc	/^GATEPTR CIRCUIT::FindEasiestControl_t(GATEPTR gptr)$/;"	f	class:CIRCUIT
+FindHardestControl	atpg.cc	/^GATEPTR CIRCUIT::FindHardestControl(GATEPTR gptr)$/;"	f	class:CIRCUIT
+FindHardestControl_t	tfatpg.cc	/^GATEPTR CIRCUIT::FindHardestControl_t(GATEPTR gptr)$/;"	f	class:CIRCUIT
+FindPIAssignment	atpg.cc	/^GATEPTR CIRCUIT::FindPIAssignment(GATEPTR gptr, VALUE value)$/;"	f	class:CIRCUIT
+FindPIAssignment_t	tfatpg.cc	/^GATEPTR CIRCUIT::FindPIAssignment_t(GATEPTR gptr, VALUE value)$/;"	f	class:CIRCUIT
+FindPropagateGate	atpg.cc	/^GATEPTR CIRCUIT::FindPropagateGate()$/;"	f	class:CIRCUIT
+Flag	gate.h	/^        bitset<NumFlags> Flag;$/;"	m	class:GATE
+Flist	circuit.h	/^        list<FAULT*> Flist; \/\/collapsing fault list$/;"	m	class:CIRCUIT
+Function	gate.h	/^        GATEFUNC Function;$/;"	m	class:GATE
+GAND	readcircuit.tab.cc	/^    GAND = 263,$/;"	e	enum:yytokentype	file:
+GAND	readcircuit.tab.h	/^    GAND = 263,$/;"	e	enum:yytokentype
+GATE	gate.h	/^        GATE(): Function(G_BAD), Level(0), Value(X), Value_t(X), Inversion(false) {$/;"	f	class:GATE
+GATE	gate.h	/^class GATE$/;"	c
+GATEFUNC	typeemu.h	/^enum GATEFUNC {G_PI, G_PO, G_PPI, G_PPO, G_NOT, G_AND, G_NAND, G_OR, G_NOR, G_DFF, G_BUF, G_BAD };$/;"	g
+GATEPTR	circuit.h	/^typedef GATE* GATEPTR;$/;"	t
+GATE_H	gate.h	2;"	d
+GBUF	readcircuit.tab.cc	/^    GBUF = 262,$/;"	e	enum:yytokentype	file:
+GBUF	readcircuit.tab.h	/^    GBUF = 262,$/;"	e	enum:yytokentype
+GDFF	readcircuit.tab.cc	/^    GDFF = 260,$/;"	e	enum:yytokentype	file:
+GDFF	readcircuit.tab.h	/^    GDFF = 260,$/;"	e	enum:yytokentype
+GINPUT	readcircuit.tab.cc	/^    GINPUT = 258,$/;"	e	enum:yytokentype	file:
+GINPUT	readcircuit.tab.h	/^    GINPUT = 258,$/;"	e	enum:yytokentype
+GNAND	readcircuit.tab.cc	/^    GNAND = 265,$/;"	e	enum:yytokentype	file:
+GNAND	readcircuit.tab.h	/^    GNAND = 265,$/;"	e	enum:yytokentype
+GNOR	readcircuit.tab.cc	/^    GNOR = 266,$/;"	e	enum:yytokentype	file:
+GNOR	readcircuit.tab.h	/^    GNOR = 266,$/;"	e	enum:yytokentype
+GNOT	readcircuit.tab.cc	/^    GNOT = 261,$/;"	e	enum:yytokentype	file:
+GNOT	readcircuit.tab.h	/^    GNOT = 261,$/;"	e	enum:yytokentype
+GOR	readcircuit.tab.cc	/^    GOR = 264,$/;"	e	enum:yytokentype	file:
+GOR	readcircuit.tab.h	/^    GOR = 264,$/;"	e	enum:yytokentype
+GOUTPUT	readcircuit.tab.cc	/^    GOUTPUT = 259,$/;"	e	enum:yytokentype	file:
+GOUTPUT	readcircuit.tab.h	/^    GOUTPUT = 259,$/;"	e	enum:yytokentype
+G_AND	typeemu.h	/^enum GATEFUNC {G_PI, G_PO, G_PPI, G_PPO, G_NOT, G_AND, G_NAND, G_OR, G_NOR, G_DFF, G_BUF, G_BAD };$/;"	e	enum:GATEFUNC
+G_BAD	typeemu.h	/^enum GATEFUNC {G_PI, G_PO, G_PPI, G_PPO, G_NOT, G_AND, G_NAND, G_OR, G_NOR, G_DFF, G_BUF, G_BAD };$/;"	e	enum:GATEFUNC
+G_BUF	typeemu.h	/^enum GATEFUNC {G_PI, G_PO, G_PPI, G_PPO, G_NOT, G_AND, G_NAND, G_OR, G_NOR, G_DFF, G_BUF, G_BAD };$/;"	e	enum:GATEFUNC
+G_DFF	typeemu.h	/^enum GATEFUNC {G_PI, G_PO, G_PPI, G_PPO, G_NOT, G_AND, G_NAND, G_OR, G_NOR, G_DFF, G_BUF, G_BAD };$/;"	e	enum:GATEFUNC
+G_NAND	typeemu.h	/^enum GATEFUNC {G_PI, G_PO, G_PPI, G_PPO, G_NOT, G_AND, G_NAND, G_OR, G_NOR, G_DFF, G_BUF, G_BAD };$/;"	e	enum:GATEFUNC
+G_NOR	typeemu.h	/^enum GATEFUNC {G_PI, G_PO, G_PPI, G_PPO, G_NOT, G_AND, G_NAND, G_OR, G_NOR, G_DFF, G_BUF, G_BAD };$/;"	e	enum:GATEFUNC
+G_NOT	typeemu.h	/^enum GATEFUNC {G_PI, G_PO, G_PPI, G_PPO, G_NOT, G_AND, G_NAND, G_OR, G_NOR, G_DFF, G_BUF, G_BAD };$/;"	e	enum:GATEFUNC
+G_OR	typeemu.h	/^enum GATEFUNC {G_PI, G_PO, G_PPI, G_PPO, G_NOT, G_AND, G_NAND, G_OR, G_NOR, G_DFF, G_BUF, G_BAD };$/;"	e	enum:GATEFUNC
+G_PI	typeemu.h	/^enum GATEFUNC {G_PI, G_PO, G_PPI, G_PPO, G_NOT, G_AND, G_NAND, G_OR, G_NOR, G_DFF, G_BUF, G_BAD };$/;"	e	enum:GATEFUNC
+G_PO	typeemu.h	/^enum GATEFUNC {G_PI, G_PO, G_PPI, G_PPO, G_NOT, G_AND, G_NAND, G_OR, G_NOR, G_DFF, G_BUF, G_BAD };$/;"	e	enum:GATEFUNC
+G_PPI	typeemu.h	/^enum GATEFUNC {G_PI, G_PO, G_PPI, G_PPO, G_NOT, G_AND, G_NAND, G_OR, G_NOR, G_DFF, G_BUF, G_BAD };$/;"	e	enum:GATEFUNC
+G_PPO	typeemu.h	/^enum GATEFUNC {G_PI, G_PO, G_PPI, G_PPO, G_NOT, G_AND, G_NAND, G_OR, G_NOR, G_DFF, G_BUF, G_BAD };$/;"	e	enum:GATEFUNC
+Gate	circuit.h	/^        GATE* Gate(unsigned index) { return Netlist[index]; }$/;"	f	class:CIRCUIT
+GateStack	circuit.h	/^        ListofGate GateStack;$/;"	m	class:CIRCUIT
+GenerateAllFaultList	atpg.cc	/^void CIRCUIT::GenerateAllFaultList()$/;"	f	class:CIRCUIT
+GenerateAllTFaultList	stfsim.cc	/^void CIRCUIT::GenerateAllTFaultList()$/;"	f	class:CIRCUIT
+GetCount	gate.h	/^        unsigned GetCount(unsigned i = 0) { return Count[i];}$/;"	f	class:GATE
+GetEqvFaultNum	fault.h	/^        unsigned GetEqvFaultNum() { return EqvFaultNum; }$/;"	f	class:FAULT
+GetEqvFaultNum	tfault.h	/^        unsigned GetEqvFaultNum() { return EqvFaultNum; }$/;"	f	class:TFAULT
+GetFaultFlag	gate.h	/^        bool GetFaultFlag(unsigned idx) { return FaultFlag[idx]; }$/;"	f	class:GATE
+GetFlag	gate.h	/^        bool GetFlag(FLAGS f) { return Flag[f]; }$/;"	f	class:GATE
+GetFunction	gate.h	/^        GATEFUNC GetFunction(){ return Function;}$/;"	f	class:GATE
+GetID	gate.h	/^        unsigned GetID(){ return ID;}$/;"	f	class:GATE
+GetInputGate	fault.h	/^        GATE* GetInputGate() { return Input; }$/;"	f	class:FAULT
+GetInputGate	tfault.h	/^        GATE* GetInputGate() { return Input; }$/;"	f	class:TFAULT
+GetInput_list	gate.h	/^        vector<GATE*> &GetInput_list() { return Input_list; }$/;"	f	class:GATE
+GetLevel	gate.h	/^        unsigned GetLevel() { return Level;}$/;"	f	class:GATE
+GetLongOpt	GetLongOpt.cc	/^GetLongOpt::GetLongOpt(const char optmark)$/;"	f	class:GetLongOpt
+GetLongOpt	GetLongOpt.h	/^class GetLongOpt$/;"	c
+GetMaxLevel	circuit.h	/^        int GetMaxLevel(){ return MaxLevel;}$/;"	f	class:CIRCUIT
+GetName	circuit.h	/^        string GetName(){ return Name;}$/;"	f	class:CIRCUIT
+GetName	gate.h	/^        string GetName(){ return Name;}$/;"	f	class:GATE
+GetOutputGate	fault.h	/^        GATE* GetOutputGate() { return Output; }$/;"	f	class:FAULT
+GetOutputGate	tfault.h	/^        GATE* GetOutputGate() { return Output; }$/;"	f	class:TFAULT
+GetStatus	fault.h	/^        FAULT_STATUS GetStatus() { return Status; }$/;"	f	class:FAULT
+GetStatus	tfault.h	/^        FAULT_STATUS GetStatus() { return Status; }$/;"	f	class:TFAULT
+GetTransition	gate.h	/^	char GetTransition(){$/;"	f	class:GATE
+GetTransition_t	gate.h	/^	char GetTransition_t(){$/;"	f	class:GATE
+GetValue	fault.h	/^        VALUE GetValue() { return Value; }$/;"	f	class:FAULT
+GetValue	gate.h	/^        VALUE GetValue() { return Value;}$/;"	f	class:GATE
+GetValue	tfault.h	/^        VALUE GetValue() { return Value; }$/;"	f	class:TFAULT
+GetValue1	gate.h	/^        bitset<PatternNum> GetValue1() { return WireValue[0]; }$/;"	f	class:GATE
+GetValue1	gate.h	/^        bool GetValue1(unsigned idx) { return WireValue[0][idx]; }$/;"	f	class:GATE
+GetValue2	gate.h	/^        bitset<PatternNum> GetValue2() { return WireValue[1]; }$/;"	f	class:GATE
+GetValue2	gate.h	/^        bool GetValue2(unsigned idx) { return WireValue[1][idx]; }$/;"	f	class:GATE
+GetValue_t	gate.h	/^        VALUE GetValue_t() { return Value_t;}$/;"	f	class:GATE
+GetWireValue	gate.h	/^        bitset<PatternNum> GetWireValue(unsigned i) { return WireValue[i]; }$/;"	f	class:GATE
+GetWireValue	gate.h	/^        bool GetWireValue(unsigned i, unsigned idx) { return WireValue[i][idx]; }$/;"	f	class:GATE
+HASH_H	hash.h	17;"	d
+HEADERS	Makefile	/^HEADERS = gate.h fault.h circuit.h GetLongOpt.h typeemu.h readcircuit.tab.h ReadPattern.h hash.h tfault.h$/;"	m
+Hash	hash.h	/^    Hash(int s = 509)$/;"	f	class:Hash
+Hash	hash.h	/^class Hash$/;"	c
+ID	gate.h	/^        unsigned ID;$/;"	m	class:GATE
+ILLIGAL	typeemu.h	/^enum VALUE {S0, S1, X, D, B, ILLIGAL};$/;"	e	enum:VALUE
+INCPATH	Makefile	/^INCPATH  =$/;"	m
+INITIAL	lex.yy.cc	503;"	d	file:
+INT16_MAX	lex.yy.cc	71;"	d	file:
+INT16_MIN	lex.yy.cc	62;"	d	file:
+INT32_MAX	lex.yy.cc	74;"	d	file:
+INT32_MIN	lex.yy.cc	65;"	d	file:
+INT8_MAX	lex.yy.cc	68;"	d	file:
+INT8_MIN	lex.yy.cc	59;"	d	file:
+IncCount	gate.h	/^        void IncCount(unsigned i = 0) {Count[i]++;}$/;"	f	class:GATE
+IncEqvFaultNum	fault.h	/^        void IncEqvFaultNum() { ++EqvFaultNum; }$/;"	f	class:FAULT
+IncEqvFaultNum	tfault.h	/^        void IncEqvFaultNum() { ++EqvFaultNum; }$/;"	f	class:TFAULT
+InitPattern	circuit.h	/^        void InitPattern(const char *pattern) {$/;"	f	class:CIRCUIT
+Initialization	tfatpg.cc	/^ATPG_STATUS CIRCUIT::Initialization(GATEPTR gptr, VALUE target, unsigned &total_backtrack_num)$/;"	f	class:CIRCUIT
+Initialize	sim.cc	/^void PATTERN::Initialize(char* InFileName, int no_pi, string TAG)$/;"	f	class:PATTERN
+InitializeQueue	sim.cc	/^void CIRCUIT::InitializeQueue()$/;"	f	class:CIRCUIT
+InjectFaultValue	fsim.cc	/^void CIRCUIT::InjectFaultValue(GATEPTR gptr, unsigned idx,VALUE value)$/;"	f	class:CIRCUIT
+Input	fault.h	/^        GATE* Input;$/;"	m	class:FAULT
+Input	tfault.h	/^        GATE* Input;$/;"	m	class:TFAULT
+Input_list	gate.h	/^        vector<GATE*> Input_list;$/;"	m	class:GATE
+InverseValue	gate.h	/^        void InverseValue() {Value = NotTable[Value];}$/;"	f	class:GATE
+InverseValue_t	gate.h	/^        void InverseValue_t() {Value_t = NotTable[Value_t];}$/;"	f	class:GATE
+Inversion	gate.h	/^        bool Inversion;$/;"	m	class:GATE
+Is_Branch	fault.h	/^        bool Is_Branch() { return Branch; }$/;"	f	class:FAULT
+Is_Branch	tfault.h	/^        bool Is_Branch() { return Branch; }$/;"	f	class:TFAULT
+Is_Inversion	gate.h	/^        bool Is_Inversion() { return Inversion;}$/;"	f	class:GATE
+Is_Unique	gate.h	/^        bool Is_Unique(unsigned j)$/;"	f	class:GATE
+LIBS	Makefile	/^LIBS     = -lreadline -lcurses$/;"	m
+LINK	Makefile	/^LINK     = g++$/;"	m
+LPAR	readcircuit.tab.cc	/^    LPAR = 268,$/;"	e	enum:yytokentype	file:
+LPAR	readcircuit.tab.h	/^    LPAR = 268,$/;"	e	enum:yytokentype
+Level	gate.h	/^        unsigned Level;$/;"	m	class:GATE
+Levelize	circuit.cc	/^void CIRCUIT::Levelize()$/;"	f	class:CIRCUIT
+ListofGate	circuit.h	/^        typedef list<GATE*> ListofGate;$/;"	t	class:CIRCUIT
+ListofGateIte	circuit.h	/^        typedef list<GATE*>::iterator ListofGateIte;$/;"	t	class:CIRCUIT
+LogicSim	sim.cc	/^void CIRCUIT::LogicSim()$/;"	f	class:CIRCUIT
+LogicSimVectors	sim.cc	/^void CIRCUIT::LogicSimVectors()$/;"	f	class:CIRCUIT
+LogicSim_t	stfsim.cc	/^void CIRCUIT::LogicSim_t()$/;"	f	class:CIRCUIT
+MARKED	typeemu.h	/^enum FLAGS { ALL_ASSIGNED, MARKED, FAULT_INJECTED, FAULTY, SCHEDULED, OUTPUT, NumFlags };$/;"	e	enum:FLAGS
+MandatoryValue	GetLongOpt.h	/^            NoValue, OptionalValue, MandatoryValue$/;"	e	enum:GetLongOpt::OptType
+MarkOutputGate	fsim.cc	/^void CIRCUIT::MarkOutputGate()$/;"	f	class:CIRCUIT
+MarkPropagateTree	atpg.cc	/^void CIRCUIT::MarkPropagateTree(GATEPTR gptr)$/;"	f	class:CIRCUIT
+MaxLevel	circuit.h	/^        unsigned MaxLevel;$/;"	m	class:CIRCUIT
+NAMESTRING	readcircuit.tab.cc	/^    NAMESTRING = 272$/;"	e	enum:yytokentype	file:
+NAMESTRING	readcircuit.tab.h	/^    NAMESTRING = 272$/;"	e	enum:yytokentype
+NCV	typeemu.h	/^const VALUE NCV[] = {X, X, X, X, X, S1, S1, S0, S0, X, X, X};$/;"	v
+Name	circuit.h	/^        string Name;$/;"	m	class:CIRCUIT
+Name	gate.h	/^        string Name;$/;"	m	class:GATE
+NameTable	readcircuit.tab.cc	/^Hash<string, GATE*, Str_hash_function> NameTable;$/;"	v
+NameToGate	readcircuit.tab.cc	/^GATE* NameToGate(string name){$/;"	f
+Netlist	circuit.h	/^        vector<GATE*> Netlist;$/;"	m	class:CIRCUIT
+NoValue	GetLongOpt.h	/^            NoValue, OptionalValue, MandatoryValue$/;"	e	enum:GetLongOpt::OptType
+No_Fanin	gate.h	/^        unsigned No_Fanin() { return Input_list.size();}$/;"	f	class:GATE
+No_Fanout	gate.h	/^        unsigned No_Fanout() { return Output_list.size();}$/;"	f	class:GATE
+No_Gate	circuit.h	/^        unsigned No_Gate() { return Netlist.size(); }$/;"	f	class:CIRCUIT
+No_PI	circuit.h	/^        unsigned No_PI() { return PIlist.size(); }$/;"	f	class:CIRCUIT
+No_PO	circuit.h	/^        unsigned No_PO() { return POlist.size(); }$/;"	f	class:CIRCUIT
+No_PPI	circuit.h	/^        unsigned No_PPI() { return PPIlist.size(); }$/;"	f	class:CIRCUIT
+No_PPO	circuit.h	/^        unsigned No_PPO() { return PPOlist.size(); }$/;"	f	class:CIRCUIT
+NotTable	typeemu.h	/^const VALUE NotTable[] = {S1, S0, X, B, D, ILLIGAL};$/;"	v
+NumFlags	typeemu.h	/^enum FLAGS { ALL_ASSIGNED, MARKED, FAULT_INJECTED, FAULTY, SCHEDULED, OUTPUT, NumFlags };$/;"	e	enum:FLAGS
+OBJECTS	Makefile	/^OBJECTS = readcircuit.tab.o lex.yy.o circuit.o main.o GetLongOpt.o atpg.o fsim.o sim.o psim.o stfsim.o tfatpg.o$/;"	m
+OUTPUT	typeemu.h	/^enum FLAGS { ALL_ASSIGNED, MARKED, FAULT_INJECTED, FAULTY, SCHEDULED, OUTPUT, NumFlags };$/;"	e	enum:FLAGS
+OptType	GetLongOpt.h	/^        enum OptType {$/;"	g	class:GetLongOpt
+OptionalValue	GetLongOpt.h	/^            NoValue, OptionalValue, MandatoryValue$/;"	e	enum:GetLongOpt::OptType
+OrTable	typeemu.h	/^const VALUE OrTable[5][5]  =  { { S0,  S1,  X,  D,  B },$/;"	v
+Output	fault.h	/^        GATE* Output; \/\/record output gate for branch fault$/;"	m	class:FAULT
+Output	tfault.h	/^        GATE* Output; \/\/record output gate for branch fault$/;"	m	class:TFAULT
+Output_list	gate.h	/^        vector<GATE*> Output_list;$/;"	m	class:GATE
+PATTERN	ReadPattern.h	/^        PATTERN(): no_pi_infile(0){}$/;"	f	class:PATTERN
+PATTERN	ReadPattern.h	/^class PATTERN$/;"	c
+PIGate	circuit.h	/^        GATE* PIGate(unsigned index) { return PIlist[index]; }$/;"	f	class:CIRCUIT
+PIlist	circuit.h	/^        vector<GATE*> PIlist; \/\/store the gate indexes of PI$/;"	m	class:CIRCUIT
+POGate	circuit.h	/^        GATE* POGate(unsigned index) { return POlist[index]; }$/;"	f	class:CIRCUIT
+POlist	circuit.h	/^        vector<GATE*> POlist;$/;"	m	class:CIRCUIT
+PPIGate	circuit.h	/^        GATE* PPIGate(unsigned index) { return PPIlist[index]; }$/;"	f	class:CIRCUIT
+PPIlist	circuit.h	/^        vector<GATE*> PPIlist;$/;"	m	class:CIRCUIT
+PPOGate	circuit.h	/^        GATE* PPOGate(unsigned index) { return PPOlist[index]; }$/;"	f	class:CIRCUIT
+PPOlist	circuit.h	/^        vector<GATE*> PPOlist;$/;"	m	class:CIRCUIT
+ParallelEvaluate	psim.cc	/^void CIRCUIT::ParallelEvaluate(GATEPTR gptr)$/;"	f	class:CIRCUIT
+ParallelInv	gate.h	/^        void ParallelInv() {$/;"	f	class:GATE
+ParallelLogicSim	psim.cc	/^void CIRCUIT::ParallelLogicSim()$/;"	f	class:CIRCUIT
+ParallelLogicSimVectors	psim.cc	/^void CIRCUIT::ParallelLogicSimVectors()$/;"	f	class:CIRCUIT
+ParseError	readcircuit.tab.cc	/^bool ParseError=false;$/;"	v
+Pattern	circuit.h	/^        PATTERN Pattern;$/;"	m	class:CIRCUIT
+PatternNum	typeemu.h	/^const unsigned PatternNum = 16;$/;"	v
+Podem	atpg.cc	/^ATPG_STATUS CIRCUIT::Podem(FAULT* fptr, unsigned &total_backtrack_num)$/;"	f	class:CIRCUIT
+Pred	hash.h	/^class Pred$/;"	c
+PrintIO	sim.cc	/^void CIRCUIT::PrintIO()$/;"	f	class:CIRCUIT
+PrintIO_t	stfsim.cc	/^void CIRCUIT::PrintIO_t()$/;"	f	class:CIRCUIT
+PrintParallelIOs	psim.cc	/^void CIRCUIT::PrintParallelIOs(unsigned idx)$/;"	f	class:CIRCUIT
+PrintTransition	stfsim.cc	/^void CIRCUIT::PrintTransition()$/;"	f	class:CIRCUIT
+PrintTransition_t	stfsim.cc	/^void CIRCUIT::PrintTransition_t()$/;"	f	class:CIRCUIT
+PropagateTree	circuit.h	/^        ListofGate PropagateTree;$/;"	m	class:CIRCUIT
+Queue	circuit.h	/^        ListofGate* Queue;$/;"	m	class:CIRCUIT
+QueueIte	circuit.h	/^        ListofGateIte QueueIte;$/;"	m	class:CIRCUIT
+READPATTERN_H	ReadPattern.h	2;"	d
+REDUNDANT	typeemu.h	/^enum FAULT_STATUS { UNKNOWN, DETECTED, REDUNDANT, ABORT };$/;"	e	enum:FAULT_STATUS
+REJECT	lex.yy.cc	489;"	d	file:
+RPAR	readcircuit.tab.cc	/^    RPAR = 269,$/;"	e	enum:yytokentype	file:
+RPAR	readcircuit.tab.h	/^    RPAR = 269,$/;"	e	enum:yytokentype
+ReadNextPattern	psim.cc	/^void PATTERN::ReadNextPattern(unsigned idx)$/;"	f	class:PATTERN
+ReadNextPattern	sim.cc	/^void PATTERN::ReadNextPattern()$/;"	f	class:PATTERN
+ReadNextPattern_t	stfsim.cc	/^void PATTERN::ReadNextPattern_t()$/;"	f	class:PATTERN
+ResetAllCount	gate.h	/^        void ResetAllCount() {Count[0] = 0;Count[1] = 0;}$/;"	f	class:GATE
+ResetCount	gate.h	/^        void ResetCount(unsigned i = 0) {Count[i] = 0;}$/;"	f	class:GATE
+ResetFaultFlag	gate.h	/^        void ResetFaultFlag() { FaultFlag.reset(); }$/;"	f	class:GATE
+ResetFlag	gate.h	/^        void ResetFlag() { Flag.reset(); }$/;"	f	class:GATE
+ResetFlag	gate.h	/^        void ResetFlag(FLAGS f) { Flag.reset(f); }$/;"	f	class:GATE
+ResetValue1	gate.h	/^        void ResetValue1() { WireValue[0].reset(); }$/;"	f	class:GATE
+ResetValue1	gate.h	/^        void ResetValue1(unsigned idx) { WireValue[0].reset(idx); }$/;"	f	class:GATE
+ResetValue2	gate.h	/^        void ResetValue2() { WireValue[1].reset(); }$/;"	f	class:GATE
+ResetValue2	gate.h	/^        void ResetValue2(unsigned idx) { WireValue[1].reset(idx); }$/;"	f	class:GATE
+ResetWireValue	gate.h	/^        void ResetWireValue(unsigned i) { WireValue[i].reset(); }$/;"	f	class:GATE
+ResetWireValue	gate.h	/^        void ResetWireValue(unsigned i, unsigned idx) { WireValue[i].reset(idx); }$/;"	f	class:GATE
+S0	typeemu.h	/^enum VALUE {S0, S1, X, D, B, ILLIGAL};$/;"	e	enum:VALUE
+S1	typeemu.h	/^enum VALUE {S0, S1, X, D, B, ILLIGAL};$/;"	e	enum:VALUE
+SCHEDULED	typeemu.h	/^enum FLAGS { ALL_ASSIGNED, MARKED, FAULT_INJECTED, FAULTY, SCHEDULED, OUTPUT, NumFlags };$/;"	e	enum:FLAGS
+SOURCES	Makefile	/^SOURCES = readcircuit.tab.cc lex.yy.cc circuit.cc main.cc GetLongOpt.cc atpg.cc fsim.cc sim.cc psim.cc stfsim.cc tfatpg.cc$/;"	m
+Schedule	circuit.h	/^        void Schedule(GATE* gptr)$/;"	f	class:CIRCUIT
+ScheduleAllPIs	psim.cc	/^void CIRCUIT::ScheduleAllPIs()$/;"	f	class:CIRCUIT
+ScheduleFanout	sim.cc	/^void CIRCUIT::ScheduleFanout(GATE* gptr)$/;"	f	class:CIRCUIT
+SchedulePI	sim.cc	/^void CIRCUIT::SchedulePI()$/;"	f	class:CIRCUIT
+SchedulePPI	sim.cc	/^void CIRCUIT::SchedulePPI()$/;"	f	class:CIRCUIT
+SetBackTrackLimit	circuit.h	/^        void SetBackTrackLimit(unsigned bt) { BackTrackLimit = bt; }$/;"	f	class:CIRCUIT
+SetBranch	fault.h	/^        void SetBranch(bool b) { Branch = b; }$/;"	f	class:FAULT
+SetBranch	tfault.h	/^        void SetBranch(bool b) { Branch = b; }$/;"	f	class:TFAULT
+SetEqvFaultNum	fault.h	/^        void SetEqvFaultNum(unsigned n) { EqvFaultNum = n; }$/;"	f	class:FAULT
+SetEqvFaultNum	tfault.h	/^        void SetEqvFaultNum(unsigned n) { EqvFaultNum = n; }$/;"	f	class:TFAULT
+SetFaultFlag	gate.h	/^        void SetFaultFlag(unsigned idx) { FaultFlag.set(idx); }$/;"	f	class:GATE
+SetFaultFreeValue	gate.h	/^        void SetFaultFreeValue() {$/;"	f	class:GATE
+SetFlag	gate.h	/^        void SetFlag(FLAGS f) { Flag.set(f); }$/;"	f	class:GATE
+SetFunction	gate.h	/^        void SetFunction(GATEFUNC f){ Function = f;}$/;"	f	class:GATE
+SetID	gate.h	/^        void SetID(unsigned id){ ID = id;}$/;"	f	class:GATE
+SetInversion	gate.h	/^        void SetInversion(){Inversion = true;}$/;"	f	class:GATE
+SetLevel	gate.h	/^        void SetLevel(unsigned l){ Level = l;}$/;"	f	class:GATE
+SetMaxLevel	circuit.cc	/^void CIRCUIT::SetMaxLevel()$/;"	f	class:CIRCUIT
+SetName	circuit.h	/^        void SetName(string n){ Name = n;}$/;"	f	class:CIRCUIT
+SetName	gate.h	/^        void SetName(string n){ Name = n;}$/;"	f	class:GATE
+SetPPIZero	sim.cc	/^void CIRCUIT::SetPPIZero()$/;"	f	class:CIRCUIT
+SetStatus	fault.h	/^        void SetStatus(FAULT_STATUS status) { Status = status; }$/;"	f	class:FAULT
+SetStatus	tfault.h	/^        void SetStatus(FAULT_STATUS status) { Status = status; }$/;"	f	class:TFAULT
+SetUniqueImpliedValue	atpg.cc	/^ATPG_STATUS CIRCUIT::SetUniqueImpliedValue(FAULT* fptr)$/;"	f	class:CIRCUIT
+SetValue	gate.h	/^        void SetValue(VALUE v) {Value = v;}$/;"	f	class:GATE
+SetValue1	gate.h	/^        void SetValue1() { WireValue[0].set(); }$/;"	f	class:GATE
+SetValue1	gate.h	/^        void SetValue1(bitset<PatternNum> &value) { WireValue[0] = value; }$/;"	f	class:GATE
+SetValue1	gate.h	/^        void SetValue1(unsigned idx) { WireValue[0].set(idx); }$/;"	f	class:GATE
+SetValue2	gate.h	/^        void SetValue2() { WireValue[1].set(); }$/;"	f	class:GATE
+SetValue2	gate.h	/^        void SetValue2(bitset<PatternNum> &value) { WireValue[1] = value; }$/;"	f	class:GATE
+SetValue2	gate.h	/^        void SetValue2(unsigned idx) { WireValue[1].set(idx); }$/;"	f	class:GATE
+SetValue_t	gate.h	/^        void SetValue_t(VALUE v) {Value_t = v;}$/;"	f	class:GATE
+SetWireValue	gate.h	/^        void SetWireValue(unsigned i) { WireValue[i].set(); }$/;"	f	class:GATE
+SetWireValue	gate.h	/^        void SetWireValue(unsigned i, bitset<PatternNum> &value) { WireValue[i] = value; }$/;"	f	class:GATE
+SetWireValue	gate.h	/^        void SetWireValue(unsigned i, unsigned idx) { WireValue[i].set(idx); }$/;"	f	class:GATE
+SetupIO_ID	circuit.cc	/^void CIRCUIT::SetupIO_ID()$/;"	f	class:CIRCUIT
+SetupOption	main.cc	/^int SetupOption(int argc, char ** argv)$/;"	f
+SortFaninByLevel	atpg.cc	/^void CIRCUIT::SortFaninByLevel()$/;"	f	class:CIRCUIT
+Status	fault.h	/^        FAULT_STATUS Status;$/;"	m	class:FAULT
+Status	tfault.h	/^        FAULT_STATUS Status;$/;"	m	class:TFAULT
+Str_hash_function	hash.h	/^class Str_hash_function$/;"	c
+TARGET	Makefile	/^TARGET  = atpg$/;"	m
+TFAULT	tfault.h	/^        TFAULT(GATE* gptr, GATE* ogptr, VALUE value): Value(value), Input(gptr),$/;"	f	class:TFAULT
+TFAULT	tfault.h	/^class TFAULT$/;"	c
+TFAULT_H	tfault.h	2;"	d
+TFAtpg	tfatpg.cc	/^void CIRCUIT::TFAtpg()$/;"	f	class:CIRCUIT
+TFaultSim	stfsim.cc	/^void CIRCUIT::TFaultSim()$/;"	f	class:CIRCUIT
+TFaultSimVectors	stfsim.cc	/^void CIRCUIT::TFaultSimVectors()$/;"	f	class:CIRCUIT
+TFaultSim_t	stfsim.cc	/^void CIRCUIT::TFaultSim_t()$/;"	f	class:CIRCUIT
+TFlist	circuit.h	/^        list<TFAULT*> TFlist; \/\/collapsing fault list$/;"	m	class:CIRCUIT
+TRUE	typeemu.h	/^enum ATPG_STATUS { TRUE, CONFLICT, FALSE };$/;"	e	enum:ATPG_STATUS
+TestPossible	atpg.cc	/^GATEPTR CIRCUIT::TestPossible(FAULT* fptr)$/;"	f	class:CIRCUIT
+TraceDetectedStemFault	atpg.cc	/^void CIRCUIT::TraceDetectedStemFault(GATEPTR gptr, VALUE val)$/;"	f	class:CIRCUIT
+TraceUnknownPath	atpg.cc	/^bool CIRCUIT::TraceUnknownPath(GATEPTR gptr)$/;"	f	class:CIRCUIT
+UFlist	circuit.h	/^        list<FAULT*> UFlist; \/\/undetected fault list$/;"	m	class:CIRCUIT
+UINT16_MAX	lex.yy.cc	80;"	d	file:
+UINT32_MAX	lex.yy.cc	83;"	d	file:
+UINT8_MAX	lex.yy.cc	77;"	d	file:
+UNKNOWN	typeemu.h	/^enum FAULT_STATUS { UNKNOWN, DETECTED, REDUNDANT, ABORT };$/;"	e	enum:FAULT_STATUS
+UTFlist	circuit.h	/^        list<TFAULT*> UTFlist; \/\/undetected fault list$/;"	m	class:CIRCUIT
+UnSetInversion	gate.h	/^        void UnSetInversion(){Inversion = false;}$/;"	f	class:GATE
+VALUE	typeemu.h	/^enum VALUE {S0, S1, X, D, B, ILLIGAL};$/;"	g
+Value	fault.h	/^        VALUE Value;$/;"	m	class:FAULT
+Value	gate.h	/^        VALUE Value;$/;"	m	class:GATE
+Value	tfault.h	/^        VALUE Value;$/;"	m	class:TFAULT
+Value_t	gate.h	/^        VALUE Value_t;$/;"	m	class:GATE
+WireValue	gate.h	/^        bitset<PatternNum> WireValue[2]; \/\/one pair of WireValues (length defined by PatternNum).$/;"	m	class:GATE
+X	typeemu.h	/^enum VALUE {S0, S1, X, D, B, ILLIGAL};$/;"	e	enum:VALUE
+XorTable	typeemu.h	/^const VALUE XorTable[5][5] =  { { S0,  S1,  X,  D,  B },$/;"	v
+YYABORT	readcircuit.tab.cc	609;"	d	file:
+YYACCEPT	readcircuit.tab.cc	608;"	d	file:
+YYBACKUP	readcircuit.tab.cc	615;"	d	file:
+YYBISON	readcircuit.tab.cc	44;"	d	file:
+YYBISON_VERSION	readcircuit.tab.cc	47;"	d	file:
+YYCASE_	readcircuit.tab.cc	956;"	d	file:
+YYCASE_	readcircuit.tab.cc	966;"	d	file:
+YYCOPY	readcircuit.tab.cc	403;"	d	file:
+YYCOPY	readcircuit.tab.cc	406;"	d	file:
+YYCOPY_NEEDED	readcircuit.tab.cc	378;"	d	file:
+YYDEBUG	readcircuit.tab.cc	122;"	d	file:
+YYDEBUG	readcircuit.tab.h	37;"	d
+YYDPRINTF	readcircuit.tab.cc	646;"	d	file:
+YYDPRINTF	readcircuit.tab.cc	761;"	d	file:
+YYEMPTY	readcircuit.tab.cc	605;"	d	file:
+YYEOF	readcircuit.tab.cc	606;"	d	file:
+YYERRCODE	readcircuit.tab.cc	634;"	d	file:
+YYERROR	readcircuit.tab.cc	610;"	d	file:
+YYERROR_VERBOSE	readcircuit.tab.cc	110;"	d	file:
+YYERROR_VERBOSE	readcircuit.tab.cc	111;"	d	file:
+YYERROR_VERBOSE	readcircuit.tab.cc	113;"	d	file:
+YYFINAL	readcircuit.tab.cc	419;"	d	file:
+YYFPRINTF	readcircuit.tab.cc	643;"	d	file:
+YYFREE	readcircuit.tab.cc	349;"	d	file:
+YYINITDEPTH	readcircuit.tab.cc	770;"	d	file:
+YYLAST	readcircuit.tab.cc	421;"	d	file:
+YYMALLOC	readcircuit.tab.cc	343;"	d	file:
+YYMAXDEPTH	readcircuit.tab.cc	781;"	d	file:
+YYMAXUTOK	readcircuit.tab.cc	435;"	d	file:
+YYNNTS	readcircuit.tab.cc	426;"	d	file:
+YYNRULES	readcircuit.tab.cc	428;"	d	file:
+YYNSTATES	readcircuit.tab.cc	430;"	d	file:
+YYNTOKENS	readcircuit.tab.cc	424;"	d	file:
+YYPACT_NINF	readcircuit.tab.cc	507;"	d	file:
+YYPOPSTACK	readcircuit.tab.cc	1081;"	d	file:
+YYPULL	readcircuit.tab.cc	59;"	d	file:
+YYPURE	readcircuit.tab.cc	53;"	d	file:
+YYPUSH	readcircuit.tab.cc	56;"	d	file:
+YYRECOVERING	readcircuit.tab.cc	613;"	d	file:
+YYSIZE_MAXIMUM	readcircuit.tab.cc	222;"	d	file:
+YYSIZE_T	readcircuit.tab.cc	211;"	d	file:
+YYSIZE_T	readcircuit.tab.cc	213;"	d	file:
+YYSIZE_T	readcircuit.tab.cc	216;"	d	file:
+YYSIZE_T	readcircuit.tab.cc	218;"	d	file:
+YYSKELETON_NAME	readcircuit.tab.cc	50;"	d	file:
+YYSTACK_ALLOC	readcircuit.tab.cc	297;"	d	file:
+YYSTACK_ALLOC	readcircuit.tab.cc	301;"	d	file:
+YYSTACK_ALLOC	readcircuit.tab.cc	306;"	d	file:
+YYSTACK_ALLOC	readcircuit.tab.cc	329;"	d	file:
+YYSTACK_ALLOC_MAXIMUM	readcircuit.tab.cc	326;"	d	file:
+YYSTACK_ALLOC_MAXIMUM	readcircuit.tab.cc	332;"	d	file:
+YYSTACK_BYTES	readcircuit.tab.cc	374;"	d	file:
+YYSTACK_FREE	readcircuit.tab.cc	320;"	d	file:
+YYSTACK_FREE	readcircuit.tab.cc	330;"	d	file:
+YYSTACK_GAP_MAXIMUM	readcircuit.tab.cc	370;"	d	file:
+YYSTACK_RELOCATE	readcircuit.tab.cc	385;"	d	file:
+YYSTATE	lex.yy.cc	132;"	d	file:
+YYSTYPE	readcircuit.tab.cc	/^typedef union YYSTYPE YYSTYPE;$/;"	t	typeref:union:YYSTYPE	file:
+YYSTYPE	readcircuit.tab.cc	/^union YYSTYPE$/;"	u	file:
+YYSTYPE	readcircuit.tab.h	/^typedef union YYSTYPE YYSTYPE;$/;"	t	typeref:union:YYSTYPE
+YYSTYPE	readcircuit.tab.h	/^union YYSTYPE$/;"	u
+YYSTYPE_IS_DECLARED	readcircuit.tab.cc	167;"	d	file:
+YYSTYPE_IS_DECLARED	readcircuit.tab.h	82;"	d
+YYSTYPE_IS_TRIVIAL	readcircuit.tab.cc	166;"	d	file:
+YYSTYPE_IS_TRIVIAL	readcircuit.tab.h	81;"	d
+YYTABLES_NAME	lex.yy.cc	1851;"	d	file:
+YYTABLE_NINF	readcircuit.tab.cc	512;"	d	file:
+YYTERROR	readcircuit.tab.cc	633;"	d	file:
+YYTOKENTYPE	readcircuit.tab.cc	130;"	d	file:
+YYTOKENTYPE	readcircuit.tab.h	45;"	d
+YYTRANSLATE	readcircuit.tab.cc	437;"	d	file:
+YYUNDEFTOK	readcircuit.tab.cc	434;"	d	file:
+YYUSE	readcircuit.tab.cc	265;"	d	file:
+YYUSE	readcircuit.tab.cc	267;"	d	file:
+YY_	readcircuit.tab.cc	228;"	d	file:
+YY_	readcircuit.tab.cc	232;"	d	file:
+YY_ATTRIBUTE	readcircuit.tab.cc	240;"	d	file:
+YY_ATTRIBUTE	readcircuit.tab.cc	242;"	d	file:
+YY_ATTRIBUTE_PURE	readcircuit.tab.cc	247;"	d	file:
+YY_ATTRIBUTE_UNUSED	readcircuit.tab.cc	251;"	d	file:
+YY_AT_BOL	lex.yy.cc	340;"	d	file:
+YY_BREAK	lex.yy.cc	676;"	d	file:
+YY_BUFFER_EOF_PENDING	lex.yy.cc	256;"	d	file:
+YY_BUFFER_NEW	lex.yy.cc	244;"	d	file:
+YY_BUFFER_NORMAL	lex.yy.cc	245;"	d	file:
+YY_BUFFER_STATE	lex.yy.cc	/^typedef struct yy_buffer_state *YY_BUFFER_STATE;$/;"	t	typeref:struct:yy_buffer_state	file:
+YY_BUF_SIZE	lex.yy.cc	149;"	d	file:
+YY_BUF_SIZE	lex.yy.cc	151;"	d	file:
+YY_CHAR	lex.yy.cc	/^typedef unsigned char YY_CHAR;$/;"	t	file:
+YY_CURRENT_BUFFER	lex.yy.cc	272;"	d	file:
+YY_CURRENT_BUFFER_LVALUE	lex.yy.cc	279;"	d	file:
+YY_DECL	lex.yy.cc	664;"	d	file:
+YY_DECL_IS_OURS	lex.yy.cc	660;"	d	file:
+YY_DO_BEFORE_ACTION	lex.yy.cc	374;"	d	file:
+YY_END_OF_BUFFER	lex.yy.cc	382;"	d	file:
+YY_END_OF_BUFFER_CHAR	lex.yy.cc	140;"	d	file:
+YY_EXIT_FAILURE	lex.yy.cc	1647;"	d	file:
+YY_EXTRA_TYPE	lex.yy.cc	514;"	d	file:
+YY_FATAL_ERROR	lex.yy.cc	651;"	d	file:
+YY_FLEX_MAJOR_VERSION	lex.yy.cc	9;"	d	file:
+YY_FLEX_MINOR_VERSION	lex.yy.cc	10;"	d	file:
+YY_FLEX_SUBMINOR_VERSION	lex.yy.cc	11;"	d	file:
+YY_FLUSH_BUFFER	lex.yy.cc	308;"	d	file:
+YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN	readcircuit.tab.cc	272;"	d	file:
+YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN	readcircuit.tab.cc	282;"	d	file:
+YY_IGNORE_MAYBE_UNINITIALIZED_END	readcircuit.tab.cc	276;"	d	file:
+YY_IGNORE_MAYBE_UNINITIALIZED_END	readcircuit.tab.cc	283;"	d	file:
+YY_INITIAL_VALUE	readcircuit.tab.cc	279;"	d	file:
+YY_INITIAL_VALUE	readcircuit.tab.cc	286;"	d	file:
+YY_INPUT	lex.yy.cc	604;"	d	file:
+YY_INT_ALIGNED	lex.yy.cc	4;"	d	file:
+YY_LESS_LINENO	lex.yy.cc	177;"	d	file:
+YY_LINENO_REWIND_TO	lex.yy.cc	178;"	d	file:
+YY_LOCATION_PRINT	readcircuit.tab.cc	654;"	d	file:
+YY_MORE_ADJ	lex.yy.cc	491;"	d	file:
+YY_NEW_FILE	lex.yy.cc	138;"	d	file:
+YY_NULL	lex.yy.cc	112;"	d	file:
+YY_NULLPTR	readcircuit.tab.cc	102;"	d	file:
+YY_NULLPTR	readcircuit.tab.cc	104;"	d	file:
+YY_NUM_RULES	lex.yy.cc	381;"	d	file:
+YY_READ_BUF_SIZE	lex.yy.cc	586;"	d	file:
+YY_READ_BUF_SIZE	lex.yy.cc	588;"	d	file:
+YY_REDUCE_PRINT	readcircuit.tab.cc	751;"	d	file:
+YY_REDUCE_PRINT	readcircuit.tab.cc	764;"	d	file:
+YY_RESTORE_YY_MORE_OFFSET	lex.yy.cc	492;"	d	file:
+YY_RULE_SETUP	lex.yy.cc	679;"	d	file:
+YY_SC_TO_UI	lex.yy.cc	119;"	d	file:
+YY_SKIP_YYWRAP	lex.yy.cc	345;"	d	file:
+YY_STACK_PRINT	readcircuit.tab.cc	720;"	d	file:
+YY_STACK_PRINT	readcircuit.tab.cc	763;"	d	file:
+YY_START	lex.yy.cc	131;"	d	file:
+YY_START_STACK_INCR	lex.yy.cc	646;"	d	file:
+YY_STATE_BUF_SIZE	lex.yy.cc	157;"	d	file:
+YY_STATE_EOF	lex.yy.cc	135;"	d	file:
+YY_STRUCT_YY_BUFFER_STATE	lex.yy.cc	197;"	d	file:
+YY_SYMBOL_PRINT	readcircuit.tab.cc	658;"	d	file:
+YY_SYMBOL_PRINT	readcircuit.tab.cc	762;"	d	file:
+YY_TYPEDEF_YY_BUFFER_STATE	lex.yy.cc	160;"	d	file:
+YY_TYPEDEF_YY_SIZE_T	lex.yy.cc	165;"	d	file:
+YY_USER_ACTION	lex.yy.cc	671;"	d	file:
+YY_USE_CONST	lex.yy.cc	100;"	d	file:
+YY_USE_CONST	lex.yy.cc	93;"	d	file:
+YY_YY_READCIRCUIT_TAB_H_INCLUDED	readcircuit.tab.cc	119;"	d	file:
+YY_YY_READCIRCUIT_TAB_H_INCLUDED	readcircuit.tab.h	34;"	d
+_GetLongOpt_h_	GetLongOpt.h	5;"	d
+_Noreturn	readcircuit.tab.cc	257;"	d	file:
+_Noreturn	readcircuit.tab.cc	259;"	d	file:
+__STDC_LIMIT_MACROS	lex.yy.cc	39;"	d	file:
+_size	hash.h	/^    int _size;$/;"	m	class:Cache
+_size	hash.h	/^    int _size;$/;"	m	class:Hash
+alloca	readcircuit.tab.cc	304;"	d	file:
+basename	GetLongOpt.cc	/^GetLongOpt::basename(char * const pname) const$/;"	f	class:GetLongOpt
+bucket	hash.h	/^    vector<list<pair<KEY, VALUE> > > bucket;$/;"	m	class:Hash
+bucket	hash.h	/^    vector<pair<KEY, VALUE> > bucket;$/;"	m	class:Cache
+bucket_num	hash.h	/^Hash<KEY, VALUE, HASH_FUNCTION>::bucket_num(KEY k)$/;"	f	class:Hash
+circuit	readcircuit.y	/^circuit : $/;"	l
+clean	hash.h	/^    void clean() { bucket.erase(bucket.begin(), bucket.end()); }$/;"	f	class:Cache
+clean	hash.h	/^Hash<KEY, VALUE, HASH_FUNCTION>::clean()$/;"	f	class:Hash
+description	GetLongOpt.h	/^            const char *description;   \/\/ a description of option$/;"	m	struct:GetLongOpt::Cell
+enroll	GetLongOpt.cc	/^GetLongOpt::enroll(const char * const opt, const OptType t,$/;"	f	class:GetLongOpt
+enroll_done	GetLongOpt.h	/^        int enroll_done;         \/\/ finished enrolling$/;"	m	class:GetLongOpt
+eof	ReadPattern.h	/^        bool eof()$/;"	f	class:PATTERN
+fanin_list	readcircuit.y	/^fanin_list: $/;"	l
+ff_definition	readcircuit.y	/^ff_definition: output EQUAL GDFF LPAR NAMESTRING RPAR EOLINE{$/;"	l
+flex_int16_t	lex.yy.cc	/^typedef int16_t flex_int16_t;$/;"	t	file:
+flex_int16_t	lex.yy.cc	/^typedef short int flex_int16_t;$/;"	t	file:
+flex_int32_t	lex.yy.cc	/^typedef int flex_int32_t;$/;"	t	file:
+flex_int32_t	lex.yy.cc	/^typedef int32_t flex_int32_t;$/;"	t	file:
+flex_int8_t	lex.yy.cc	/^typedef int8_t flex_int8_t;$/;"	t	file:
+flex_int8_t	lex.yy.cc	/^typedef signed char flex_int8_t;$/;"	t	file:
+flex_uint16_t	lex.yy.cc	/^typedef uint16_t flex_uint16_t;$/;"	t	file:
+flex_uint16_t	lex.yy.cc	/^typedef unsigned short int flex_uint16_t;$/;"	t	file:
+flex_uint32_t	lex.yy.cc	/^typedef uint32_t flex_uint32_t;$/;"	t	file:
+flex_uint32_t	lex.yy.cc	/^typedef unsigned int flex_uint32_t;$/;"	t	file:
+flex_uint8_t	lex.yy.cc	/^typedef uint8_t flex_uint8_t;$/;"	t	file:
+flex_uint8_t	lex.yy.cc	/^typedef unsigned char flex_uint8_t; $/;"	t	file:
+for_each_exec	hash.h	/^Hash<KEY, VALUE, HASH_FUNCTION>::for_each_exec(Exec<VALUE> *e)$/;"	f	class:Hash
+for_each_if_else	hash.h	/^    Hash<KEY, VALUE, HASH_FUNCTION>::for_each_if_else$/;"	f	class:Hash
+forced_insert	hash.h	/^    void Hash<KEY, VALUE, HASH_FUNCTION>::forced_insert$/;"	f	class:Hash
+func	readcircuit.tab.cc	/^GATEFUNC func;$/;"	m	union:YYSTYPE	file:
+func	readcircuit.tab.h	/^GATEFUNC func;$/;"	m	union:YYSTYPE
+gate_definition	readcircuit.y	/^gate_definition: output EQUAL gatename LPAR{$/;"	l
+gatename	readcircuit.y	/^gatename: GNOT{$$=G_NOT;}$/;"	l
+get_value	hash.h	/^Hash<KEY, VALUE, HASH_FUNCTION>::get_value(KEY k)$/;"	f	class:Hash
+get_value	hash.h	/^Hash<KEY, VALUE, HASH_FUNCTION>::get_value(KEY k, int b)$/;"	f	class:Hash
+gptr	readcircuit.tab.cc	/^GATE* gptr=NULL;$/;"	v
+inlist	ReadPattern.h	/^        vector<GATE*> inlist;$/;"	m	class:PATTERN
+inlist	readcircuit.tab.cc	/^GATE* inlist=NULL;$/;"	v
+input_definition	readcircuit.y	/^input_definition: GINPUT LPAR NAMESTRING RPAR EOLINE{$/;"	l
+insert	hash.h	/^Hash<KEY, VALUE, HASH_FUNCTION>::insert(const KEY k, const VALUE v)$/;"	f	class:Hash
+is_member	hash.h	/^Hash<KEY, VALUE, HASH_FUNCTION>::is_member(KEY k)$/;"	f	class:Hash
+last	GetLongOpt.h	/^        Cell *last;           \/\/ last entry in option table$/;"	m	class:GetLongOpt
+lineno	lex.yy.cc	/^long lineno=1;$/;"	v
+main	main.cc	/^int main(int argc, char ** argv)$/;"	f
+name	readcircuit.tab.cc	/^string name;$/;"	v
+netlist	readcircuit.y	/^netlist: circuit{$/;"	l
+next	GetLongOpt.h	/^            Cell *next;    \/\/ pointer to the next cell$/;"	m	struct:GetLongOpt::Cell
+no_dff	readcircuit.tab.cc	/^unsigned no_dff=0;$/;"	v
+no_gate	readcircuit.tab.cc	/^unsigned no_gate=0;$/;"	v
+no_pi	readcircuit.tab.cc	/^unsigned no_pi=0;$/;"	v
+no_pi_infile	ReadPattern.h	/^        int no_pi_infile;$/;"	m	class:PATTERN
+no_po	readcircuit.tab.cc	/^unsigned no_po=0;$/;"	v
+nodes	hash.h	/^    unsigned nodes() { return num_of_nodes; }$/;"	f	class:Hash
+num	readcircuit.tab.cc	/^long num;$/;"	m	union:YYSTYPE	file:
+num	readcircuit.tab.h	/^long num;$/;"	m	union:YYSTYPE
+num_of_nodes	hash.h	/^    unsigned num_of_nodes;$/;"	m	class:Hash
+operator ()	atpg.cc	/^    bool operator()(const GATEPTR gptr1, const GATEPTR gptr2) const$/;"	f	struct:sort_by_level
+operator ()	hash.h	/^	int operator() (const string id, const int size)$/;"	f	class:Str_hash_function
+operator ()	hash.h	/^	virtual bool operator() (const VALUE v) const$/;"	f	class:Pred
+operator []	hash.h	/^    VALUE operator[] (KEY k)$/;"	f	class:Cache
+operator []	hash.h	/^    VALUE& operator[] (int b) { return (bucket[b].second); }$/;"	f	class:Cache
+operator []	hash.h	/^    list<pair<KEY, VALUE> >& operator[] (int b) { return bucket[b]; }$/;"	f	class:Hash
+operator []	hash.h	/^Hash<KEY, VALUE, HASH_FUNCTION>::operator[] (KEY k)$/;"	f	class:Hash
+option	GetLongOpt.h	/^            const char *option;  \/\/ option name$/;"	m	struct:GetLongOpt::Cell
+option	main.cc	/^GetLongOpt option;$/;"	v
+optmarker	GetLongOpt.h	/^        char optmarker;       \/\/ option marker$/;"	m	class:GetLongOpt
+output	readcircuit.y	/^output: NAMESTRING $/;"	l
+output_definition	readcircuit.y	/^output_definition: GOUTPUT LPAR NAMESTRING RPAR EOLINE{$/;"	l
+parse	GetLongOpt.cc	/^GetLongOpt::parse(char * const str, char * const p)$/;"	f	class:GetLongOpt
+parse	GetLongOpt.cc	/^GetLongOpt::parse(int argc, char * const *argv)$/;"	f	class:GetLongOpt
+patterninput	ReadPattern.h	/^        ifstream patterninput;$/;"	m	class:PATTERN
+pname	GetLongOpt.h	/^        char *pname;          \/\/ program basename$/;"	m	class:GetLongOpt
+pop_value	hash.h	/^Hash<KEY, VALUE, HASH_FUNCTION>::pop_value(KEY k)$/;"	f	class:Hash
+read	hash.h	/^    VALUE read(KEY k)$/;"	f	class:Cache
+remove	hash.h	/^Hash<KEY, VALUE, HASH_FUNCTION>::remove(KEY k)$/;"	f	class:Hash
+remove_if	hash.h	/^Hash<KEY, VALUE, HASH_FUNCTION>::remove_if(Pred<VALUE> *pred)$/;"	f	class:Hash
+remove_if_else	hash.h	/^    Hash<KEY, VALUE, HASH_FUNCTION>::remove_if_else$/;"	f	class:Hash
+retrieve	GetLongOpt.cc	/^GetLongOpt::retrieve(const char * const opt) const$/;"	f	class:GetLongOpt
+setcell	GetLongOpt.cc	/^GetLongOpt::setcell(Cell *c, char *valtoken, char *nexttoken, char *name)$/;"	f	class:GetLongOpt
+short	readcircuit.tab.cc	182;"	d	file:
+size	hash.h	/^    int size() { return _size; }$/;"	f	class:Cache
+size	hash.h	/^    int size() { return _size; }$/;"	f	class:Hash
+sort_by_level	atpg.cc	/^struct sort_by_level$/;"	s	file:
+str	readcircuit.tab.cc	/^char str[256];$/;"	m	union:YYSTYPE	file:
+str	readcircuit.tab.h	/^char str[256];$/;"	m	union:YYSTYPE
+table	GetLongOpt.h	/^        Cell *table;          \/\/ option table$/;"	m	class:GetLongOpt
+test_insert	hash.h	/^Hash<KEY, VALUE, HASH_FUNCTION>::test_insert(KEY k)$/;"	f	class:Hash
+type	GetLongOpt.h	/^            OptType type;     \/\/ option type$/;"	m	struct:GetLongOpt::Cell
+unput	lex.yy.cc	194;"	d	file:
+usage	GetLongOpt.cc	/^GetLongOpt::usage(ostream &outfile) const$/;"	f	class:GetLongOpt
+usage	GetLongOpt.h	/^        void usage(const char *str) { ustring = str; }$/;"	f	class:GetLongOpt
+ustring	GetLongOpt.h	/^        const char *ustring;        \/\/ usage message$/;"	m	class:GetLongOpt
+value	GetLongOpt.h	/^            const char *value;   \/\/ value of option (string)$/;"	m	struct:GetLongOpt::Cell
+write	hash.h	/^    void write(const KEY k, const VALUE v)$/;"	f	class:Cache
+yy_accept	lex.yy.cc	/^static yyconst flex_int16_t yy_accept[46] =$/;"	v	file:
+yy_at_bol	lex.yy.cc	/^	int yy_at_bol;$/;"	m	struct:yy_buffer_state	file:
+yy_base	lex.yy.cc	/^static yyconst flex_uint16_t yy_base[48] =$/;"	v	file:
+yy_bs_column	lex.yy.cc	/^    int yy_bs_column; \/**< The column count. *\/$/;"	m	struct:yy_buffer_state	file:
+yy_bs_lineno	lex.yy.cc	/^    int yy_bs_lineno; \/**< The line count. *\/$/;"	m	struct:yy_buffer_state	file:
+yy_buf_pos	lex.yy.cc	/^	char *yy_buf_pos;		\/* current position in input buffer *\/$/;"	m	struct:yy_buffer_state	file:
+yy_buf_size	lex.yy.cc	/^	yy_size_t yy_buf_size;$/;"	m	struct:yy_buffer_state	file:
+yy_buffer_stack	lex.yy.cc	/^static YY_BUFFER_STATE * yy_buffer_stack = 0; \/**< Stack as an array. *\/$/;"	v	file:
+yy_buffer_stack_max	lex.yy.cc	/^static size_t yy_buffer_stack_max = 0; \/**< capacity of stack. *\/$/;"	v	file:
+yy_buffer_stack_top	lex.yy.cc	/^static size_t yy_buffer_stack_top = 0; \/**< index of top of stack. *\/$/;"	v	file:
+yy_buffer_state	lex.yy.cc	/^struct yy_buffer_state$/;"	s	file:
+yy_buffer_status	lex.yy.cc	/^	int yy_buffer_status;$/;"	m	struct:yy_buffer_state	file:
+yy_c_buf_p	lex.yy.cc	/^static char *yy_c_buf_p = (char *) 0;$/;"	v	file:
+yy_ch_buf	lex.yy.cc	/^	char *yy_ch_buf;		\/* input buffer *\/$/;"	m	struct:yy_buffer_state	file:
+yy_chk	lex.yy.cc	/^static yyconst flex_int16_t yy_chk[74] =$/;"	v	file:
+yy_create_buffer	lex.yy.cc	/^    YY_BUFFER_STATE yy_create_buffer  (FILE * file, int  size )$/;"	f
+yy_def	lex.yy.cc	/^static yyconst flex_int16_t yy_def[48] =$/;"	v	file:
+yy_delete_buffer	lex.yy.cc	/^    void yy_delete_buffer (YY_BUFFER_STATE  b )$/;"	f
+yy_did_buffer_switch_on_eof	lex.yy.cc	/^static int yy_did_buffer_switch_on_eof;$/;"	v	file:
+yy_ec	lex.yy.cc	/^static yyconst YY_CHAR yy_ec[256] =$/;"	v	file:
+yy_fatal_error	lex.yy.cc	/^static void yy_fatal_error (yyconst char* msg )$/;"	f	file:
+yy_fill_buffer	lex.yy.cc	/^	int yy_fill_buffer;$/;"	m	struct:yy_buffer_state	file:
+yy_flex_debug	lex.yy.cc	/^int yy_flex_debug = 0;$/;"	v
+yy_flex_strlen	lex.yy.cc	/^static int yy_flex_strlen (yyconst char * s )$/;"	f	file:
+yy_flex_strncpy	lex.yy.cc	/^static void yy_flex_strncpy (char* s1, yyconst char * s2, int n )$/;"	f	file:
+yy_flush_buffer	lex.yy.cc	/^    void yy_flush_buffer (YY_BUFFER_STATE  b )$/;"	f
+yy_get_next_buffer	lex.yy.cc	/^static int yy_get_next_buffer (void)$/;"	f	file:
+yy_get_previous_state	lex.yy.cc	/^    static yy_state_type yy_get_previous_state (void)$/;"	f	file:
+yy_hold_char	lex.yy.cc	/^static char yy_hold_char;$/;"	v	file:
+yy_init	lex.yy.cc	/^static int yy_init = 0;		\/* whether we need to initialize *\/$/;"	v	file:
+yy_init_buffer	lex.yy.cc	/^    static void yy_init_buffer  (YY_BUFFER_STATE  b, FILE * file )$/;"	f	file:
+yy_init_globals	lex.yy.cc	/^static int yy_init_globals (void)$/;"	f	file:
+yy_input_file	lex.yy.cc	/^	FILE *yy_input_file;$/;"	m	struct:yy_buffer_state	file:
+yy_is_interactive	lex.yy.cc	/^	int yy_is_interactive;$/;"	m	struct:yy_buffer_state	file:
+yy_is_our_buffer	lex.yy.cc	/^	int yy_is_our_buffer;$/;"	m	struct:yy_buffer_state	file:
+yy_last_accepting_cpos	lex.yy.cc	/^static char *yy_last_accepting_cpos;$/;"	v	file:
+yy_last_accepting_state	lex.yy.cc	/^static yy_state_type yy_last_accepting_state;$/;"	v	file:
+yy_load_buffer_state	lex.yy.cc	/^static void yy_load_buffer_state  (void)$/;"	f	file:
+yy_meta	lex.yy.cc	/^static yyconst YY_CHAR yy_meta[22] =$/;"	v	file:
+yy_n_chars	lex.yy.cc	/^	yy_size_t yy_n_chars;$/;"	m	struct:yy_buffer_state	file:
+yy_n_chars	lex.yy.cc	/^static yy_size_t yy_n_chars;		\/* number of characters read into yy_ch_buf *\/$/;"	v	file:
+yy_new_buffer	lex.yy.cc	318;"	d	file:
+yy_nxt	lex.yy.cc	/^	flex_int32_t yy_nxt;$/;"	m	struct:yy_trans_info	file:
+yy_nxt	lex.yy.cc	/^static yyconst flex_uint16_t yy_nxt[74] =$/;"	v	file:
+yy_reduce_print	readcircuit.tab.cc	/^yy_reduce_print (yytype_int16 *yyssp, YYSTYPE *yyvsp, int yyrule)$/;"	f	file:
+yy_scan_buffer	lex.yy.cc	/^YY_BUFFER_STATE yy_scan_buffer  (char * base, yy_size_t  size )$/;"	f
+yy_scan_bytes	lex.yy.cc	/^YY_BUFFER_STATE yy_scan_bytes  (yyconst char * yybytes, yy_size_t  _yybytes_len )$/;"	f
+yy_scan_string	lex.yy.cc	/^YY_BUFFER_STATE yy_scan_string (yyconst char * yystr )$/;"	f
+yy_set_bol	lex.yy.cc	330;"	d	file:
+yy_set_interactive	lex.yy.cc	320;"	d	file:
+yy_size_t	lex.yy.cc	/^typedef size_t yy_size_t;$/;"	t	file:
+yy_stack_print	readcircuit.tab.cc	/^yy_stack_print (yytype_int16 *yybottom, yytype_int16 *yytop)$/;"	f	file:
+yy_start	lex.yy.cc	/^static int yy_start = 0;	\/* start state number *\/$/;"	v	file:
+yy_state_type	lex.yy.cc	/^typedef int yy_state_type;$/;"	t	file:
+yy_switch_to_buffer	lex.yy.cc	/^    void yy_switch_to_buffer  (YY_BUFFER_STATE  new_buffer )$/;"	f
+yy_symbol_print	readcircuit.tab.cc	/^yy_symbol_print (FILE *yyoutput, int yytype, YYSTYPE const * const yyvaluep)$/;"	f	file:
+yy_symbol_value_print	readcircuit.tab.cc	/^yy_symbol_value_print (FILE *yyoutput, int yytype, YYSTYPE const * const yyvaluep)$/;"	f	file:
+yy_trans_info	lex.yy.cc	/^struct yy_trans_info$/;"	s	file:
+yy_try_NUL_trans	lex.yy.cc	/^    static yy_state_type yy_try_NUL_trans  (yy_state_type yy_current_state )$/;"	f	file:
+yy_verify	lex.yy.cc	/^	flex_int32_t yy_verify;$/;"	m	struct:yy_trans_info	file:
+yyalloc	lex.yy.cc	/^void *yyalloc (yy_size_t  size )$/;"	f
+yyalloc	readcircuit.tab.cc	/^union yyalloc$/;"	u	file:
+yychar	readcircuit.tab.cc	/^int yychar;$/;"	v
+yycheck	readcircuit.tab.cc	/^static const yytype_int8 yycheck[] =$/;"	v	file:
+yyclearin	readcircuit.tab.cc	604;"	d	file:
+yyconst	lex.yy.cc	106;"	d	file:
+yyconst	lex.yy.cc	108;"	d	file:
+yydebug	readcircuit.tab.cc	/^int yydebug;$/;"	v
+yydefact	readcircuit.tab.cc	/^static const yytype_uint8 yydefact[] =$/;"	v	file:
+yydefgoto	readcircuit.tab.cc	/^static const yytype_int8 yydefgoto[] =$/;"	v	file:
+yydestruct	readcircuit.tab.cc	/^yydestruct (const char *yymsg, int yytype, YYSTYPE *yyvaluep)$/;"	f	file:
+yyensure_buffer_stack	lex.yy.cc	/^static void yyensure_buffer_stack (void)$/;"	f	file:
+yyerrok	readcircuit.tab.cc	603;"	d	file:
+yyerror	readcircuit.tab.cc	/^int yyerror(char *err)$/;"	f
+yyfree	lex.yy.cc	/^void yyfree (void * ptr )$/;"	f
+yyget_debug	lex.yy.cc	/^int yyget_debug  (void)$/;"	f
+yyget_in	lex.yy.cc	/^FILE *yyget_in  (void)$/;"	f
+yyget_leng	lex.yy.cc	/^yy_size_t yyget_leng  (void)$/;"	f
+yyget_lineno	lex.yy.cc	/^int yyget_lineno  (void)$/;"	f
+yyget_out	lex.yy.cc	/^FILE *yyget_out  (void)$/;"	f
+yyget_text	lex.yy.cc	/^char *yyget_text  (void)$/;"	f
+yyin	lex.yy.cc	/^FILE *yyin = (FILE *) 0, *yyout = (FILE *) 0;$/;"	v
+yyinput	lex.yy.cc	/^    static int yyinput (void)$/;"	f	file:
+yyleng	lex.yy.cc	/^yy_size_t yyleng;$/;"	v
+yyless	lex.yy.cc	1658;"	d	file:
+yyless	lex.yy.cc	1659;"	d	file:
+yyless	lex.yy.cc	181;"	d	file:
+yylex_destroy	lex.yy.cc	/^int yylex_destroy  (void)$/;"	f
+yylineno	lex.yy.cc	/^int yylineno = 1;$/;"	v
+yylval	readcircuit.tab.cc	/^YYSTYPE yylval;$/;"	v
+yymore	lex.yy.cc	490;"	d	file:
+yynerrs	readcircuit.tab.cc	/^int yynerrs;$/;"	v
+yyout	lex.yy.cc	/^FILE *yyin = (FILE *) 0, *yyout = (FILE *) 0;$/;"	v
+yypact	readcircuit.tab.cc	/^static const yytype_int8 yypact[] =$/;"	v	file:
+yypact_value_is_default	readcircuit.tab.cc	509;"	d	file:
+yyparse	readcircuit.tab.cc	/^yyparse (void)$/;"	f
+yypgoto	readcircuit.tab.cc	/^static const yytype_int8 yypgoto[] =$/;"	v	file:
+yypop_buffer_state	lex.yy.cc	/^void yypop_buffer_state (void)$/;"	f
+yypush_buffer_state	lex.yy.cc	/^void yypush_buffer_state (YY_BUFFER_STATE new_buffer )$/;"	f
+yyr1	readcircuit.tab.cc	/^static const yytype_uint8 yyr1[] =$/;"	v	file:
+yyr2	readcircuit.tab.cc	/^static const yytype_uint8 yyr2[] =$/;"	v	file:
+yyrealloc	lex.yy.cc	/^void *yyrealloc  (void * ptr, yy_size_t  size )$/;"	f
+yyrestart	lex.yy.cc	/^    void yyrestart  (FILE * input_file )$/;"	f
+yyrline	readcircuit.tab.cc	/^static const yytype_uint8 yyrline[] =$/;"	v	file:
+yyset_debug	lex.yy.cc	/^void yyset_debug (int  _bdebug )$/;"	f
+yyset_in	lex.yy.cc	/^void yyset_in (FILE *  _in_str )$/;"	f
+yyset_lineno	lex.yy.cc	/^void yyset_lineno (int  _line_number )$/;"	f
+yyset_out	lex.yy.cc	/^void yyset_out (FILE *  _out_str )$/;"	f
+yyss_alloc	readcircuit.tab.cc	/^  yytype_int16 yyss_alloc;$/;"	m	union:yyalloc	file:
+yystos	readcircuit.tab.cc	/^static const yytype_uint8 yystos[] =$/;"	v	file:
+yystpcpy	readcircuit.tab.cc	/^yystpcpy (char *yydest, const char *yysrc)$/;"	f	file:
+yystpcpy	readcircuit.tab.cc	805;"	d	file:
+yystrlen	readcircuit.tab.cc	/^yystrlen (const char *yystr)$/;"	f	file:
+yystrlen	readcircuit.tab.cc	789;"	d	file:
+yysyntax_error	readcircuit.tab.cc	/^yysyntax_error (YYSIZE_T *yymsg_alloc, char **yymsg,$/;"	f	file:
+yytable	readcircuit.tab.cc	/^static const yytype_int8 yytable[] =$/;"	v	file:
+yytable_value_is_error	readcircuit.tab.cc	514;"	d	file:
+yyterminate	lex.yy.cc	641;"	d	file:
+yytext	lex.yy.cc	/^char *yytext;$/;"	v
+yytext_ptr	lex.yy.cc	359;"	d	file:
+yytext_ptr	lex.yy.cc	361;"	d	file:
+yytname	readcircuit.tab.cc	/^static const char *const yytname[] =$/;"	v	file:
+yytnamerr	readcircuit.tab.cc	/^yytnamerr (char *yyres, const char *yystr)$/;"	f	file:
+yytokentype	readcircuit.tab.cc	/^  enum yytokentype$/;"	g	file:
+yytokentype	readcircuit.tab.h	/^  enum yytokentype$/;"	g
+yytoknum	readcircuit.tab.cc	/^static const yytype_uint16 yytoknum[] =$/;"	v	file:
+yytranslate	readcircuit.tab.cc	/^static const yytype_uint8 yytranslate[] =$/;"	v	file:
+yytype_int16	readcircuit.tab.cc	/^typedef YYTYPE_INT16 yytype_int16;$/;"	t	file:
+yytype_int16	readcircuit.tab.cc	/^typedef short int yytype_int16;$/;"	t	file:
+yytype_int8	readcircuit.tab.cc	/^typedef YYTYPE_INT8 yytype_int8;$/;"	t	file:
+yytype_int8	readcircuit.tab.cc	/^typedef signed char yytype_int8;$/;"	t	file:
+yytype_uint16	readcircuit.tab.cc	/^typedef YYTYPE_UINT16 yytype_uint16;$/;"	t	file:
+yytype_uint16	readcircuit.tab.cc	/^typedef unsigned short int yytype_uint16;$/;"	t	file:
+yytype_uint8	readcircuit.tab.cc	/^typedef YYTYPE_UINT8 yytype_uint8;$/;"	t	file:
+yytype_uint8	readcircuit.tab.cc	/^typedef unsigned char yytype_uint8;$/;"	t	file:
+yyvs_alloc	readcircuit.tab.cc	/^  YYSTYPE yyvs_alloc;$/;"	m	union:yyalloc	file:
+yywrap	lex.yy.cc	344;"	d	file:
+~CIRCUIT	circuit.h	/^        ~CIRCUIT() {$/;"	f	class:CIRCUIT
+~Cache	hash.h	/^    ~Cache() {}$/;"	f	class:Cache
+~FAULT	fault.h	/^        ~FAULT() {}$/;"	f	class:FAULT
+~GATE	gate.h	/^        ~GATE() {}$/;"	f	class:GATE
+~GetLongOpt	GetLongOpt.cc	/^GetLongOpt::~GetLongOpt()$/;"	f	class:GetLongOpt
+~Hash	hash.h	/^    ~Hash() { bucket.erase(bucket.begin(), bucket.end()); }$/;"	f	class:Hash
+~TFAULT	tfault.h	/^        ~TFAULT() {}$/;"	f	class:TFAULT
