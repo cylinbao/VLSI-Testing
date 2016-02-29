@@ -17,6 +17,10 @@ class CIRCUIT
         vector<GATE*> POlist;
         vector<GATE*> PPIlist;
         vector<GATE*> PPOlist;
+				// store the number of the gates by types(12 types in total)
+				vector<int> NO_Gate_Func_list;
+				unsigned TotalGateNum;
+
         list<FAULT*> Flist; //collapsing fault list
         list<FAULT*> UFlist; //undetected fault list
         list<TFAULT*> TFlist; //collapsing fault list
@@ -38,6 +42,7 @@ class CIRCUIT
             POlist.reserve(512);
             PPIlist.reserve(2048);
             PPOlist.reserve(2048);
+						NO_Gate_Func_list.reserve(12);
         }
         CIRCUIT(unsigned NO_GATE, unsigned NO_PI = 128, unsigned NO_PO = 512,
                 unsigned NO_PPI = 2048, unsigned NO_PPO = 2048) {
@@ -46,12 +51,29 @@ class CIRCUIT
             POlist.reserve(NO_PO);
             PPIlist.reserve(NO_PPI);
             PPOlist.reserve(NO_PPO);
+            NO_Gate_Func_list.reserve(12);
         }
         ~CIRCUIT() {
             for (unsigned i = 0;i<Netlist.size();++i) { delete Netlist[i]; }
             list<FAULT*>::iterator fite;
             for (fite = Flist.begin();fite!=Flist.end();++fite) { delete *fite; }
         }
+				
+				/* VLSI-Testing Assignment0 */
+				void Ass0();
+				void init_NO_Gate_Func_list();
+				void computeGateNumberByType();
+				unsigned No_Tot_Gate();
+				unsigned No_NOT_Gate() {return NO_Gate_Func_list[G_NOT];}
+				unsigned No_OR_Gate() {return NO_Gate_Func_list[G_OR];}
+				unsigned No_NOR_Gate() {return NO_Gate_Func_list[G_NOR];}
+				unsigned No_AND_Gate() {return NO_Gate_Func_list[G_AND];}
+				unsigned No_NAND_Gate() {return NO_Gate_Func_list[G_NAND];}
+				unsigned No_DFF() {return NO_Gate_Func_list[G_DFF];}
+				unsigned No_Branch() {return 0;}
+				unsigned No_Stem() {return 0;}
+				unsigned No_Avg_Fanout() {return 0;}
+				/* ************************ */
 
         void AddGate(GATE* gptr) { Netlist.push_back(gptr); }
         void SetName(string n){ Name = n;}

@@ -19,7 +19,12 @@ GetLongOpt option;
 int SetupOption(int argc, char ** argv)
 {
     option.usage("[options] input_circuit_file");
-    option.enroll("help", GetLongOpt::NoValue,
+		
+		//Add a command for VLSI-Testing Lab0
+		option.enroll("ass0", GetLongOpt::NoValue,
+            "Print some info. of the input circuit", 0);
+    
+		option.enroll("help", GetLongOpt::NoValue,
             "print this help summary", 0);
     option.enroll("logicsim", GetLongOpt::NoValue,
             "run logic simulation", 0);
@@ -84,7 +89,11 @@ int main(int argc, char ** argv)
     Circuit.Check_Levelization();
     Circuit.InitializeQueue();
 
-    if (option.retrieve("logicsim")) {
+		if (option.retrieve("ass0")) {
+				cout << "Ready to process command ass0" << endl;
+				Circuit.Ass0();
+		}
+		else if (option.retrieve("logicsim")) {
         //logic simulator
         Circuit.InitPattern(option.retrieve("input"));
         Circuit.LogicSimVectors();
