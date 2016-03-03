@@ -90,6 +90,7 @@ int main(int argc, char ** argv)
     Circuit.InitializeQueue();
 
 		if (option.retrieve("ass0")) {
+				// Lab0, print out some info. of the input circuit
 				cout << "Ready to process command ass0" << endl;
 				Circuit.Ass0();
 		}

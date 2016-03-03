@@ -8,6 +8,8 @@ using namespace std;
 void CIRCUIT::Ass0()
 {
 		cout << "It's processing command ass0" << endl;
+		cout << "!!! Print out all the elemenst in Netlist !!!" << endl;
+		printNetlist();
     cout << "Number of inputs: " << No_PI() << endl;
     cout << "Number of outputs: " << No_PO() << endl;
     cout << "Total number of gates(INV, OR, NOR, AND and NAND): " 
@@ -24,6 +26,17 @@ void CIRCUIT::Ass0()
 		cout << "Number of branch nets: " << No_Branch() << endl;
 		cout << "number of stem nets: " << No_Stem() << endl;
 		cout << "Avg num of fanouts or each gates: " << No_Avg_Fanout() << endl;
+}
+
+void CIRCUIT::printNetlist()
+{
+		vector<GATE*>::iterator it;
+
+		for(it = Netlist.begin(); it != Netlist.end(); it++) {
+			cout << "Gate name: " << (*it)->GetName() << ", ";
+			cout << "Gate ID: " << (*it)->GetID() << ", ";
+			cout << "Gate function: " << (*it)->GetFunction() << endl;
+		}
 }
 
 void CIRCUIT::init_NO_Gate_Func_list()

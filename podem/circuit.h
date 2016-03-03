@@ -63,13 +63,14 @@ class CIRCUIT
 				void Ass0();
 				void init_NO_Gate_Func_list();
 				void computeGateNumberByType();
+				void printNetlist();
 				unsigned No_Tot_Gate();
 				unsigned No_NOT_Gate() {return NO_Gate_Func_list[G_NOT];}
 				unsigned No_OR_Gate() {return NO_Gate_Func_list[G_OR];}
 				unsigned No_NOR_Gate() {return NO_Gate_Func_list[G_NOR];}
 				unsigned No_AND_Gate() {return NO_Gate_Func_list[G_AND];}
 				unsigned No_NAND_Gate() {return NO_Gate_Func_list[G_NAND];}
-				unsigned No_DFF() {return NO_Gate_Func_list[G_DFF];}
+				unsigned No_DFF() {return NO_Gate_Func_list[G_PO];}
 				unsigned No_Branch() {return 0;}
 				unsigned No_Stem() {return 0;}
 				unsigned No_Avg_Fanout() {return 0;}

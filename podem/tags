@@ -11,6 +11,7 @@ AddGate	circuit.h	/^        void AddGate(GATE* gptr) { Netlist.push_back(gptr); 
 AddInput_list	gate.h	/^        void AddInput_list(GATE* gptr){Input_list.push_back(gptr);}$/;"	f	class:GATE
 AddOutput_list	gate.h	/^        void AddOutput_list(GATE* gptr){Output_list.push_back(gptr);}$/;"	f	class:GATE
 AndTable	typeemu.h	/^const VALUE AndTable[5][5] =  { { S0,  S0,  S0,  S0,  S0 },$/;"	v
+Ass0	assignment.cc	/^void CIRCUIT::Ass0()$/;"	f	class:CIRCUIT
 Atpg	atpg.cc	/^void CIRCUIT::Atpg()$/;"	f	class:CIRCUIT
 B	typeemu.h	/^enum VALUE {S0, S1, X, D, B, ILLIGAL};$/;"	e	enum:VALUE
 BEGIN	lex.yy.cc	125;"	d	file:
@@ -214,22 +215,33 @@ MaxLevel	circuit.h	/^        unsigned MaxLevel;$/;"	m	class:CIRCUIT
 NAMESTRING	readcircuit.tab.cc	/^    NAMESTRING = 272$/;"	e	enum:yytokentype	file:
 NAMESTRING	readcircuit.tab.h	/^    NAMESTRING = 272$/;"	e	enum:yytokentype
 NCV	typeemu.h	/^const VALUE NCV[] = {X, X, X, X, X, S1, S1, S0, S0, X, X, X};$/;"	v
+NO_Gate_Func_list	circuit.h	/^				vector<int> NO_Gate_Func_list;$/;"	m	class:CIRCUIT
 Name	circuit.h	/^        string Name;$/;"	m	class:CIRCUIT
 Name	gate.h	/^        string Name;$/;"	m	class:GATE
 NameTable	readcircuit.tab.cc	/^Hash<string, GATE*, Str_hash_function> NameTable;$/;"	v
 NameToGate	readcircuit.tab.cc	/^GATE* NameToGate(string name){$/;"	f
 Netlist	circuit.h	/^        vector<GATE*> Netlist;$/;"	m	class:CIRCUIT
 NoValue	GetLongOpt.h	/^            NoValue, OptionalValue, MandatoryValue$/;"	e	enum:GetLongOpt::OptType
+No_AND_Gate	circuit.h	/^				unsigned No_AND_Gate() {return NO_Gate_Func_list[G_AND];}$/;"	f	class:CIRCUIT
+No_Avg_Fanout	circuit.h	/^				unsigned No_Avg_Fanout() {return 0;}$/;"	f	class:CIRCUIT
+No_Branch	circuit.h	/^				unsigned No_Branch() {return 0;}$/;"	f	class:CIRCUIT
+No_DFF	circuit.h	/^				unsigned No_DFF() {return NO_Gate_Func_list[G_DFF];}$/;"	f	class:CIRCUIT
 No_Fanin	gate.h	/^        unsigned No_Fanin() { return Input_list.size();}$/;"	f	class:GATE
 No_Fanout	gate.h	/^        unsigned No_Fanout() { return Output_list.size();}$/;"	f	class:GATE
 No_Gate	circuit.h	/^        unsigned No_Gate() { return Netlist.size(); }$/;"	f	class:CIRCUIT
+No_NAND_Gate	circuit.h	/^				unsigned No_NAND_Gate() {return NO_Gate_Func_list[G_NAND];}$/;"	f	class:CIRCUIT
+No_NOR_Gate	circuit.h	/^				unsigned No_NOR_Gate() {return NO_Gate_Func_list[G_NOR];}$/;"	f	class:CIRCUIT
+No_NOT_Gate	circuit.h	/^				unsigned No_NOT_Gate() {return NO_Gate_Func_list[G_NOT];}$/;"	f	class:CIRCUIT
+No_OR_Gate	circuit.h	/^				unsigned No_OR_Gate() {return NO_Gate_Func_list[G_OR];}$/;"	f	class:CIRCUIT
 No_PI	circuit.h	/^        unsigned No_PI() { return PIlist.size(); }$/;"	f	class:CIRCUIT
 No_PO	circuit.h	/^        unsigned No_PO() { return POlist.size(); }$/;"	f	class:CIRCUIT
 No_PPI	circuit.h	/^        unsigned No_PPI() { return PPIlist.size(); }$/;"	f	class:CIRCUIT
 No_PPO	circuit.h	/^        unsigned No_PPO() { return PPOlist.size(); }$/;"	f	class:CIRCUIT
+No_Stem	circuit.h	/^				unsigned No_Stem() {return 0;}$/;"	f	class:CIRCUIT
+No_Tot_Gate	assignment.cc	/^unsigned CIRCUIT::No_Tot_Gate()$/;"	f	class:CIRCUIT
 NotTable	typeemu.h	/^const VALUE NotTable[] = {S1, S0, X, B, D, ILLIGAL};$/;"	v
 NumFlags	typeemu.h	/^enum FLAGS { ALL_ASSIGNED, MARKED, FAULT_INJECTED, FAULTY, SCHEDULED, OUTPUT, NumFlags };$/;"	e	enum:FLAGS
-OBJECTS	Makefile	/^OBJECTS = readcircuit.tab.o lex.yy.o circuit.o main.o GetLongOpt.o atpg.o fsim.o sim.o psim.o stfsim.o tfatpg.o$/;"	m
+OBJECTS	Makefile	/^OBJECTS = readcircuit.tab.o lex.yy.o circuit.o main.o GetLongOpt.o atpg.o fsim.o sim.o psim.o stfsim.o tfatpg.o assignment.o$/;"	m
 OUTPUT	typeemu.h	/^enum FLAGS { ALL_ASSIGNED, MARKED, FAULT_INJECTED, FAULTY, SCHEDULED, OUTPUT, NumFlags };$/;"	e	enum:FLAGS
 OptType	GetLongOpt.h	/^        enum OptType {$/;"	g	class:GetLongOpt
 OptionalValue	GetLongOpt.h	/^            NoValue, OptionalValue, MandatoryValue$/;"	e	enum:GetLongOpt::OptType
@@ -286,7 +298,7 @@ ResetWireValue	gate.h	/^        void ResetWireValue(unsigned i, unsigned idx) { 
 S0	typeemu.h	/^enum VALUE {S0, S1, X, D, B, ILLIGAL};$/;"	e	enum:VALUE
 S1	typeemu.h	/^enum VALUE {S0, S1, X, D, B, ILLIGAL};$/;"	e	enum:VALUE
 SCHEDULED	typeemu.h	/^enum FLAGS { ALL_ASSIGNED, MARKED, FAULT_INJECTED, FAULTY, SCHEDULED, OUTPUT, NumFlags };$/;"	e	enum:FLAGS
-SOURCES	Makefile	/^SOURCES = readcircuit.tab.cc lex.yy.cc circuit.cc main.cc GetLongOpt.cc atpg.cc fsim.cc sim.cc psim.cc stfsim.cc tfatpg.cc$/;"	m
+SOURCES	Makefile	/^SOURCES = readcircuit.tab.cc lex.yy.cc circuit.cc main.cc GetLongOpt.cc atpg.cc fsim.cc sim.cc psim.cc stfsim.cc tfatpg.cc assignment.cc$/;"	m
 Schedule	circuit.h	/^        void Schedule(GATE* gptr)$/;"	f	class:CIRCUIT
 ScheduleAllPIs	psim.cc	/^void CIRCUIT::ScheduleAllPIs()$/;"	f	class:CIRCUIT
 ScheduleFanout	sim.cc	/^void CIRCUIT::ScheduleFanout(GATE* gptr)$/;"	f	class:CIRCUIT
@@ -339,6 +351,7 @@ TFaultSim_t	stfsim.cc	/^void CIRCUIT::TFaultSim_t()$/;"	f	class:CIRCUIT
 TFlist	circuit.h	/^        list<TFAULT*> TFlist; \/\/collapsing fault list$/;"	m	class:CIRCUIT
 TRUE	typeemu.h	/^enum ATPG_STATUS { TRUE, CONFLICT, FALSE };$/;"	e	enum:ATPG_STATUS
 TestPossible	atpg.cc	/^GATEPTR CIRCUIT::TestPossible(FAULT* fptr)$/;"	f	class:CIRCUIT
+TotalGateNum	circuit.h	/^				unsigned TotalGateNum;$/;"	m	class:CIRCUIT
 TraceDetectedStemFault	atpg.cc	/^void CIRCUIT::TraceDetectedStemFault(GATEPTR gptr, VALUE val)$/;"	f	class:CIRCUIT
 TraceUnknownPath	atpg.cc	/^bool CIRCUIT::TraceUnknownPath(GATEPTR gptr)$/;"	f	class:CIRCUIT
 UFlist	circuit.h	/^        list<FAULT*> UFlist; \/\/undetected fault list$/;"	m	class:CIRCUIT
@@ -514,6 +527,7 @@ bucket_num	hash.h	/^Hash<KEY, VALUE, HASH_FUNCTION>::bucket_num(KEY k)$/;"	f	cla
 circuit	readcircuit.y	/^circuit : $/;"	l
 clean	hash.h	/^    void clean() { bucket.erase(bucket.begin(), bucket.end()); }$/;"	f	class:Cache
 clean	hash.h	/^Hash<KEY, VALUE, HASH_FUNCTION>::clean()$/;"	f	class:Hash
+computeGateNumberByType	assignment.cc	/^void CIRCUIT::computeGateNumberByType()$/;"	f	class:CIRCUIT
 description	GetLongOpt.h	/^            const char *description;   \/\/ a description of option$/;"	m	struct:GetLongOpt::Cell
 enroll	GetLongOpt.cc	/^GetLongOpt::enroll(const char * const opt, const OptType t,$/;"	f	class:GetLongOpt
 enroll_done	GetLongOpt.h	/^        int enroll_done;         \/\/ finished enrolling$/;"	m	class:GetLongOpt
@@ -542,6 +556,7 @@ gatename	readcircuit.y	/^gatename: GNOT{$$=G_NOT;}$/;"	l
 get_value	hash.h	/^Hash<KEY, VALUE, HASH_FUNCTION>::get_value(KEY k)$/;"	f	class:Hash
 get_value	hash.h	/^Hash<KEY, VALUE, HASH_FUNCTION>::get_value(KEY k, int b)$/;"	f	class:Hash
 gptr	readcircuit.tab.cc	/^GATE* gptr=NULL;$/;"	v
+init_NO_Gate_Func_list	assignment.cc	/^void CIRCUIT::init_NO_Gate_Func_list()$/;"	f	class:CIRCUIT
 inlist	ReadPattern.h	/^        vector<GATE*> inlist;$/;"	m	class:PATTERN
 inlist	readcircuit.tab.cc	/^GATE* inlist=NULL;$/;"	v
 input_definition	readcircuit.y	/^input_definition: GINPUT LPAR NAMESTRING RPAR EOLINE{$/;"	l
