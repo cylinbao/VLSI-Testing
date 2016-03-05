@@ -17,9 +17,15 @@ class CIRCUIT
         vector<GATE*> POlist;
         vector<GATE*> PPIlist;
         vector<GATE*> PPOlist;
+				// VLSI-Testing Lab0
 				// store the number of the gates by types(12 types in total)
 				vector<int> NO_Gate_Func_list;
 				unsigned TotalGateNum;
+				unsigned TotalBranchNets;
+				unsigned TotalStemNets;
+				unsigned TotalFanout;
+				float AvgFanout;
+				// VLSI-Testing Lab0
 
         list<FAULT*> Flist; //collapsing fault list
         list<FAULT*> UFlist; //undetected fault list
@@ -61,19 +67,20 @@ class CIRCUIT
 				
 				/* VLSI-Testing Assignment0 */
 				void Ass0();
-				void init_NO_Gate_Func_list();
-				void computeGateNumberByType();
+				void computeNeededData();
 				void printNetlist();
-				unsigned No_Tot_Gate();
+				unsigned No_Tot_Gate() {return TotalGateNum;}
 				unsigned No_NOT_Gate() {return NO_Gate_Func_list[G_NOT];}
 				unsigned No_OR_Gate() {return NO_Gate_Func_list[G_OR];}
 				unsigned No_NOR_Gate() {return NO_Gate_Func_list[G_NOR];}
 				unsigned No_AND_Gate() {return NO_Gate_Func_list[G_AND];}
 				unsigned No_NAND_Gate() {return NO_Gate_Func_list[G_NAND];}
-				unsigned No_DFF() {return NO_Gate_Func_list[G_PO];}
-				unsigned No_Branch() {return 0;}
-				unsigned No_Stem() {return 0;}
-				unsigned No_Avg_Fanout() {return 0;}
+				unsigned No_DFF() {return NO_Gate_Func_list[G_PPI] + 
+																	NO_Gate_Func_list[G_DFF];}
+				unsigned No_Branch() {return TotalBranchNets;}
+				unsigned No_Stem() {return TotalStemNets;}
+				unsigned No_Tot_Fanout() {return TotalFanout;}
+				float No_Avg_Fanout() {return AvgFanout;}
 				/* ************************ */
 
         void AddGate(GATE* gptr) { Netlist.push_back(gptr); }

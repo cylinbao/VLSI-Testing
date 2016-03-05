@@ -7,9 +7,9 @@ using namespace std;
 // Add a function for the assignment0 //
 void CIRCUIT::Ass0()
 {
-		cout << "It's processing command ass0" << endl;
-		cout << "!!! Print out all the elemenst in Netlist !!!" << endl;
-		printNetlist();
+		computeNeededData();
+		cout << "It's processing command ass0" << endl << endl;
+		//printNetlist();
     cout << "Number of inputs: " << No_PI() << endl;
     cout << "Number of outputs: " << No_PO() << endl;
     cout << "Total number of gates(INV, OR, NOR, AND and NAND): " 
@@ -25,12 +25,16 @@ void CIRCUIT::Ass0()
 		// TODO
 		cout << "Number of branch nets: " << No_Branch() << endl;
 		cout << "number of stem nets: " << No_Stem() << endl;
-		cout << "Avg num of fanouts or each gates: " << No_Avg_Fanout() << endl;
+		//cout << "Total number of fanouts of each gates: " << No_Tot_Fanout() << endl;
+		cout << "Avg number of fanouts of each gates: " << No_Avg_Fanout() << endl;
+		cout << endl;
 }
 
 void CIRCUIT::printNetlist()
 {
 		vector<GATE*>::iterator it;
+
+		cout << "!!! Print out all the elemenst in Netlist !!!" << endl;
 
 		for(it = Netlist.begin(); it != Netlist.end(); it++) {
 			cout << "Gate name: " << (*it)->GetName() << ", ";
@@ -39,35 +43,38 @@ void CIRCUIT::printNetlist()
 		}
 }
 
-void CIRCUIT::init_NO_Gate_Func_list()
+void CIRCUIT::computeNeededData()
 {
-		vector<int>::iterator it;
+		vector<int>::iterator itGateFuncList;
 
-		for(it = NO_Gate_Func_list.begin(); it != NO_Gate_Func_list.end(); it++) {
-				*it = 0;
+		for(itGateFuncList = NO_Gate_Func_list.begin(); 
+				itGateFuncList != NO_Gate_Func_list.end(); itGateFuncList++) {
+				*itGateFuncList = 0;
 		}
-}
 
-void CIRCUIT::computeGateNumberByType()
-{
-		init_NO_Gate_Func_list();
+		TotalGateNum = 0;
+		TotalBranchNets = 0;
+		TotalStemNets = 0;
+		TotalFanout = 0;
+		AvgFanout = 0.0;
 
-		vector<GATE*>::iterator it;
+		vector<GATE*>::iterator itNetlist;
 
-		for(it = Netlist.begin(); it != Netlist.end(); it++) {
-				NO_Gate_Func_list[(*it)->GetFunction()] += 1;
+		for(itNetlist = Netlist.begin(); itNetlist != Netlist.end(); itNetlist++) {
+				NO_Gate_Func_list[(*itNetlist)->GetFunction()] += 1;
+
+				if((*itNetlist)->No_Fanout() > 1)		
+					TotalBranchNets += 1;
+
+				TotalFanout += (*itNetlist)->No_Fanout();
+
+				if((*itNetlist)->No_Fanin() > 1)		
+					TotalStemNets += 1;
 		}
-}
-
-unsigned CIRCUIT::No_Tot_Gate()
-{
-		computeGateNumberByType();
-
-		unsigned acc = 0;
 
 		for(int i = 4; i < 9; i++) {
-				acc += NO_Gate_Func_list[i];
+				TotalGateNum += NO_Gate_Func_list[i];
 		}
 
-		return acc;
+		AvgFanout = ((float)TotalFanout) / ((float)No_Gate());
 }
