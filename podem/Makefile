@@ -1,7 +1,8 @@
-
 CXX      = g++
 LINK     = g++
-CXXFLAGS = -O2 -Wall -DDEBUG
+# Remove -DDEBUG flag for VLST-Testing Lab0
+CXXFLAGS = -O2 -Wall 
+#CXXFLAGS = -O2 -Wall -DDEBUG
 #CXXFLAGS = -g -DDEBUG_ATPG -Wall #Turn on debugging
 INCPATH  =
 LIBS     = -lreadline -lcurses
@@ -11,8 +12,10 @@ DEL_FILE = rm -f
 
 HEADERS = gate.h fault.h circuit.h GetLongOpt.h typeemu.h readcircuit.tab.h ReadPattern.h hash.h tfault.h
 
+# Add source file assignment.c to be compiled
 SOURCES = readcircuit.tab.cc lex.yy.cc circuit.cc main.cc GetLongOpt.cc atpg.cc fsim.cc sim.cc psim.cc stfsim.cc tfatpg.cc assignment.cc
 
+# Add object file assignment.o to be linked
 OBJECTS = readcircuit.tab.o lex.yy.o circuit.o main.o GetLongOpt.o atpg.o fsim.o sim.o psim.o stfsim.o tfatpg.o assignment.o
 
 TARGET  = atpg

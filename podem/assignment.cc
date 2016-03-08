@@ -22,7 +22,6 @@ void CIRCUIT::Ass0()
 		if(No_DFF() != 0)
 			cout << "Number of flip-flops: " << No_DFF() << endl;
 		cout << "Total number of signal nets: " << No_Gate() << endl;
-		// TODO
 		cout << "Number of branch nets: " << No_Branch() << endl;
 		cout << "number of stem nets: " << No_Stem() << endl;
 		//cout << "Total number of fanouts of each gates: " << No_Tot_Fanout() << endl;
