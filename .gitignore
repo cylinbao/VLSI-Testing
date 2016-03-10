@@ -2,3 +2,5 @@ atpg
 *.swp
 *.o
 *.swo
+*.yy.cc
+readcircuit.*

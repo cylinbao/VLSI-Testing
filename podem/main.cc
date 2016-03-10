@@ -19,12 +19,15 @@ GetLongOpt option;
 int SetupOption(int argc, char ** argv)
 {
     option.usage("[options] input_circuit_file");
-		
-		//Add a command for VLSI-Testing Lab0
-		option.enroll("ass0", GetLongOpt::NoValue,
-            "Print some info. of the input circuit", 0);
-    
-		option.enroll("help", GetLongOpt::NoValue,
+		// Add options for lab1
+		option.enroll("path", GetLongOpt::NoValue, 
+						"print all the possible paths from source gate to target gate", 0);
+		option.enroll("start",GetLongOpt::MandatoryValue,
+						"get the starting gate for the path", 0);
+		option.enroll("end",GetLongOpt::MandatoryValue,
+						"get the ending gate for the path", 0);
+		// --------------------
+    option.enroll("help", GetLongOpt::NoValue,
             "print this help summary", 0);
     option.enroll("logicsim", GetLongOpt::NoValue,
             "run logic simulation", 0);
@@ -89,11 +92,23 @@ int main(int argc, char ** argv)
     Circuit.Check_Levelization();
     Circuit.InitializeQueue();
 
+<<<<<<< HEAD
 		if (option.retrieve("ass0")) {
 				// Lab0, print out some info. of the input circuit
 				cout << "Ready to process command ass0" << endl;
 				Circuit.Ass0();
 		}
+=======
+		// Options operations for Lab1
+		if(option.retrieve("path")){
+			cout << "Circuit file name: " << Circuit.GetName() << endl;
+			const char *start_gate = option.retrieve("start");
+			const char *end_gate = option.retrieve("end");
+			cout << "Starting Gate: " << start_gate << endl;
+			cout << "Ending Gate: " << end_gate << endl;
+		}
+		// ---------------------------
+>>>>>>> 5ac806c2535142b61c78562a58149010e1e6f79a
 		else if (option.retrieve("logicsim")) {
         //logic simulator
         Circuit.InitPattern(option.retrieve("input"));
