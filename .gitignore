@@ -4,3 +4,4 @@ atpg
 *.swo
 *.yy.cc
 readcircuit.*
+tags

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <ctime>
+#include <string>
 #include "circuit.h"
 #include "GetLongOpt.h"
 #include "ReadPattern.h"
@@ -19,7 +20,11 @@ GetLongOpt option;
 int SetupOption(int argc, char ** argv)
 {
     option.usage("[options] input_circuit_file");
-		// Add options for lab1
+		// Add options for VLSI-Testing lab1
+		option.enroll("print", GetLongOpt::NoValue,
+						"print out the needed info of input file", 0);
+		option.enroll("info", GetLongOpt::MandatoryValue,
+						"specify the needed info.", 0);
 		option.enroll("path", GetLongOpt::NoValue, 
 						"print all the possible paths from source gate to target gate", 0);
 		option.enroll("start",GetLongOpt::MandatoryValue,
@@ -97,8 +102,22 @@ int main(int argc, char ** argv)
 			cout << "Circuit file name: " << Circuit.GetName() << endl;
 			const char *start_gate = option.retrieve("start");
 			const char *end_gate = option.retrieve("end");
-			cout << "Starting Gate: " << start_gate << endl;
-			cout << "Ending Gate: " << end_gate << endl;
+			//cout << "Starting Gate: " << start_gate << endl;
+			//cout << "Ending Gate: " << end_gate << endl;
+
+			string src_gate_name(start_gate);
+			string dest_gate_name(end_gate);
+			Circuit.path(src_gate_name, dest_gate_name);
+		}
+		else if(option.retrieve("print")){
+			const char *info_type = option.retrieve("info");
+			cout << "Type of Info.: " << info_type << endl;
+			if((string)info_type == "net")
+				Circuit.printNetlist();
+			else if((string)info_type == "PO")
+				Circuit.printPOInputList();
+			else if((string)info_type == "gate")
+				Circuit.printGateOutput();
 		}
 		// ---------------------------
 		else if (option.retrieve("logicsim")) {

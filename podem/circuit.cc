@@ -157,3 +157,45 @@ void CIRCUIT::SetupIO_ID()
         }
     }
 }
+
+// VLSI-Testing Lab1
+// Print out the netlist stored in the Netlist data structure
+void CIRCUIT::printNetlist()
+{
+	char* GATEFUNC_Table[12] = {"G_PI", "G_PO", "G_PPI", "G_PPO", "G_NOT",
+	"G_AND", "G_NAND", "G_OR", "G_NOR", "G_DFF", "G_BUF", "G_BAD"};
+	vector<GATE*>::iterator it_net;
+
+	for(it_net = Netlist.begin(); it_net != Netlist.end(); ++it_net){
+		cout << "Gate Nate: " << (*it_net)->GetName();
+		cout << ", Gate function: ";
+		cout << GATEFUNC_Table[(*it_net)->GetFunction()];
+		cout << ";\n";
+	}
+}
+
+void CIRCUIT::printPOInputList()
+{
+	unsigned no_gate_fanin, i;
+	vector<GATE*>::iterator it_po;
+
+	for(it_po = POlist.begin(); it_po != POlist.end(); ++it_po){
+		cout << "PO: " << (*it_po)->GetName() << endl;
+		no_gate_fanin = (*it_po)->No_Fanin();
+		for(i = 0; i < no_gate_fanin; ++i)
+			cout << "  " << (*it_po)->Fanin(i)->GetName() << endl;
+	}
+}
+
+void CIRCUIT::printGateOutput()
+{
+	unsigned no_gate_fanout, i;
+	vector<GATE*>::iterator it_net;
+
+	for(it_net = Netlist.begin(); it_net != Netlist.end(); ++it_net){
+		cout << "Gate: " << (*it_net)->GetName() << endl;
+		no_gate_fanout = (*it_net)->No_Fanout();
+		for(i = 0; i < no_gate_fanout; ++i)
+			cout << "  " << (*it_net)->Fanout(i)->GetName() << endl;
+	}
+}

@@ -4,6 +4,8 @@
 #include "tfault.h"
 #include "ReadPattern.h"
 #include <stdlib.h>
+#include <string>
+#include <stack>
 
 typedef GATE* GATEPTR;
 
@@ -29,6 +31,8 @@ class CIRCUIT
 		ListofGate GateStack;
 		ListofGate PropagateTree;
 		ListofGateIte QueueIte;
+		//VLSI-Testing Lab1, stack for path
+		std::stack<GATE*> path_stack;
 
 	public:
 		//Initialize netlist
@@ -83,12 +87,22 @@ class CIRCUIT
 			}
 		}
 
+		// VLSI-Testing Lab1
+		// defined in path.cc
+		void path(string src_name_gate, string dest_gate_name);
+		bool findPath(GATE* src_gate, GATE* dest_gate);
+		void printPath(string src_gate_name, string dest_gate_name);
+
 		//defined in circuit.cc
 		void Levelize();
 		void FanoutList();
 		void Check_Levelization();
 		void SetMaxLevel();
 		void SetupIO_ID();
+		// print useful infomation
+		void printNetlist();
+		void printPOInputList();
+		void printGateOutput();
 
 		//defined in sim.cc
 		void SetPPIZero(); //Initialize PPI state
