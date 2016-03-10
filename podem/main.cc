@@ -92,13 +92,6 @@ int main(int argc, char ** argv)
     Circuit.Check_Levelization();
     Circuit.InitializeQueue();
 
-<<<<<<< HEAD
-		if (option.retrieve("ass0")) {
-				// Lab0, print out some info. of the input circuit
-				cout << "Ready to process command ass0" << endl;
-				Circuit.Ass0();
-		}
-=======
 		// Options operations for Lab1
 		if(option.retrieve("path")){
 			cout << "Circuit file name: " << Circuit.GetName() << endl;
@@ -108,7 +101,6 @@ int main(int argc, char ** argv)
 			cout << "Ending Gate: " << end_gate << endl;
 		}
 		// ---------------------------
->>>>>>> 5ac806c2535142b61c78562a58149010e1e6f79a
 		else if (option.retrieve("logicsim")) {
         //logic simulator
         Circuit.InitPattern(option.retrieve("input"));

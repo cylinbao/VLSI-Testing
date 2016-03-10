@@ -52,7 +52,6 @@ class CIRCUIT
 			list<FAULT*>::iterator fite;
 			for (fite = Flist.begin();fite!=Flist.end();++fite) { delete *fite; }
 		}
->>>>>>> 5ac806c2535142b61c78562a58149010e1e6f79a
 
 		void AddGate(GATE* gptr) { Netlist.push_back(gptr); }
 		void SetName(string n){ Name = n;}
