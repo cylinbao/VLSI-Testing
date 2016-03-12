@@ -5,7 +5,7 @@
 #include "ReadPattern.h"
 #include <stdlib.h>
 #include <string>
-#include <stack>
+#include <vector>
 
 typedef GATE* GATEPTR;
 
@@ -32,7 +32,8 @@ class CIRCUIT
 		ListofGate PropagateTree;
 		ListofGateIte QueueIte;
 		//VLSI-Testing Lab1, stack for path
-		std::stack<GATE*> path_stack;
+		std::vector<GATE*> path_stack;
+		int path_count;
 
 	public:
 		//Initialize netlist
@@ -42,6 +43,8 @@ class CIRCUIT
 			POlist.reserve(512);
 			PPIlist.reserve(2048);
 			PPOlist.reserve(2048);
+			path_stack.clear();
+			path_count = 0;
 		}
 		CIRCUIT(unsigned NO_GATE, unsigned NO_PI = 128, unsigned NO_PO = 512,
 				unsigned NO_PPI = 2048, unsigned NO_PPO = 2048) {
@@ -50,6 +53,8 @@ class CIRCUIT
 			POlist.reserve(NO_PO);
 			PPIlist.reserve(NO_PPI);
 			PPOlist.reserve(NO_PPO);
+			path_stack.clear();
+			path_count = 0;
 		}
 		~CIRCUIT() {
 			for (unsigned i = 0;i<Netlist.size();++i) { delete Netlist[i]; }
@@ -90,8 +95,8 @@ class CIRCUIT
 		// VLSI-Testing Lab1
 		// defined in path.cc
 		void path(string src_name_gate, string dest_gate_name);
-		bool findPath(GATE* src_gate, GATE* dest_gate);
-		void printPath(string src_gate_name, string dest_gate_name);
+		bool findPath(GATE* dest_gate);
+		void printPath();
 
 		//defined in circuit.cc
 		void Levelize();

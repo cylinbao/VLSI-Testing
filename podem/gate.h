@@ -23,6 +23,8 @@ class GATE
 		//bitset<PatternNum> WireValue2; //use two values to simulate don't care case
 		bitset<PatternNum> WireValue[2]; //one pair of WireValues (length defined by PatternNum).
 		bitset<PatternNum> FaultFlag;
+		// VLSI-Testing Lab1, label for finding paths
+		DFS_STATUS dfs_status;
 	public:
 		//Initialize GATE
 		GATE(): Function(G_BAD), Level(0), Value(X), Value_t(X), Inversion(false) {
@@ -32,8 +34,13 @@ class GATE
 			Count[1] = (0);
 			WireValue[0].set();   //All parallel bitsets are set to X
 			WireValue[1].reset();
+			// VLSI-Testing Lab1, initial path label
+			dfs_status = WHITE;
 		}
 		~GATE() {}
+		//VLSI-Testing Lab1, operations with the dfs status
+		void setDFSStatus(DFS_STATUS flag) {dfs_status = flag;}
+		DFS_STATUS getDFSStatus() {return dfs_status;}
 		void SetName(string n){ Name = n;}
 		void SetID(unsigned id){ ID = id;}
 		void SetFunction(GATEFUNC f){ Function = f;}

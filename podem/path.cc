@@ -29,11 +29,14 @@ void CIRCUIT::path(string src_gate_name, string dest_gate_name)
 
 	//cout << "Source gate: " << src_gate->GetName() << endl;
 	//cout << "Dest gate: " << dest_gate->GetName() << endl;
-	bool path_flag = false;
-	path_flag = findPath(src_gate, dest_gate);
+	path_stack.push_back(src_gate);
+	path_count = 0;
+	findPath(dest_gate);
 
-	if(path_flag == true)
-		printPath(src_gate_name, dest_gate_name);
+	if(path_count > 0){
+		cout << "The paths from " << src_gate_name << " to ";
+		cout << dest_gate_name << ": " << path_count << endl;
+	}
 	else{
 		cout << "Can not find path from " << src_gate_name << " to ";
 		cout << dest_gate_name << "!" << endl;
@@ -41,54 +44,49 @@ void CIRCUIT::path(string src_gate_name, string dest_gate_name)
 }
 
 // if it finds a path, then return true
-bool CIRCUIT::findPath(GATE *src_gate, GATE *dest_gate)
+bool CIRCUIT::findPath(GATE *dest_gate)
 {
 	bool path_flag = false;
-	unsigned no_src_out;
-	unsigned i;
-	GATE *gate_ptr;
+	unsigned no_src_out, i;
+	GATE *next_gate, *src_gate;
 
-	no_src_out = src_gate->No_Fanout();
-	for(i = 0; i < no_src_out; ++i){
-		gate_ptr = src_gate->Fanout(i);	
-		if(gate_ptr == dest_gate){
-			path_stack.push(gate_ptr);
-			path_stack.push(src_gate);
-			return true;
-		}
-		else
-			path_flag = findPath(gate_ptr, dest_gate);
-	}
-	if(path_flag == true){
-		path_stack.push(src_gate);
+	src_gate = path_stack.back();
+	if(src_gate == dest_gate){
+		printPath();
+		path_stack.pop_back();
+		path_count++;
 		return true;
 	}
-	else
-		return false;
+
+	no_src_out = src_gate->No_Fanout();
+
+	for(i = 0; i < no_src_out; ++i){
+		bool temp_flag;
+		next_gate = src_gate->Fanout(i);	
+
+		if(next_gate->getDFSStatus() != BLACK){
+			path_stack.push_back(next_gate);
+			temp_flag = findPath(dest_gate);
+			if(path_flag == false)
+				path_flag = temp_flag;
+		}
+	}
+
+	if(path_flag == false)
+		src_gate->setDFSStatus(BLACK);
+
+	path_stack.pop_back();
+	return path_flag;
 }
 
-void CIRCUIT::printPath(string src_gate_name, string dest_gate_name)
+void CIRCUIT::printPath()
 {
 	string gate_name;
-	bool meet_end_gate = true;
-	int count = 0;
+	vector<GATE*>::iterator it_stack;
 
 	cout << endl << "Found paths:" << endl;
-	while(!path_stack.empty()){
-		gate_name = path_stack.top()->GetName();
-		if(meet_end_gate == true){
-			cout << src_gate_name << " ";
-			meet_end_gate = false;
-		}
-		if(gate_name != src_gate_name)
-			cout << gate_name << " ";
-		if(gate_name == dest_gate_name){
-			count++;
-			meet_end_gate = true;
-			cout << endl;
-		}
-		path_stack.pop();
+	for(it_stack = path_stack.begin(); it_stack != path_stack.end(); ++it_stack){
+		cout << (*it_stack)->GetName() << " ";	
 	}
-	cout << "The paths from " << src_gate_name << " to ";
-	cout << dest_gate_name << ": " << count << endl << endl;
+	cout << endl;
 }
