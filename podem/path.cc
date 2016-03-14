@@ -1,6 +1,7 @@
 #include <string>
 #include <iostream>
 #include "circuit.h"
+#include "stdio.h"
 using namespace std;
 
 void CIRCUIT::path(string src_gate_name, string dest_gate_name)
@@ -86,7 +87,8 @@ void CIRCUIT::printPath()
 
 	cout << endl << "Found paths:" << endl;
 	for(it_stack = path_stack.begin(); it_stack != path_stack.end(); ++it_stack){
-		cout << (*it_stack)->GetName() << " ";	
+		//cout << (*it_stack)->GetName() << " ";	
+		printf("%s ", (*it_stack)->GetName().c_str());
 	}
 	cout << endl;
 }
