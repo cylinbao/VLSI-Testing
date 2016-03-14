@@ -34,6 +34,7 @@ class CIRCUIT
 		//VLSI-Testing Lab1, stack for path
 		std::vector<GATE*> path_stack;
 		int path_count;
+		string dest_gate_name;
 
 	public:
 		//Initialize netlist
@@ -95,7 +96,7 @@ class CIRCUIT
 		// VLSI-Testing Lab1
 		// defined in path.cc
 		void path(string src_name_gate, string dest_gate_name);
-		bool findPath(GATE* dest_gate);
+		bool findPath();
 		void printPath();
 
 		//defined in circuit.cc

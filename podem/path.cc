@@ -10,6 +10,7 @@ void CIRCUIT::path(string src_gate_name, string dest_gate_name)
 	GATE *src_gate = &empty_gate, *dest_gate = &empty_gate;
 	vector<GATE*>::iterator it_list;
 
+	CIRCUIT::dest_gate_name = dest_gate_name;
 	for(it_list = PIlist.begin(); it_list != PIlist.end(); ++it_list)
 		if((*it_list)->GetName() == src_gate_name)
 			src_gate = (*it_list);
@@ -32,7 +33,7 @@ void CIRCUIT::path(string src_gate_name, string dest_gate_name)
 	//cout << "Dest gate: " << dest_gate->GetName() << endl;
 	path_stack.push_back(src_gate);
 	path_count = 0;
-	findPath(dest_gate);
+	findPath();
 
 	if(path_count > 0){
 		cout << "The paths from " << src_gate_name << " to ";
@@ -45,14 +46,14 @@ void CIRCUIT::path(string src_gate_name, string dest_gate_name)
 }
 
 // if it finds a path, then return true
-bool CIRCUIT::findPath(GATE *dest_gate)
+bool CIRCUIT::findPath()
 {
 	bool path_flag = false;
 	unsigned no_src_out, i;
 	GATE *next_gate, *src_gate;
 
 	src_gate = path_stack.back();
-	if(src_gate == dest_gate){
+	if(src_gate->GetName() == dest_gate_name){
 		printPath();
 		path_stack.pop_back();
 		path_count++;
@@ -67,7 +68,7 @@ bool CIRCUIT::findPath(GATE *dest_gate)
 
 		if(next_gate->getDFSStatus() != BLACK){
 			path_stack.push_back(next_gate);
-			temp_flag = findPath(dest_gate);
+			temp_flag = findPath();
 			if(path_flag == false)
 				path_flag = temp_flag;
 		}
