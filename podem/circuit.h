@@ -2,10 +2,16 @@
 #define CIRCUIT_H
 #include "fault.h"
 #include "tfault.h"
-#include "ReadPattern.h"
+#include "pattern.h"
 #include <stdlib.h>
 #include <string>
 #include <vector>
+#include <fstream>
+#include <string.h>
+
+#define xstr(s) str(s)
+#define str(s) #s
+#define OUTDIR output
 
 typedef GATE* GATEPTR;
 
@@ -35,6 +41,8 @@ class CIRCUIT
 		std::vector<GATE*> path_stack;
 		int path_count;
 		string dest_gate_name;
+		string input_name, output_name;
+		ofstream ofs;
 
 	public:
 		//Initialize netlist
@@ -56,6 +64,8 @@ class CIRCUIT
 			PPOlist.reserve(NO_PPO);
 			path_stack.clear();
 			path_count = 0;
+			if(ofs.is_open())
+				ofs.close();
 		}
 		~CIRCUIT() {
 			for (unsigned i = 0;i<Netlist.size();++i) { delete Netlist[i]; }
@@ -81,8 +91,29 @@ class CIRCUIT
 		unsigned No_PPI() { return PPIlist.size(); }
 		unsigned No_PPO() { return PPOlist.size(); }
 
+		void genRandomPattern(string pattern_name, int number){
+			Pattern.genRandomPattern(pattern_name, number);
+		}
+		void genRandomPatternUnknown(string pattern_name, int number){
+			Pattern.genRandomPatternUnknown(pattern_name, number);
+		}
+
 		void InitPattern(const char *pattern) {
 			Pattern.Initialize(const_cast<char *>(pattern), PIlist.size(), "PI");
+		}
+
+		void openOutputFile(string file_name) {
+			char str[] = "mkdir ";
+			strcat(str, xstr(OUTDIR));
+			system(str);
+
+			strcpy(str, "./"); 
+			strcat(str, xstr(OUTDIR));
+			strcat(str, "/");
+			strcat(str, file_name.c_str());
+			ofs.open(str, ofstream::out | ofstream::trunc);
+			if(!ofs.is_open())
+				cout << "Cannot open file!\n";
 		}
 
 		void Schedule(GATE* gptr)

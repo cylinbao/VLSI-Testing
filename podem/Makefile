@@ -7,16 +7,17 @@ CXXFLAGS = -O2 -Wall
 INCPATH  =
 LIBS     = -lreadline -lcurses
 DEL_FILE = rm -f
+DEL_DIR  = rm -fr
 
 ####### Files
 
-HEADERS = gate.h fault.h circuit.h GetLongOpt.h typeemu.h readcircuit.tab.h ReadPattern.h hash.h tfault.h
+HEADERS = gate.h fault.h circuit.h GetLongOpt.h typeemu.h readcircuit.tab.h pattern.h hash.h tfault.h
 
 # Add source file assignment.c to be compiled
-SOURCES = readcircuit.tab.cc lex.yy.cc circuit.cc main.cc GetLongOpt.cc atpg.cc fsim.cc sim.cc psim.cc stfsim.cc tfatpg.cc path.cc
+SOURCES = readcircuit.tab.cc lex.yy.cc circuit.cc main.cc GetLongOpt.cc atpg.cc fsim.cc sim.cc psim.cc stfsim.cc tfatpg.cc path.cc pattern.cc
 
 # Add object file assignment.o to be linked
-OBJECTS = readcircuit.tab.o lex.yy.o circuit.o main.o GetLongOpt.o atpg.o fsim.o sim.o psim.o stfsim.o tfatpg.o path.o
+OBJECTS = readcircuit.tab.o lex.yy.o circuit.o main.o GetLongOpt.o atpg.o fsim.o sim.o psim.o stfsim.o tfatpg.o path.o pattern.o
 
 TARGET  = atpg
 
@@ -49,4 +50,19 @@ lex.yy.cc: readcircuit.l readcircuit.y
 clean:
 	@$(DEL_FILE) $(OBJECTS) $(TARGET)
 	@$(DEL_FILE) readcircuit.tab.cc readcircuit.tab.h lex.yy.cc
+	@$(DEL_DIR)	 output input
 
+lab2-17:
+	./$(TARGET) -pattern -num 100 -output c17.output ../circuits/iscas85/c17.bench
+	@echo "Print output file"
+	@cat ./output/c17.output
+
+lab2-17U:
+	./$(TARGET) -pattern -num 100 -unknown -output c17.output ../circuits/iscas85/c17.bench
+	@echo "Print output file"
+	@cat ./output/c17.output
+
+lab2-7552:
+	./$(TARGET) -logicsim -input ../input/c7552.input -output c7552.output ../circuits/iscas85/c7552.bench
+	@echo "Print output file"
+	@cat ./output/c7552.output

@@ -3,7 +3,7 @@
 #include <iostream>
 #include "gate.h"
 #include "circuit.h"
-#include "ReadPattern.h"
+#include "pattern.h"
 #include "GetLongOpt.h"
 using namespace std;
 
@@ -185,10 +185,20 @@ void PATTERN::ReadNextPattern()
 void CIRCUIT::PrintIO()
 {
     register unsigned i;
-    for (i = 0;i<No_PI();++i) { cout << PIGate(i)->GetValue(); }
+		ofs << "PI: ";
+    for (i = 0;i<No_PI();++i){
+			cout << PIGate(i)->GetValue(); 
+			ofs << PIGate(i)->GetValue(); 
+		}
     cout << " ";
-    for (i = 0;i<No_PO();++i) { cout << POGate(i)->GetValue(); }
+    ofs << " ";
+		ofs << "PO: ";
+    for (i = 0;i<No_PO();++i){
+			cout << POGate(i)->GetValue(); 
+			ofs << POGate(i)->GetValue(); 
+		}
     cout << endl;
+    ofs << endl;
     return;
 }
 

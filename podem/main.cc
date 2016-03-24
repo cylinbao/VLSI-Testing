@@ -3,7 +3,7 @@
 #include <string>
 #include "circuit.h"
 #include "GetLongOpt.h"
-#include "ReadPattern.h"
+#include "pattern.h"
 using namespace std;
 
 // All defined in readcircuit.l
@@ -32,6 +32,16 @@ int SetupOption(int argc, char ** argv)
 		option.enroll("end",GetLongOpt::MandatoryValue,
 						"get the ending gate for the path", 0);
 		// --------------------
+		// Add options for VLSI-Testing lab2
+    option.enroll("pattern", GetLongOpt::NoValue,
+            			"Generate random pattern", 0);
+		option.enroll("num",GetLongOpt::MandatoryValue,
+									"specify the number of the generated pattern", 0);
+    option.enroll("unknown", GetLongOpt::NoValue,
+            			"Generate random pattern with unknown", 0);
+    option.enroll("mod_logicsim", GetLongOpt::NoValue,
+            			"use cpu instructions to compute AND, OR and NOT", 0);
+		// ---------------------------------
     option.enroll("help", GetLongOpt::NoValue,
             "print this help summary", 0);
     option.enroll("logicsim", GetLongOpt::NoValue,
@@ -71,12 +81,12 @@ int main(int argc, char ** argv)
             exit( -1);
         }
         else {
-            string circuit_name = argv[optind];
-            string::size_type idx = circuit_name.rfind('/');
-            if (idx != string::npos) { circuit_name = circuit_name.substr(idx+1); }
-            idx = circuit_name.find(".bench");
-            if (idx != string::npos) { circuit_name = circuit_name.substr(0,idx); }
-            Circuit.SetName(circuit_name);
+            string output_name = argv[optind];
+            string::size_type idx = output_name.rfind('/');
+            if (idx != string::npos) { output_name = output_name.substr(idx+1); }
+            idx = output_name.find(".bench");
+            if (idx != string::npos) { output_name = output_name.substr(0,idx); }
+            Circuit.SetName(output_name);
         }
     }
     else {
@@ -102,13 +112,34 @@ int main(int argc, char ** argv)
 			cout << "Circuit file name: " << Circuit.GetName() << endl;
 			const char *start_gate = option.retrieve("start");
 			const char *end_gate = option.retrieve("end");
-			//cout << "Starting Gate: " << start_gate << endl;
-			//cout << "Ending Gate: " << end_gate << endl;
 
 			string src_gate_name(start_gate);
 			string dest_gate_name(end_gate);
 			Circuit.path(src_gate_name, dest_gate_name);
 		}
+		// Options operations for lab2
+		else if(option.retrieve("pattern")){
+			string output_name = (string) option.retrieve("output");
+			string pattern_name;
+			int number = atoi(option.retrieve("num"));
+
+      Circuit.openOutputFile(output_name);
+
+			string::size_type idx = output_name.rfind('/');
+			if (idx != string::npos) { output_name = output_name.substr(idx+1); }
+			idx = output_name.find(".output");
+			if (idx != string::npos) { pattern_name = output_name.substr(0,idx); }
+			pattern_name.append(".input");
+
+			if(option.retrieve("unknown"))	
+				Circuit.genRandomPatternUnknown(pattern_name, number);
+			else
+				Circuit.genRandomPattern(pattern_name, number);
+		}
+		else if(option.retrieve("mod_logicsim")){
+
+		}
+		// ----------------------------
 		else if(option.retrieve("print")){
 			const char *info_type = option.retrieve("info");
 			cout << "Type of Info.: " << info_type << endl;
@@ -123,6 +154,7 @@ int main(int argc, char ** argv)
 		else if (option.retrieve("logicsim")) {
         //logic simulator
         Circuit.InitPattern(option.retrieve("input"));
+        Circuit.openOutputFile(option.retrieve("output"));
         Circuit.LogicSimVectors();
     }
     else if (option.retrieve("plogicsim")) {
