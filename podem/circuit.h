@@ -42,7 +42,7 @@ class CIRCUIT
 		int path_count;
 		string dest_gate_name;
 		string input_name, output_name;
-		ofstream ofs;
+		ofstream ofs; // for printing logicsim output file
 
 	public:
 		//Initialize netlist
@@ -64,13 +64,13 @@ class CIRCUIT
 			PPOlist.reserve(NO_PPO);
 			path_stack.clear();
 			path_count = 0;
-			if(ofs.is_open())
-				ofs.close();
 		}
 		~CIRCUIT() {
 			for (unsigned i = 0;i<Netlist.size();++i) { delete Netlist[i]; }
 			list<FAULT*>::iterator fite;
 			for (fite = Flist.begin();fite!=Flist.end();++fite) { delete *fite; }
+			if(ofs.is_open())
+				ofs.close();
 		}
 
 		void AddGate(GATE* gptr) { Netlist.push_back(gptr); }
@@ -91,11 +91,22 @@ class CIRCUIT
 		unsigned No_PPI() { return PPIlist.size(); }
 		unsigned No_PPO() { return PPOlist.size(); }
 
+		void copyPItoPattern(){
+			vector<GATE*>::iterator it; 
+			for(it = PIlist.begin(); it != PIlist.end(); it++){
+				Pattern.addInList(*it);
+			}
+		}
 		void genRandomPattern(string pattern_name, int number){
-			Pattern.genRandomPattern(pattern_name, number);
+			Pattern.setPatternName(pattern_name);
+			copyPItoPattern();
+			Pattern.printPatternHeader();
+			Pattern.genRandomPattern(number);
 		}
 		void genRandomPatternUnknown(string pattern_name, int number){
-			Pattern.genRandomPatternUnknown(pattern_name, number);
+			Pattern.setPatternName(pattern_name);
+			copyPItoPattern();
+			Pattern.genRandomPatternUnknown(number);
 		}
 
 		void InitPattern(const char *pattern) {

@@ -123,8 +123,6 @@ int main(int argc, char ** argv)
 			string pattern_name;
 			int number = atoi(option.retrieve("num"));
 
-      Circuit.openOutputFile(output_name);
-
 			string::size_type idx = output_name.rfind('/');
 			if (idx != string::npos) { output_name = output_name.substr(idx+1); }
 			idx = output_name.find(".output");
@@ -135,6 +133,10 @@ int main(int argc, char ** argv)
 				Circuit.genRandomPatternUnknown(pattern_name, number);
 			else
 				Circuit.genRandomPattern(pattern_name, number);
+			
+			//Circuit.InitPattern(pattern_name.c_str());
+			Circuit.openOutputFile(output_name);
+			//Circuit.LogicSimVectors();
 		}
 		else if(option.retrieve("mod_logicsim")){
 

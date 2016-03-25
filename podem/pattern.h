@@ -5,8 +5,8 @@
 #include <stdlib.h>
 #include "gate.h"
 
-#define xstr(s) str(s)                                                           
-#define str(s) #s                                                                
+#define xstr(s) str(s) 
+#define str(s) #s     
 #define INDIR input
 
 using namespace std;
@@ -17,6 +17,7 @@ class PATTERN
         ifstream patterninput;
         vector<GATE*> inlist;
         int no_pi_infile;
+				string pattern_name;
 				ofstream ofs;
     public:
         PATTERN(): no_pi_infile(0){}
@@ -24,17 +25,18 @@ class PATTERN
 					if(ofs.is_open())
 						ofs.close();
 				}
-        void Initialize(char* InFileName, int no_pi, string TAG);
-        //Assign next input pattern to PI
+					bool eof() { return (patterninput.eof()); }
+					void Initialize(char* IFileName, int no_pi, string TAG);
+        //sign next input pattern to PI
         void ReadNextPattern();
         void ReadNextPattern_t();
 				void ReadNextPattern(unsigned idx);
-        bool eof()
-        {
-            return (patterninput.eof());
-        }
-				void setupInput(string pattern_name);
-				void genRandomPattern(string pattern_name, int pattern_number);
-				void genRandomPatternUnknown(string pattern_name, int pattern_number);
+				// Add for VLSI-Testing lab2
+				void addInList(GATE* gate) {inlist.push_back(gate);}
+				void setPatternName(string name) {pattern_name = name;}
+				void setupPatternFile();
+				void printPatternHeader();
+				void genRandomPattern(int pattern_number);
+				void genRandomPatternUnknown(int pattern_number);
 };
 #endif
