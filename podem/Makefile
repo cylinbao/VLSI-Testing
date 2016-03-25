@@ -5,7 +5,7 @@ CXXFLAGS = -O2 -Wall
 #CXXFLAGS = -O2 -Wall -DDEBUG
 #CXXFLAGS = -g -DDEBUG_ATPG -Wall #Turn on debugging
 INCPATH  =
-LIBS     = -lreadline -lcurses
+LIBS     = -lreadline -lcurses -lgsl
 DEL_FILE = rm -f
 DEL_DIR  = rm -fr
 

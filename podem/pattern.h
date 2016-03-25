@@ -35,6 +35,7 @@ class PATTERN
 				void addInList(GATE* gate) {inlist.push_back(gate);}
 				void setPatternName(string name) {pattern_name = name;}
 				void setupPatternFile();
+				void setPatterninput();
 				void initPattern();
 				void genRandomPattern(int pattern_number);
 				void genRandomPatternUnknown(int pattern_number);
