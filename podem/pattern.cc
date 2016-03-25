@@ -18,21 +18,54 @@ void PATTERN::setupPatternFile()
 		std::cout << "Cannot open file!\n";
 }
 
-void PATTERN::printPatternHeader()
+void PATTERN::initPattern()
 {
-	vector<GATE*>::iterator it;
+	int i;
 
-	for(it = inlist.begin(); it != inlist.end(); it++)
-		ofs << "PI " << (*it)->GetName() << " ";
+	no_pi_infile = inlist.size();
 
+	for(i = 0; i < no_pi_infile; i++){
+		ofs << "PI " << inlist[i]->GetName();
+		if( i < no_pi_infile-1)
+			ofs << " ";
+	}
 	ofs << endl;
 }
 
 void PATTERN::genRandomPattern(int pattern_number)
 {
 	setupPatternFile();
-	printPatternHeader();
-	//ofs << pattern_number;
+	initPattern();
+
+	/*
+	ofs << "01110" << endl;
+	ofs << "10101" << endl;
+	ofs << "00101" << endl;
+	ofs << "01000" << endl;
+	ofs << "10001" << endl;
+	ofs << "00011" << endl;
+	ofs << "00111" << endl;
+	ofs << "00000" << endl;
+	*/
+	// TODO Generate Random Pattern here
+
+	ofs.close();
+
+	string str;
+	str = "./";
+	str.append(xstr(INDIR));
+	str.append("/");
+	str.append(pattern_name);
+	patterninput.open(str.c_str(), ios::in);
+	if(!patterninput){
+		cout << "Unable to open pattern file" << endl;
+		exit(-1);
+	}
+	string temp;
+	int i;
+	for(i = 0; i < no_pi_infile; i++){
+		patterninput >> temp;
+	}
 }
 
 void PATTERN::genRandomPatternUnknown(int pattern_number)

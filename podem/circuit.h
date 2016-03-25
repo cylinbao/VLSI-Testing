@@ -100,7 +100,6 @@ class CIRCUIT
 		void genRandomPattern(string pattern_name, int number){
 			Pattern.setPatternName(pattern_name);
 			copyPItoPattern();
-			Pattern.printPatternHeader();
 			Pattern.genRandomPattern(number);
 		}
 		void genRandomPatternUnknown(string pattern_name, int number){

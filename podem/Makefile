@@ -62,6 +62,11 @@ lab2-17U:
 	@echo "Print output file"
 	@cat ./output/c17.output
 
+lab2-7552-1:
+	./$(TARGET) -pattern -num 100 -output c7552.output ../circuits/iscas85/c7552.bench
+	@echo "Print output file"
+	@cat ./output/c17.output
+
 lab2-7552:
 	./$(TARGET) -logicsim -input ../input/c7552.input -output c7552.output ../circuits/iscas85/c7552.bench
 	@echo "Print output file"

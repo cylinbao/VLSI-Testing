@@ -134,9 +134,8 @@ int main(int argc, char ** argv)
 			else
 				Circuit.genRandomPattern(pattern_name, number);
 			
-			//Circuit.InitPattern(pattern_name.c_str());
 			Circuit.openOutputFile(output_name);
-			//Circuit.LogicSimVectors();
+			Circuit.LogicSimVectors();
 		}
 		else if(option.retrieve("mod_logicsim")){
 

@@ -25,8 +25,8 @@ class PATTERN
 					if(ofs.is_open())
 						ofs.close();
 				}
-					bool eof() { return (patterninput.eof()); }
-					void Initialize(char* IFileName, int no_pi, string TAG);
+				bool eof() { return (patterninput.eof()); }
+				void Initialize(char* IFileName, int no_pi, string TAG);
         //sign next input pattern to PI
         void ReadNextPattern();
         void ReadNextPattern_t();
@@ -35,7 +35,7 @@ class PATTERN
 				void addInList(GATE* gate) {inlist.push_back(gate);}
 				void setPatternName(string name) {pattern_name = name;}
 				void setupPatternFile();
-				void printPatternHeader();
+				void initPattern();
 				void genRandomPattern(int pattern_number);
 				void genRandomPatternUnknown(int pattern_number);
 };
