@@ -5,7 +5,7 @@ CXXFLAGS = -O2 -Wall
 #CXXFLAGS = -O2 -Wall -DDEBUG
 #CXXFLAGS = -g -DDEBUG_ATPG -Wall #Turn on debugging
 INCPATH  =
-LIBS     = -lreadline -lcurses -lgsl
+LIBS     = -lreadline -lcurses
 DEL_FILE = rm -f
 DEL_DIR  = rm -fr
 
@@ -53,21 +53,13 @@ clean:
 	@$(DEL_DIR)	 output input
 
 lab2-17:
-	./$(TARGET) -pattern -num 100 -output c17.output ../circuits/iscas85/c17.bench
-	@echo "Print output file"
-	@cat ./output/c17.output
+	./$(TARGET) -pattern -num 10 -output c17.output ../circuits/iscas85/c17.bench
 
 lab2-17U:
-	./$(TARGET) -pattern -num 100 -unknown -output c17.output ../circuits/iscas85/c17.bench
-	@echo "Print output file"
-	@cat ./output/c17.output
+	./$(TARGET) -pattern -num 10 -unknown -output c17.output ../circuits/iscas85/c17.bench
 
 lab2-7552-1:
 	./$(TARGET) -pattern -num 100 -output c7552.output ../circuits/iscas85/c7552.bench
-	@echo "Print output file"
-	@cat ./output/c17.output
 
 lab2-7552:
 	./$(TARGET) -logicsim -input ../input/c7552.input -output c7552.output ../circuits/iscas85/c7552.bench
-	@echo "Print output file"
-	@cat ./output/c7552.output

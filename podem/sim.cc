@@ -185,17 +185,32 @@ void PATTERN::ReadNextPattern()
 void CIRCUIT::PrintIO()
 {
     register unsigned i;
+		VALUE temp;
 		ofs << "PI: ";
     for (i = 0;i<No_PI();++i){
-			cout << PIGate(i)->GetValue(); 
-			ofs << PIGate(i)->GetValue(); 
+			temp = PIGate(i)->GetValue();
+			if(temp == X){
+				cout << 'X';
+				ofs << 'X';
+			}
+			else{
+				cout << temp; 
+				ofs << temp;
+			}
 		}
     cout << " ";
     ofs << " ";
 		ofs << "PO: ";
     for (i = 0;i<No_PO();++i){
-			cout << POGate(i)->GetValue(); 
-			ofs << POGate(i)->GetValue(); 
+			temp = POGate(i)->GetValue();
+			if(temp == X){
+				cout << 'X';
+				ofs << 'X';
+			}
+			else{
+				cout << temp; 
+				ofs << temp;
+			}
 		}
     cout << endl;
     ofs << endl;

@@ -107,6 +107,7 @@ class CIRCUIT
 			Pattern.setPatternName(pattern_name);
 			copyPItoPattern();
 			Pattern.genRandomPatternUnknown(number);
+			Pattern.setPatterninput();
 		}
 
 		void InitPattern(const char *pattern) {

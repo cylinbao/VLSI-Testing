@@ -24,6 +24,8 @@ class PATTERN
 				~PATTERN(){
 					if(ofs.is_open())
 						ofs.close();
+					if(patterninput.is_open())
+						patterninput.close();
 				}
 				bool eof() { return (patterninput.eof()); }
 				void Initialize(char* IFileName, int no_pi, string TAG);
