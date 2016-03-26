@@ -8,6 +8,7 @@
 #include <vector>
 #include <fstream>
 #include <string.h>
+#include <bitset>
 
 #define xstr(s) str(s)
 #define str(s) #s
@@ -161,8 +162,12 @@ class CIRCUIT
 		void SchedulePPI();
 		void LogicSimVectors();
 		void LogicSim();
+		void ModLogicSimVectors();
+		void ModLogicSim();
 		void PrintIO();
+		void PrintModIO();
 		VALUE Evaluate(GATEPTR gptr);
+		bitset<2> ModEvaluate(GATEPTR gptr);
 
 		//defined in atpg.cc
 		void GenerateAllFaultList();

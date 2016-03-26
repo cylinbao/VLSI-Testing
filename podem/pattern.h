@@ -34,6 +34,7 @@ class PATTERN
         void ReadNextPattern_t();
 				void ReadNextPattern(unsigned idx);
 				// Add for VLSI-Testing lab2
+        void ReadNextModPattern();
 				void addInList(GATE* gate) {inlist.push_back(gate);}
 				void setPatternName(string name) {pattern_name = name;}
 				void setupPatternFile();

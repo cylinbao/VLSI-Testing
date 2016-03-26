@@ -25,6 +25,8 @@ class GATE
 		bitset<PatternNum> FaultFlag;
 		// VLSI-Testing Lab1, label for finding paths
 		DFS_STATUS dfs_status;
+		// VLSI-Testing lab2
+		bitset<2> mod_value;
 	public:
 		//Initialize GATE
 		GATE(): Function(G_BAD), Level(0), Value(X), Value_t(X), Inversion(false) {
@@ -36,10 +38,16 @@ class GATE
 			WireValue[1].reset();
 			// VLSI-Testing Lab1, initial path label
 			dfs_status = WHITE;
+			// VLSI-Testing lab2
+			mod_value.reset();
 		}
 		~GATE() {}
 		//VLSI-Testing Lab1, operations with the dfs status
 		void setDFSStatus(DFS_STATUS flag) {dfs_status = flag;}
+		// VLSI-Testing Lab2
+		void SetModValue(bitset<2> bits) { mod_value = bits; }
+		bitset<2> GetModValue() {return mod_value;}
+
 		DFS_STATUS getDFSStatus() {return dfs_status;}
 		void SetName(string n){ Name = n;}
 		void SetID(unsigned id){ ID = id;}

@@ -138,7 +138,9 @@ int main(int argc, char ** argv)
 			Circuit.LogicSimVectors();
 		}
 		else if(option.retrieve("mod_logicsim")){
-
+        //logic simulator using CPU instructions directly
+        Circuit.InitPattern(option.retrieve("input"));
+        Circuit.ModLogicSimVectors();
 		}
 		// ----------------------------
 		else if(option.retrieve("print")){
@@ -200,5 +202,6 @@ int main(int argc, char ** argv)
     time_end = clock();
     cout << "total CPU time = " << double(time_end - time_init)/CLOCKS_PER_SEC << endl;
     cout << endl;
-    return 0;
+
+   return 0;
 }

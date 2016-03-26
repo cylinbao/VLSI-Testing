@@ -8,6 +8,7 @@ INCPATH  =
 LIBS     = -lreadline -lcurses
 DEL_FILE = rm -f
 DEL_DIR  = rm -fr
+MEMUSG	 = /usr/bin/time -f "Average memory usage: %K \nMaximum memory usage: %M\n"
 
 ####### Files
 
@@ -52,14 +53,44 @@ clean:
 	@$(DEL_FILE) readcircuit.tab.cc readcircuit.tab.h lex.yy.cc
 	@$(DEL_DIR)	 output input
 
-lab2-17:
-	./$(TARGET) -pattern -num 10 -output c17.output ../circuits/iscas85/c17.bench
+lab2.1-17-1:
+	$(MEMUSG) ./$(TARGET) -pattern -num 100 -output c17.output ../circuits/iscas85/c17.bench
 
-lab2-17U:
-	./$(TARGET) -pattern -num 10 -unknown -output c17.output ../circuits/iscas85/c17.bench
+lab2.1-17U-1:
+	$(MEMUSG) ./$(TARGET) -pattern -num 100 -unknown -output c17.output ../circuits/iscas85/c17.bench
 
-lab2-7552-1:
-	./$(TARGET) -pattern -num 100 -output c7552.output ../circuits/iscas85/c7552.bench
+lab2.1-17-2:
+	$(MEMUSG) ./$(TARGET) -pattern -num 1000 -output c17.output ../circuits/iscas85/c17.bench
 
-lab2-7552:
-	./$(TARGET) -logicsim -input ../input/c7552.input -output c7552.output ../circuits/iscas85/c7552.bench
+lab2.1-17U-2:
+	$(MEMUSG) ./$(TARGET) -pattern -num 1000 -unknown -output c17.output ../circuits/iscas85/c17.bench
+
+lab2.1-17-3:
+	$(MEMUSG) ./$(TARGET) -pattern -num 10000 -output c17.output ../circuits/iscas85/c17.bench
+
+lab2.1-17U-3:
+	$(MEMUSG) ./$(TARGET) -pattern -num 10000 -unknown -output c17.output ../circuits/iscas85/c17.bench
+
+lab2.1-7552-1:
+	$(MEMUSG) ./$(TARGET) -pattern -num 100 -output c7552.output ../circuits/iscas85/c7552.bench
+
+lab2.1-7552U-1:
+	$(MEMUSG) ./$(TARGET) -pattern -num 100 -output c7552.output ../circuits/iscas85/c7552.bench
+
+lab2.1-7552-2:
+	$(MEMUSG) ./$(TARGET) -pattern -num 1000 -output c7552.output ../circuits/iscas85/c7552.bench
+
+lab2.1-7552U-2:
+	$(MEMUSG) ./$(TARGET) -pattern -num 1000 -output c7552.output ../circuits/iscas85/c7552.bench
+
+lab2.1-7552-3:
+	$(MEMUSG) ./$(TARGET) -pattern -num 10000 -output c7552.output ../circuits/iscas85/c7552.bench
+
+lab2.1-7552U-3:
+	$(MEMUSG) ./$(TARGET) -pattern -num 10000 -output c7552.output ../circuits/iscas85/c7552.bench
+
+lab2.2-17:
+	$(MEMUSG) ./$(TARGET) -mod_logicsim -input ../input/c17.input ../circuits/iscas85/c17.bench
+
+lab2.2-7552:
+	$(MEMUSG) ./$(TARGET) -mod_logicsim -input ../input/c7552.input ../circuits/iscas85/c7552.bench
