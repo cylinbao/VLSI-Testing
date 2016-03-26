@@ -157,7 +157,7 @@ int main(int argc, char ** argv)
 		else if (option.retrieve("logicsim")) {
         //logic simulator
         Circuit.InitPattern(option.retrieve("input"));
-        Circuit.openOutputFile(option.retrieve("output"));
+        //Circuit.openOutputFile(option.retrieve("output"));
         Circuit.LogicSimVectors();
     }
     else if (option.retrieve("plogicsim")) {

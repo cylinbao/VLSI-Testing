@@ -75,22 +75,28 @@ lab2.1-7552-1:
 	$(MEMUSG) ./$(TARGET) -pattern -num 100 -output c7552.output ../circuits/iscas85/c7552.bench
 
 lab2.1-7552U-1:
-	$(MEMUSG) ./$(TARGET) -pattern -num 100 -output c7552.output ../circuits/iscas85/c7552.bench
+	$(MEMUSG) ./$(TARGET) -pattern -num 100 -unknown -output c7552.output ../circuits/iscas85/c7552.bench
 
 lab2.1-7552-2:
 	$(MEMUSG) ./$(TARGET) -pattern -num 1000 -output c7552.output ../circuits/iscas85/c7552.bench
 
 lab2.1-7552U-2:
-	$(MEMUSG) ./$(TARGET) -pattern -num 1000 -output c7552.output ../circuits/iscas85/c7552.bench
+	$(MEMUSG) ./$(TARGET) -pattern -num 1000 -unknown -output c7552.output ../circuits/iscas85/c7552.bench
 
 lab2.1-7552-3:
 	$(MEMUSG) ./$(TARGET) -pattern -num 10000 -output c7552.output ../circuits/iscas85/c7552.bench
 
 lab2.1-7552U-3:
-	$(MEMUSG) ./$(TARGET) -pattern -num 10000 -output c7552.output ../circuits/iscas85/c7552.bench
+	$(MEMUSG) ./$(TARGET) -pattern -num 10000 -unknown -output c7552.output ../circuits/iscas85/c7552.bench
 
 lab2.2-17:
-	$(MEMUSG) ./$(TARGET) -mod_logicsim -input ../input/c17.input ../circuits/iscas85/c17.bench
+	$(MEMUSG) ./$(TARGET) -mod_logicsim -input ./input/c17.input ../circuits/iscas85/c17.bench
 
 lab2.2-7552:
-	$(MEMUSG) ./$(TARGET) -mod_logicsim -input ../input/c7552.input ../circuits/iscas85/c7552.bench
+	$(MEMUSG) ./$(TARGET) -mod_logicsim -input ./input/c7552.input ../circuits/iscas85/c7552.bench
+
+lab2-17:
+	$(MEMUSG) ./$(TARGET) -logicsim -input ./input/c17.input ../circuits/iscas85/c17.bench
+
+lab2-7552:
+	$(MEMUSG) ./$(TARGET) -logicsim -input ./input/c7552.input ../circuits/iscas85/c7552.bench
