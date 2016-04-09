@@ -44,6 +44,11 @@ class CIRCUIT
 		string dest_gate_name;
 		string input_name, output_name;
 		ofstream ofs; // for printing logicsim output file
+		//VLSI-Testing Lab3
+		unsigned int evaluation_count;
+		double avg_eval_cnt_pattern;
+		double percent_eval_cnt;
+		unsigned pattern_num;
 
 	public:
 		//Initialize netlist
@@ -55,6 +60,8 @@ class CIRCUIT
 			PPOlist.reserve(2048);
 			path_stack.clear();
 			path_count = 0;
+			evaluation_count = 0;
+			pattern_num = 0;
 		}
 		CIRCUIT(unsigned NO_GATE, unsigned NO_PI = 128, unsigned NO_PO = 512,
 				unsigned NO_PPI = 2048, unsigned NO_PPO = 2048) {
@@ -65,6 +72,8 @@ class CIRCUIT
 			PPOlist.reserve(NO_PPO);
 			path_stack.clear();
 			path_count = 0;
+			evaluation_count = 0;
+			pattern_num = 0;
 		}
 		~CIRCUIT() {
 			for (unsigned i = 0;i<Netlist.size();++i) { delete Netlist[i]; }
@@ -142,7 +151,10 @@ class CIRCUIT
 		void path(string src_name_gate, string dest_gate_name);
 		bool findPath();
 		void printPath();
-
+		// VLSI-Testing Lab3
+		unsigned int getEvaluationCount() {return evaluation_count;}
+		void printStatResult();
+			
 		//defined in circuit.cc
 		void Levelize();
 		void FanoutList();

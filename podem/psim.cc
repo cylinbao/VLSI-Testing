@@ -8,21 +8,23 @@ extern GetLongOpt option;
 // Event-driven Parallel Pattern Logic simulation
 void CIRCUIT::ParallelLogicSimVectors()
 {
-    cout << "Run Parallel Logic simulation" << endl;
-    unsigned pattern_num(0);
-    unsigned pattern_idx(0);
-    while(!Pattern.eof()){ 
-	for(pattern_idx=0; pattern_idx<PatternNum; pattern_idx++){
-	    if(!Pattern.eof()){ 
-	        ++pattern_num;
-	        Pattern.ReadNextPattern(pattern_idx);
-	    }
-	    else break;
-	}
-	ScheduleAllPIs();
-	ParallelLogicSim();
-	PrintParallelIOs(pattern_idx);
-    }
+  cout << "Run Parallel Logic simulation" << endl;
+  //unsigned pattern_num(0);
+  unsigned pattern_idx(0);
+  while(!Pattern.eof()){ 
+		for(pattern_idx=0; pattern_idx<PatternNum; pattern_idx++){
+			if(!Pattern.eof()){ 
+				++pattern_num;
+				Pattern.ReadNextPattern(pattern_idx);
+			}
+			else break;
+		}
+		ScheduleAllPIs();
+		ParallelLogicSim();
+		PrintParallelIOs(pattern_idx);
+  }
+
+	printStatResult();
 }
 
 //Assign next input pattern to PI's idx'th bits
@@ -71,6 +73,7 @@ void CIRCUIT::ParallelEvaluate(GATEPTR gptr)
     register unsigned i;
     bitset<PatternNum> new_value1(gptr->Fanin(0)->GetValue1());
     bitset<PatternNum> new_value2(gptr->Fanin(0)->GetValue2());
+		evaluation_count += gptr->No_Fanin();
     switch(gptr->GetFunction()) {
         case G_AND:
         case G_NAND:
@@ -117,7 +120,7 @@ void CIRCUIT::PrintParallelIOs(unsigned idx)
 			   if(PIGate(i)->GetWireValue(1, j)==1){
 	    			cout << "1";
 			   }
-			   else cout << "X";
+			   else cout << "2";
 		    }
 
 	    }
@@ -133,7 +136,7 @@ void CIRCUIT::PrintParallelIOs(unsigned idx)
 			   if(POGate(i)->GetWireValue(1, j)==1){
 	    			cout << "1";
 			   }
-			   else cout << "X";
+			   else cout << "2";
 		    }
 	    }
 	    cout << endl;

@@ -199,6 +199,7 @@ int main(int argc, char ** argv)
             Circuit.Atpg();
         }
     }
+
     time_end = clock();
     cout << "total CPU time = " << double(time_end - time_init)/CLOCKS_PER_SEC << endl;
     cout << endl;

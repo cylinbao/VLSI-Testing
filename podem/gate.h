@@ -27,6 +27,7 @@ class GATE
 		DFS_STATUS dfs_status;
 		// VLSI-Testing lab2
 		bitset<2> mod_value;
+
 	public:
 		//Initialize GATE
 		GATE(): Function(G_BAD), Level(0), Value(X), Value_t(X), Inversion(false) {
@@ -98,14 +99,14 @@ class GATE
 		void SetValue1(unsigned idx) { WireValue[0].set(idx); }
 		void ResetValue1() { WireValue[0].reset(); }
 		void ResetValue1(unsigned idx) { WireValue[0].reset(idx); }
-		bool GetValue1(unsigned idx) { return WireValue[0][idx]; }
-		bitset<PatternNum> GetValue1() { return WireValue[0]; }
 		void SetValue2(bitset<PatternNum> &value) { WireValue[1] = value; }
 		void SetValue2() { WireValue[1].set(); }
 		void SetValue2(unsigned idx) { WireValue[1].set(idx); }
 		void ResetValue2() { WireValue[1].reset(); }
 		void ResetValue2(unsigned idx) { WireValue[1].reset(idx); }
+		bool GetValue1(unsigned idx) { return WireValue[0][idx]; }
 		bool GetValue2(unsigned idx) { return WireValue[1][idx]; }
+		bitset<PatternNum> GetValue1() { return WireValue[0]; }
 		bitset<PatternNum> GetValue2() { return WireValue[1]; }
 		void ParallelInv() {
 			bitset<PatternNum> value(~WireValue[0]);
