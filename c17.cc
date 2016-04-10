@@ -3,6 +3,7 @@
 #include <bitset>
 #include <string>
 #include <fstream>
+#include <stdlib.h>
 
 using namespace std;
 const unsigned PatternNum = 16;

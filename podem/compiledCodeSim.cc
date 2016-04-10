@@ -9,8 +9,11 @@ void CIRCUIT::genCompiledCodeSimulator()
 
 	genHeader();
 	genMainBegin();
+	genEvaBegin();
+	genPrintIOBegin();
 
   unsigned pattern_idx(0);
+	bool flag(true);
   while(!Pattern.eof()){ 
 		for(pattern_idx=0; pattern_idx<PatternNum; pattern_idx++){
 			if(!Pattern.eof()){ 
@@ -25,13 +28,102 @@ void CIRCUIT::genCompiledCodeSimulator()
 		ofsMain << "printIO(" << pattern_idx << ");\n\n"; 
 
 		ScheduleAllPIs();
-		ParallelLogicSim();
-		//ccsPrintParallelIOs(pattern_idx);
+		ccsParallelLogicSim(flag);
+
+		if(flag == true)
+			flag = false;
   }
+	ccsPrintParallelIOs(pattern_idx);
+
 	genMainEnd();
+	genEvaEnd();
+	genPrintIOEnd();
+
 	combineFilesToOutput();
 
 	printStatResult();
+}
+
+//Simulate PatternNum vectors
+void CIRCUIT::ccsParallelLogicSim(bool flag)
+{
+    GATE* gptr;
+    for (unsigned i = 0;i <= MaxLevel;i++) {
+        while (!Queue[i].empty()) {
+            gptr = Queue[i].front();
+            Queue[i].pop_front();
+            gptr->ResetFlag(SCHEDULED);
+            ccsParallelEvaluate(gptr, flag);
+        }
+    }
+    return;
+}
+
+//Evaluate parallel value of gptr
+void CIRCUIT::ccsParallelEvaluate(GATEPTR gptr, bool flag)
+{
+    register unsigned i;
+    bitset<PatternNum> new_value1(gptr->Fanin(0)->GetValue1());
+    bitset<PatternNum> new_value2(gptr->Fanin(0)->GetValue2());
+
+		if(flag == true){
+		ofsEva << "G_" << gptr->GetName() << "[0]" << " = " 
+					 << "G_" << gptr->Fanin(0)->GetName() << "[0];\n";
+		ofsEva << "G_" << gptr->GetName() << "[1]" << " = " 
+					 << "G_" << gptr->Fanin(0)->GetName() << "[1];\n";
+		}
+
+		evaluation_count += gptr->No_Fanin();
+    switch(gptr->GetFunction()) {
+        case G_AND:
+        case G_NAND:
+            for (i = 1; i < gptr->No_Fanin(); ++i) {
+                new_value1 &= gptr->Fanin(i)->GetValue1();
+								new_value2 &= gptr->Fanin(i)->GetValue2();
+
+								if(flag == true){
+								ofsEva << "G_" << gptr->GetName() << "[0]" << " &= " 
+											 << "G_" << gptr->Fanin(i)->GetName() << "[0];\n";
+								ofsEva << "G_" << gptr->GetName() << "[1]" << " &= " 
+											 << "G_" << gptr->Fanin(i)->GetName() << "[1];\n";
+								}
+            }
+            break;
+        case G_OR:
+        case G_NOR:
+            for (i = 1; i < gptr->No_Fanin(); ++i) {
+                new_value1 |= gptr->Fanin(i)->GetValue1();
+                new_value2 |= gptr->Fanin(i)->GetValue2();
+
+								if(flag == true){
+								ofsEva << "G_" << gptr->GetName() << "[0]" << " |= " 
+											 << "G_" << gptr->Fanin(i)->GetName() << "[0];\n";
+								ofsEva << "G_" << gptr->GetName() << "[1]" << " |= " 
+											 << "G_" << gptr->Fanin(i)->GetName() << "[1];\n";
+								}
+            }
+            break;
+        default: break;
+    } 
+    //swap new_value1 and new_value2 to avoid unknown value masked
+    if (gptr->Is_Inversion()) {
+        new_value1.flip(); new_value2.flip();
+        bitset<PatternNum> value(new_value1);
+				new_value1 = new_value2; new_value2 = value;
+
+				if(flag == true){
+					ofsEva << "temp = G_" << gptr->GetName() << "[0];\n";
+					ofsEva << "G_" << gptr->GetName() << "[0]" << " = ~" 
+								 << "G_" << gptr->GetName() << "[1];\n";
+					ofsEva << "G_" << gptr->GetName() << "[1]" << " = ~temp;\n";
+				}
+    }
+    if (gptr->GetValue1() != new_value1 || gptr->GetValue2() != new_value2) {
+        gptr->SetValue1(new_value1);
+        gptr->SetValue2(new_value2);
+        ScheduleFanout(gptr);
+    }
+    return;
 }
 
 void CIRCUIT::genHeader()
@@ -41,15 +133,46 @@ void CIRCUIT::genHeader()
 	ofsHeader << "#include <bitset>" << endl;
 	ofsHeader << "#include <string>" << endl;
 	ofsHeader << "#include <fstream>" << endl;
+	ofsHeader << "#include <stdlib.h>" << endl;
 	ofsHeader << "using namespace std;" << endl << endl;
 	ofsHeader << "const unsigned PatternNum = 16;" << endl << endl;
 	ofsHeader << "void evaluate();" << endl;
-	ofsHeader << "void printIO(unsigned idx);" << endl;
+	ofsHeader << "void printIO(unsigned idx);" << endl << endl;
+
+	ofsHeader << "bitset<PatternNum> temp;\n";
+	for(unsigned i=0; i < No_Gate(); i++) {
+		ofsHeader << "bitset<PatternNum> G_" << Gate(i)->GetName() << "[2];\n";
+	}
+
+	ofsHeader << "ofstream ofs(\"" << output_name
+						<< "\", ofstream::out | ofstream::trunc);\n";
+
+	ofsHeader << endl;
 }
 
 void CIRCUIT::genMainBegin()
 {
 	ofsMain << "int main()\n{\n";
+	ofsMain << "clock_t time_init, time_end;\n";
+	ofsMain << "time_init = clock();\n";
+}
+
+void CIRCUIT::genMainEnd()
+{
+	ofsMain << "time_end = clock();\n";
+	ofsMain << "cout << \"Total CPU Time = \" << double(time_end - \
+							time_init)/CLOCKS_PER_SEC << endl;\n";
+	ofsMain << "return 0;\n}\n";
+}
+
+void CIRCUIT::genEvaBegin()
+{
+	ofsEva << "void evaluate()\n{\n";
+}
+
+void CIRCUIT::genEvaEnd()
+{
+	ofsEva << "}\n";
 }
 
 void CIRCUIT::genIniPattern()
@@ -57,14 +180,11 @@ void CIRCUIT::genIniPattern()
 	vector<GATE*>::iterator it;
 
 	for(it=Pattern.getInlistPtr()->begin(); it!=Pattern.getInlistPtr()->end(); it++) {
-		ofsMain << (*it)->GetName() << "[0]=" << (*it)->getWireValue()[0] << ";" << endl;
-		ofsMain << (*it)->GetName() << "[1]=" << (*it)->getWireValue()[1] << ";" << endl;			
+		ofsMain << "G_" << (*it)->GetName() << "[0] = 0b" << (*it)->getWireValue()[0] 
+						<< ";" << endl;
+		ofsMain << "G_" << (*it)->GetName() << "[1] = 0b" << (*it)->getWireValue()[1] 
+						<< ";" << endl;
 	}
-}
-
-void CIRCUIT::genMainEnd()
-{
-	ofsMain << "return 0;\n}\n";
 }
 
 void CIRCUIT::combineFilesToOutput()
@@ -92,43 +212,60 @@ void CIRCUIT::combineFilesToOutput()
 		ofs << ifs.rdbuf();
 		ifs.close();
 	}
+
+	system("rm -f ./simulator/header");
+	system("rm -f ./simulator/main");
+	system("rm -f ./simulator/evaluate");
+	system("rm -f ./simulator/printIO");
+}
+
+void CIRCUIT::genPrintIOBegin()
+{
+	ofsPrintIO << "void printIO(unsigned idx)\n{\n";
+}
+
+void CIRCUIT::genPrintIOEnd()
+{
+	ofsPrintIO << "}\n";
 }
 
 void CIRCUIT::ccsPrintParallelIOs(unsigned idx)
 {
-    register unsigned i;
-    for (unsigned j=0; j<idx; j++){
-	    for (i = 0;i<No_PI();++i) { 
-		    if(PIGate(i)->GetWireValue(0, j)==0){ 
-			   if(PIGate(i)->GetWireValue(1, j)==1){
-	    			ofs << "F";
-			   }
-			   else ofs << "0";
-		    }
-		    else{
-			   if(PIGate(i)->GetWireValue(1, j)==1){
-	    			ofs << "1";
-			   }
-			   else ofs << "2";
-		    }
+	ofsPrintIO << "for(unsigned i=0; i < idx; i++){\n";
+	for(unsigned i=0; i < No_PI(); i++){
+		ofsPrintIO << "\tif(G_" << PIGate(i)->GetName() << "[0][i] == 0){\n";
 
-	    }
-	    ofs << " ";
-	    for (i = 0;i<No_PO();++i) { 
-		    if(POGate(i)->GetWireValue(0, j)==0){ 
-			   if(POGate(i)->GetWireValue(1, j)==1){
-	    			ofs << "F";
-			   }
-			   else ofs << "0";
-		    }
-		    else{
-			   if(POGate(i)->GetWireValue(1, j)==1){
-	    			ofs << "1";
-			   }
-			   else ofs << "2";
-		    }
-	    }
-	    ofs << endl;
-    }
-    return;
+		ofsPrintIO << "\tif(G_" << PIGate(i)->GetName() << "[1][i] == 1)\n";
+		ofsPrintIO << "\tofs << \'F\';\n";
+		ofsPrintIO << "\telse\n\tofs << \'0\';\n";
+
+		ofsPrintIO << "\t}\n\telse{\n";
+
+		ofsPrintIO << "\tif(G_" << PIGate(i)->GetName() << "[1][i] == 1)\n";
+		ofsPrintIO << "\tofs << \'1\';\n";
+		ofsPrintIO << "\telse\n\tofs << \'2\';\n";
+
+		ofsPrintIO << "\t}\n";
+	}
+	
+	ofsPrintIO << "\tofs << \" \";\n";
+
+	for(unsigned i=0; i < No_PO(); i++){
+		ofsPrintIO << "\tif(G_" << POGate(i)->GetName() << "[0][i] == 0){\n";
+
+		ofsPrintIO << "\tif(G_" << POGate(i)->GetName() << "[1][i] == 1)\n";
+	ofsPrintIO << "\tofs << \'F\';\n";
+	ofsPrintIO << "\telse\n\tofs << \'0\';\n";
+
+		ofsPrintIO << "\t}\n\telse{\n";
+
+		ofsPrintIO << "\tif(G_" << POGate(i)->GetName() << "[1][i] == 1)\n";
+		ofsPrintIO << "\tofs << \'1\';\n";
+		ofsPrintIO << "\telse\n\tofs << \'2\';\n";
+
+		ofsPrintIO << "\t}\n";
+	}
+	ofsPrintIO << "\tofs << endl;\n";
+
+	ofsPrintIO << "}\n";
 }

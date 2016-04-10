@@ -192,12 +192,19 @@ class CIRCUIT
 		unsigned int getEvaluationCount() {return evaluation_count;}
 		void printStatResult();
 		void genCompiledCodeSimulator();
+		void ccsParallelLogicSim(bool flag);
+		void ccsParallelEvaluate(GATEPTR gptr, bool flag);
 		void ccsPrintParallelIOs(unsigned idx);
 		void genHeader();
 		void genMainBegin();
 		void genMainEnd();
+		void genEvaBegin();
+		void genEvaEnd();
+		void genPrintIOBegin();
+		void genPrintIOEnd();
 		void genIniPattern();
 		void combineFilesToOutput();
+		void setOutputName(string str) { output_name = str;}
 			
 		//defined in circuit.cc
 		void Levelize();

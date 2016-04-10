@@ -48,7 +48,20 @@ lex.yy.cc: readcircuit.l readcircuit.y
 	flex readcircuit.l 
 	mv lex.yy.c lex.yy.cc
 
+.PHONY: clean c17 c880 c7552
 clean:
 	@$(DEL_FILE) $(OBJECTS) $(TARGET)
 	@$(DEL_FILE) readcircuit.tab.cc readcircuit.tab.h lex.yy.cc
 	@$(DEL_DIR)	 output input simulator
+
+c17:
+	./atpg -simulator c17.cc -input ../input/c17.input ../circuits/iscas85/c17.bench
+	g++ ./simulator/c17.cc -o ./simulator/c17
+
+c880:
+	./atpg -simulator c880.cc -input ../input/c880.input ../circuits/iscas85/c880.bench
+	g++ ./simulator/c880.cc -o ./simulator/c880
+
+c7552:
+	./atpg -simulator c7552.cc -input ../input/c7552.input ../circuits/iscas85/c7552.bench
+	g++ ./simulator/c7552.cc -o ./simulator/c7552
