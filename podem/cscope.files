@@ -1,9 +1,0 @@
-./fault.h
-./circuit.h
-./tfault.h
-./ReadPattern.h
-./gate.h
-./hash.h
-./typeemu.h
-./GetLongOpt.h
-./readcircuit.tab.h
