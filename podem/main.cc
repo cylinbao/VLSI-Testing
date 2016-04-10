@@ -42,6 +42,10 @@ int SetupOption(int argc, char ** argv)
     option.enroll("mod_logicsim", GetLongOpt::NoValue,
             			"use cpu instructions to compute AND, OR and NOT", 0);
 		// ---------------------------------
+		// Add options for VLSI-Testing lab3
+    option.enroll("simulator", GetLongOpt::MandatoryValue,
+            "Generate a compiled code simulator", 0);
+		// ---------------------------------
     option.enroll("help", GetLongOpt::NoValue,
             "print this help summary", 0);
     option.enroll("logicsim", GetLongOpt::NoValue,
@@ -117,6 +121,7 @@ int main(int argc, char ** argv)
 			string dest_gate_name(end_gate);
 			Circuit.path(src_gate_name, dest_gate_name);
 		}
+		// ----------------------------
 		// Options operations for lab2
 		else if(option.retrieve("pattern")){
 			string output_name = (string) option.retrieve("output");
@@ -154,10 +159,17 @@ int main(int argc, char ** argv)
 				Circuit.printGateOutput();
 		}
 		// ---------------------------
+		// Options operations for lab3
+		else if(option.retrieve("simulator")){
+				string output_name = (string) option.retrieve("simulator");
+        Circuit.InitPattern(option.retrieve("input"));
+				Circuit.openSimulatorFile(output_name);
+        Circuit.genCompiledCodeSimulator();
+		}
+		// ---------------------------
 		else if (option.retrieve("logicsim")) {
         //logic simulator
         Circuit.InitPattern(option.retrieve("input"));
-        //Circuit.openOutputFile(option.retrieve("output"));
         Circuit.LogicSimVectors();
     }
     else if (option.retrieve("plogicsim")) {

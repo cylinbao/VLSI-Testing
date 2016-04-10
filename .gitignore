@@ -5,3 +5,6 @@ atpg
 *.yy.cc
 readcircuit.*
 tags
+*/simulator/*
+*/input/*
+*/output/*

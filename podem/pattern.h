@@ -42,5 +42,7 @@ class PATTERN
 				void initPattern();
 				void genRandomPattern(int pattern_number);
 				void genRandomPatternUnknown(int pattern_number);
+				// VLSI-Testing lab3
+				vector<GATE*>* getInlistPtr() { return &inlist;}
 };
 #endif

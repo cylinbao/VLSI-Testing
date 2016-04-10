@@ -9,10 +9,12 @@
 #include <fstream>
 #include <string.h>
 #include <bitset>
+#include <iostream>
 
 #define xstr(s) str(s)
 #define str(s) #s
 #define OUTDIR output
+#define SIMDIR simulator
 
 typedef GATE* GATEPTR;
 
@@ -49,6 +51,7 @@ class CIRCUIT
 		double avg_eval_cnt_pattern;
 		double percent_eval_cnt;
 		unsigned pattern_num;
+		ofstream ofsHeader, ofsMain, ofsEva, ofsPrintIO;
 
 	public:
 		//Initialize netlist
@@ -81,6 +84,14 @@ class CIRCUIT
 			for (fite = Flist.begin();fite!=Flist.end();++fite) { delete *fite; }
 			if(ofs.is_open())
 				ofs.close();
+			if(ofsHeader.is_open())
+				ofsHeader.close();
+			if(ofsMain.is_open())
+				ofsMain.close();
+			if(ofsEva.is_open())
+				ofsEva.close();
+			if(ofsPrintIO.is_open())
+				ofsPrintIO.close();
 		}
 
 		void AddGate(GATE* gptr) { Netlist.push_back(gptr); }
@@ -138,6 +149,32 @@ class CIRCUIT
 				cout << "Cannot open file!\n";
 		}
 
+		void openSimulatorFile(string file_name) {
+			char str[] = "mkdir ";
+			strcat(str, xstr(SIMDIR));
+			system(str);
+
+			strcpy(str, "./"); 
+			strcat(str, xstr(SIMDIR));
+			strcat(str, "/");
+			strcat(str, file_name.c_str());
+			ofs.open(str, ofstream::out | ofstream::trunc);
+			ofsHeader.open("./simulator/header", ofstream::out|ofstream::trunc);
+			ofsMain.open("./simulator/main", ofstream::out|ofstream::trunc);
+			ofsEva.open("./simulator/evaluate", ofstream::out|ofstream::trunc);
+			ofsPrintIO.open("./simulator/printIO", ofstream::out|ofstream::trunc);
+			if(!ofs.is_open())
+				cout << "Cannot open output file!\n";
+			if(!ofsHeader.is_open())
+				cout << "Cannot open header!\n";
+			if(!ofsMain.is_open())
+				cout << "Cannot open main!\n";
+			if(!ofsEva.is_open())
+				cout << "Cannot open evaluate!\n";
+			if(!ofsPrintIO.is_open())
+				cout << "Cannot open printIO!\n";
+		}
+
 		void Schedule(GATE* gptr)
 		{
 			if (!gptr->GetFlag(SCHEDULED)) {
@@ -154,6 +191,13 @@ class CIRCUIT
 		// VLSI-Testing Lab3
 		unsigned int getEvaluationCount() {return evaluation_count;}
 		void printStatResult();
+		void genCompiledCodeSimulator();
+		void ccsPrintParallelIOs(unsigned idx);
+		void genHeader();
+		void genMainBegin();
+		void genMainEnd();
+		void genIniPattern();
+		void combineFilesToOutput();
 			
 		//defined in circuit.cc
 		void Levelize();

@@ -19,9 +19,8 @@ class GATE
 		bool Inversion;
 		//Utility variable
 		unsigned Count[2]; //used by Levelize(), FindStaticPivot(),PathSearch
-		//bitset<PatternNum> WireValue1; //parallel value for fault simulation,
-		//bitset<PatternNum> WireValue2; //use two values to simulate don't care case
-		bitset<PatternNum> WireValue[2]; //one pair of WireValues (length defined by PatternNum).
+		//one pair of WireValues (length defined by PatternNum)
+		bitset<PatternNum> WireValue[2]; 
 		bitset<PatternNum> FaultFlag;
 		// VLSI-Testing Lab1, label for finding paths
 		DFS_STATUS dfs_status;
@@ -48,6 +47,8 @@ class GATE
 		// VLSI-Testing Lab2
 		void SetModValue(bitset<2> bits) { mod_value = bits; }
 		bitset<2> GetModValue() {return mod_value;}
+		// VLSI-Testing lab3
+		bitset<PatternNum>* getWireValue() { return WireValue;}
 
 		DFS_STATUS getDFSStatus() {return dfs_status;}
 		void SetName(string n){ Name = n;}
