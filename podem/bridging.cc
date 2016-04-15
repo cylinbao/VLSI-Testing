@@ -10,42 +10,51 @@ extern GetLongOpt option;
 
 void CIRCUIT::PutGateIntoQueueByLevel()
 {
+	unsigned i;
+	GATE* p_gate;
 
+	for(i = 0; i < Netlist.size(); i++){
+		p_gate = Netlist[i];
+		Queue[p_gate->GetLevel()].push_back(p_gate);
+	}
 }
 
 //generate all stuck-at fault list
 void CIRCUIT::GenerateAllBFaultList()
 {
-    cout << "Generate stuck-at fault list" << endl;
-    register unsigned i, j;
-    GATEFUNC fun;
-    GATEPTR gptr, fanout;
-    FAULT *fptr;
-    for (i = 0;i<No_Gate();++i) {
-        gptr = Netlist[i]; fun = gptr->GetFunction();
-				if (fun == G_PI) { 
-					//add stem stuck-at 0 fault to Flist
-					fptr = new FAULT(gptr, gptr, S0);
-					CPFlist.push_front(fptr);
-					//add stem stuck-at 1 fault to Flist
-					fptr = new FAULT(gptr, gptr, S1);
-					CPFlist.push_front(fptr);
-				}
+    cout << "Generate bridging fault list" << endl;
+    register unsigned i;
+    GATEPTR gptr;
+    BRIDGING_FAULT *fptr;
 
-        if (gptr->No_Fanout() == 1) { continue; } //no branch faults
+		for(i = 0; i < MaxLevel; i++){
+			while(Queue[i].size() > 1){
+				gptr = Queue[i].front();
+				Queue[i].pop_front();
 
-        //add branch fault
-        for (j = 0;j< gptr->No_Fanout();++j) {
-            fanout = gptr->Fanout(j);
-            fptr = new FAULT(gptr, fanout, S0);
-            fptr->SetBranch(true);
-            CPFlist.push_front(fptr);
-            fptr = new FAULT(gptr, fanout, S1);
-            fptr->SetBranch(true);
-            CPFlist.push_front(fptr);
-        } //end all fanouts
-    } //end all gates
+				fptr = new BRIDGING_FAULT(gptr, Queue[i].front(), AND);
+				BFlist.push_back(fptr);
+				fptr = new BRIDGING_FAULT(gptr, Queue[i].front(), OR);
+				BFlist.push_back(fptr);
+			}
+			Queue[i].pop_front();
+		}
+
     //copy Flist to undetected Flist (for fault simulation)
-    UCPFlist = CPFlist;
+    UBFlist = BFlist;
     return;
+}
+
+void CIRCUIT::OutputAllBFaultList()
+{
+	unsigned i;
+	BRIDGING_FAULT *bfptr;
+
+	cout << "Print bridging faults to output file\n";
+	for(i = 0; i < BFlist.size(); i++){
+		bfptr = BFlist[i];
+		ofs << "(" << bfptr->GetInputGate()->GetName() << ", ";	
+		ofs << bfptr->GetOutputGate()->GetName() << ", ";
+		ofs << FaultTable[bfptr->GetType()] << ")\n";
+	}
 }

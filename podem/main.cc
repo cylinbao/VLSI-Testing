@@ -190,9 +190,12 @@ int main(int argc, char ** argv)
 				Circuit.CalculatePercentage();
     }
     else if (option.retrieve("bridging")) {
-        //single pattern single transition-fault simulation
+				string output_name = (string) option.retrieve("output");
+
 				Circuit.PutGateIntoQueueByLevel();
         Circuit.GenerateAllBFaultList();
+				Circuit.openOutputFile(output_name);
+				Circuit.OutputAllBFaultList();
     }
 		// ---------------------------
 		else if (option.retrieve("logicsim")) {

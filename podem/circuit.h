@@ -1,6 +1,7 @@
 #ifndef CIRCUIT_H
 #define CIRCUIT_H
 #include "fault.h"
+#include "bridgingFault.h"
 #include "tfault.h"
 #include "pattern.h"
 #include <stdlib.h>
@@ -55,8 +56,8 @@ class CIRCUIT
 		//VLSI-Testing Lab4
 		list<FAULT*> CPFlist; //collapsing fault list
 		list<FAULT*> UCPFlist; //undetected fault list
-		list<FAULT*> BFlist; //collapsing fault list
-		list<FAULT*> UBFlist; //undetected fault list
+		vector<BRIDGING_FAULT*> BFlist; //collapsing fault list
+		vector<BRIDGING_FAULT*> UBFlist; //undetected fault list
 
 	public:
 		//Initialize netlist
@@ -215,6 +216,7 @@ class CIRCUIT
 		void GenerateAllBFaultList();
 		void CalculatePercentage();
 		void PutGateIntoQueueByLevel();
+		void OutputAllBFaultList();
 			
 		//defined in circuit.cc
 		void Levelize();

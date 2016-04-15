@@ -12,6 +12,9 @@ enum FAULT_STATUS { UNKNOWN, DETECTED, REDUNDANT, ABORT };
 enum FAULT_TYPE { SA0, SA1, AND, OR };
 enum DFS_STATUS {WHITE, BLACK};
 
+//VLSI-Testing lab4
+const std::string FaultTable[4] = {"SA0", "SA1", "AND", "OR"};
+
 //Controlling Values
 const VALUE CV[] = {X, X, X, X, X, S0, S0, S1, S1, X, X, X};
 //Noncontrolling Values
