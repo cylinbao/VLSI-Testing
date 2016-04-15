@@ -32,6 +32,10 @@ class CIRCUIT
 		list<FAULT*> UFlist; //undetected fault list
 		list<TFAULT*> TFlist; //collapsing fault list
 		list<TFAULT*> UTFlist; //undetected fault list
+		list<FAULT*> CPFlist; //collapsing fault list
+		list<FAULT*> UCPFlist; //undetected fault list
+		list<FAULT*> BFlist; //collapsing fault list
+		list<FAULT*> UBFlist; //undetected fault list
 		unsigned MaxLevel;
 		unsigned BackTrackLimit; //backtrack limit for Podem
 		typedef list<GATE*> ListofGate;
@@ -205,6 +209,10 @@ class CIRCUIT
 		void genIniPattern();
 		void combineFilesToOutput();
 		void setOutputName(string str) { output_name = str;}
+		// VLSI-Testing Lab4
+		void GenerateAllCPFaultList();
+		void GenerateAllBFaultList();
+		void CalculatePercentage();
 			
 		//defined in circuit.cc
 		void Levelize();

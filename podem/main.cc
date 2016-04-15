@@ -46,6 +46,12 @@ int SetupOption(int argc, char ** argv)
     option.enroll("simulator", GetLongOpt::MandatoryValue,
             "Generate a compiled code simulator", 0);
 		// ---------------------------------
+		// Add options for VLSI-Testing lab4
+    option.enroll("check_point", GetLongOpt::NoValue,
+            "Generate fault list by checkpoint theorem", 0);
+    option.enroll("bridging", GetLongOpt::NoValue,
+            "Generate bridging fault list", 0);
+		// ---------------------------------
     option.enroll("help", GetLongOpt::NoValue,
             "print this help summary", 0);
     option.enroll("logicsim", GetLongOpt::NoValue,
@@ -175,6 +181,18 @@ int main(int argc, char ** argv)
 				Circuit.openSimulatorFile(file_name);
         Circuit.genCompiledCodeSimulator();
 		}
+		// ---------------------------
+		// Options operations for lab4
+    else if (option.retrieve("check_point")) {
+        //single pattern single transition-fault simulation
+        Circuit.GenerateAllCPFaultList();
+        Circuit.GenerateAllFaultList();
+				Circuit.CalculatePercentage();
+    }
+    else if (option.retrieve("bridging")) {
+        //single pattern single transition-fault simulation
+        Circuit.GenerateAllBFaultList();
+    }
 		// ---------------------------
 		else if (option.retrieve("logicsim")) {
         //logic simulator
