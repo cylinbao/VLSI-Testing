@@ -191,6 +191,7 @@ int main(int argc, char ** argv)
     }
     else if (option.retrieve("bridging")) {
         //single pattern single transition-fault simulation
+				Circuit.PutGateIntoQueueByLevel();
         Circuit.GenerateAllBFaultList();
     }
 		// ---------------------------

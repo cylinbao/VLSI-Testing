@@ -3,9 +3,15 @@
 #include <iostream>
 #include "circuit.h"
 #include "GetLongOpt.h"
+#include "bridgingFault.h"
 using namespace std;
 
 extern GetLongOpt option;
+
+void CIRCUIT::PutGateIntoQueueByLevel()
+{
+
+}
 
 //generate all stuck-at fault list
 void CIRCUIT::GenerateAllBFaultList()
