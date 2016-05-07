@@ -71,33 +71,39 @@ void CIRCUIT::Atpg()
 	    }
 	    OutputStrm << endl;
     }
-    for (fite = Flist.begin(); fite != Flist.end();++fite) {
-        fptr = *fite;
-        if (fptr->GetStatus() == DETECTED) { continue; }
-        //run podem algorithm
-        status = Podem(fptr, total_backtrack_num);
-        switch (status) {
-            case TRUE:
-                fptr->SetStatus(DETECTED);
-                ++pattern_num;
-                //run fault simulation for fault dropping
-                for (i = 0;i < PIlist.size();++i) { 
-			ScheduleFanout(PIlist[i]); 
-                        if (option.retrieve("output")){ OutputStrm << PIlist[i]->GetValue();}
-		}
-                if (option.retrieve("output")){ OutputStrm << endl;}
-                for (i = PIlist.size();i<Netlist.size();++i) { Netlist[i]->SetValue(X); }
-                LogicSim();
-                FaultSim();
-                break;
-            case CONFLICT:
-                fptr->SetStatus(REDUNDANT);
-                break;
-            case FALSE:
-                fptr->SetStatus(ABORT);
-                break;
-        }
-    } //end all faults
+		for (fite = Flist.begin(); fite != Flist.end();++fite) {
+			fptr = *fite;
+			if (fptr->GetStatus() == DETECTED) { continue; }
+			//run podem algorithm
+			status = Podem(fptr, total_backtrack_num);
+			switch (status) {
+				case TRUE:
+					fptr->SetStatus(DETECTED);
+					++pattern_num;
+					//run fault simulation for fault dropping
+					for (i = 0;i < PIlist.size();++i) { 
+						ScheduleFanout(PIlist[i]); 
+						if (option.retrieve("output")){ 
+							OutputStrm << PIlist[i]->GetValue();
+						}
+					}
+					if (option.retrieve("output")){
+						OutputStrm << endl;
+					}
+					for (i = PIlist.size();i<Netlist.size();++i) {
+						Netlist[i]->SetValue(X); 
+					}
+					LogicSim();
+					FaultSim();
+					break;
+				case CONFLICT:
+					fptr->SetStatus(REDUNDANT);
+					break;
+				case FALSE:
+					fptr->SetStatus(ABORT);
+					break;
+			}
+		} //end all faults
 
     //compute fault coverage
     unsigned total_num(0);
