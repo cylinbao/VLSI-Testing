@@ -53,8 +53,8 @@ void CIRCUIT::OutputAllBFaultList()
 	cout << "Print bridging faults to output file\n";
 	for(i = 0; i < BFlist.size(); i++){
 		bfptr = BFlist[i];
-		ofs << "(" << bfptr->GetInputGate()->GetName() << ", ";	
-		ofs << bfptr->GetOutputGate()->GetName() << ", ";
+		ofs << "(" << bfptr->GetInput1Gate()->GetName() << ", ";	
+		ofs << bfptr->GetInput2Gate()->GetName() << ", ";
 		ofs << FaultTable[bfptr->GetType()] << ")\n";
 	}
 }
