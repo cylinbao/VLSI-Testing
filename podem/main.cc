@@ -231,6 +231,8 @@ int main(int argc, char ** argv)
 		else if (option.retrieve("bfsim")) {
 			Circuit.PutGateIntoQueueByLevel();
 			Circuit.GenerateAllBFaultList();
+      Circuit.SortFaninByLevel();
+      Circuit.MarkOutputGate();
 
 			//stuck-at bridging fault simulator
 			Circuit.InitPattern(option.retrieve("input"));
