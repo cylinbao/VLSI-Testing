@@ -67,7 +67,7 @@ void CIRCUIT::BFaultSimVectors()
 void CIRCUIT::BFaultSim()
 {
     register unsigned i, fault_idx(0);
-    GATEPTR gptr1, gptr2;
+    GATEPTR gptr1, gptr2, gptr;
     BRIDGING_FAULT *fptr;
     BRIDGING_FAULT *simulate_flist[PatternNum];
     list<GATEPTR>::iterator gite;
@@ -85,57 +85,36 @@ void CIRCUIT::BFaultSim()
         //the fault is not active
         if (fptr->GetInput1Gate()->GetValue() == fptr->GetInput2Gate()->GetValue()) 
 					 { continue; }
-        //the fault can be directly seen
+
+				// pick up the gate is possible to be faulty
         gptr1 = fptr->GetInput1Gate();
         gptr2 = fptr->GetInput2Gate();
 				if(fptr->GetType() == AND){
-					if (gptr1->GetFlag(OUTPUT) && gptr1->GetValue() == S1){
-						fptr->SetStatus(DETECTED);
-						continue;
-					}
-					else if (gptr2->GetFlag(OUTPUT) && gptr2->GetValue() == S1){
-						fptr->SetStatus(DETECTED);
-						continue;
-					}
+					if(gptr1->GetValue() == S1)
+						gptr = gptr1;
+					else if(gptr2->GetValue() == S1)
+						gptr = gptr2;
 				}
 				else if(fptr->GetType() == OR){
-					if (gptr1->GetFlag(OUTPUT) && gptr1->GetValue() == S0){
-						fptr->SetStatus(DETECTED);
-						continue;
-					}
-					else if (gptr2->GetFlag(OUTPUT) && gptr2->GetValue() == S0){
-						fptr->SetStatus(DETECTED);
-						continue;
-					}
+					if(gptr1->GetValue() == S0)
+						gptr = gptr1;
+					else if(gptr2->GetValue() == S0)
+						gptr = gptr2;
 				}
 
-        if (!fptr->Is_Branch()) { //stem
-            if (!gptr->GetFlag(FAULTY)) {
-                gptr->SetFlag(FAULTY); GateStack.push_front(gptr);
-            }
-            InjectFaultValue(gptr, fault_idx, fptr->GetValue());
-            gptr->SetFlag(FAULT_INJECTED);
-            ScheduleFanout(gptr);
-            simulate_flist[fault_idx++] = fptr;
-        }
-        else { //branch
-            if (!CheckFaultyGate(fptr)) { continue; }
-            gptr = fptr->GetOutputGate();
-            //if the fault is shown at an output, it is detected
-            if (gptr->GetFlag(OUTPUT)) {
-                fptr->SetStatus(DETECTED);
-                continue;
-            }
-            if (!gptr->GetFlag(FAULTY)) {
-                gptr->SetFlag(FAULTY); GateStack.push_front(gptr);
-            }
-            // add the fault to the simulated list and inject it
-            VALUE fault_type = gptr->Is_Inversion()? NotTable[fptr->GetValue()]: fptr->GetValue();
-            InjectFaultValue(gptr, fault_idx, fault_type);
-            gptr->SetFlag(FAULT_INJECTED);
-            ScheduleFanout(gptr);
-            simulate_flist[fault_idx++] = fptr;
-        }
+				if (gptr->GetFlag(OUTPUT)){
+					fptr->SetStatus(DETECTED);
+					continue;
+				}
+				else {
+					if (!gptr->GetFlag(FAULTY)) {
+						gptr->SetFlag(FAULTY); GateStack.push_front(gptr);
+					}
+					InjectFaultValue(gptr, fault_idx, fptr->GetValue());
+					gptr->SetFlag(FAULT_INJECTED);
+					ScheduleFanout(gptr);
+					simulate_flist[fault_idx++] = fptr;
+				}
 
         //collect PatternNum fault, do fault simulation
         if (fault_idx == PatternNum) {
@@ -144,7 +123,7 @@ void CIRCUIT::BFaultSim()
                 while (!Queue[i].empty()) {
                     gptr = Queue[i].front(); Queue[i].pop_front();
                     gptr->ResetFlag(SCHEDULED);
-                    BFaultSimEvaluate(gptr);
+                    FaultSimEvaluate(gptr);
                 }
             }
 
@@ -181,7 +160,7 @@ void CIRCUIT::BFaultSim()
             while (!Queue[i].empty()) {
                 gptr = Queue[i].front(); Queue[i].pop_front();
                 gptr->ResetFlag(SCHEDULED);
-                BFaultSimEvaluate(gptr);
+                FaultSimEvaluate(gptr);
             }
         }
 
@@ -217,56 +196,6 @@ void CIRCUIT::BFaultSim()
             fite = UBFlist.erase(fite);
         }
         else { ++fite; }
-    }
-    return;
-}
-
-//evaluate parallel faulty value of gptr
-void CIRCUIT::BFaultSimEvaluate(GATEPTR gptr)
-{
-    register unsigned i;
-    bitset<PatternNum> new_value1(gptr->Fanin(0)->GetValue1());
-    bitset<PatternNum> new_value2(gptr->Fanin(0)->GetValue2());
-    switch(gptr->GetFunction()) {
-        case G_AND:
-        case G_NAND:
-            for (i = 1; i < gptr->No_Fanin(); ++i) {
-                new_value1 &= gptr->Fanin(i)->GetValue1();
-                new_value2 &= gptr->Fanin(i)->GetValue2();
-            }
-            break;
-        case G_OR:
-        case G_NOR:
-            for (i = 1; i < gptr->No_Fanin(); ++i) {
-                new_value1 |= gptr->Fanin(i)->GetValue1();
-                new_value2 |= gptr->Fanin(i)->GetValue2();
-            }
-            break;
-        default: break;
-    } 
-    //swap new_value1 and new_value2 to avoid unknown value masked
-    if (gptr->Is_Inversion()) {
-        new_value1.flip(); new_value2.flip();
-        bitset<PatternNum> value(new_value1);
-        new_value1 = new_value2; new_value2 = value;
-    }
-    if (gptr->GetValue1() != new_value1 || gptr->GetValue2() != new_value2) {
-        //if gptr has fault injected, reverse the injected value
-        if (gptr->GetFlag(FAULT_INJECTED)) {
-            for (i = 0; i < PatternNum; ++i) {
-                if (!gptr->GetFaultFlag(i)) { continue; }
-                //recover injected fault value
-                new_value1[i] = gptr->GetValue1(i);
-                new_value2[i] = gptr->GetValue2(i);
-            }
-        }
-        //set gptr as FAULTY and push to gate stack
-        if (!(gptr->GetFlag(FAULTY))) {
-            gptr->SetFlag(FAULTY); GateStack.push_front(gptr);
-        }
-        gptr->SetValue1(new_value1);
-        gptr->SetValue2(new_value2);
-        ScheduleFanout(gptr);
     }
     return;
 }
