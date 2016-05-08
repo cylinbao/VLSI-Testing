@@ -32,9 +32,9 @@ void CIRCUIT::GenerateAllBFaultList()
 				gptr = Queue[i].front();
 				Queue[i].pop_front();
 
-				fptr = new BRIDGING_FAULT(gptr, Queue[i].front(), AND);
+				fptr = new BRIDGING_FAULT(gptr, Queue[i].front(), AND, S0);
 				BFlist.push_back(fptr);
-				fptr = new BRIDGING_FAULT(gptr, Queue[i].front(), OR);
+				fptr = new BRIDGING_FAULT(gptr, Queue[i].front(), OR, S1);
 				BFlist.push_back(fptr);
 			}
 			Queue[i].pop_front();

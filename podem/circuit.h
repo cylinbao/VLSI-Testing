@@ -217,6 +217,13 @@ class CIRCUIT
 		void CalculatePercentage();
 		void PutGateIntoQueueByLevel();
 		void OutputAllBFaultList();
+
+		// VLST-Testing Lab5
+		//defined in bfsim.cc
+		void BFaultSimVectors();
+		void BFaultSim();
+		void BFaultSimEvaluate(GATE* gptr);
+
 			
 		//defined in circuit.cc
 		void Levelize();

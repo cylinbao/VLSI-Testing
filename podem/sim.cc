@@ -19,7 +19,7 @@ void CIRCUIT::LogicSimVectors()
         Pattern.ReadNextPattern();
         SchedulePI();
         LogicSim();
-        PrintIO();
+        //PrintIO();
     }
     return;
 }

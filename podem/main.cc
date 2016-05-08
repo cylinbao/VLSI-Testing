@@ -52,6 +52,10 @@ int SetupOption(int argc, char ** argv)
     option.enroll("bridging", GetLongOpt::NoValue,
             "Generate bridging fault list", 0);
 		// ---------------------------------
+		// Add options for VLSI-Testing lab5
+    option.enroll("bfsim", GetLongOpt::NoValue,
+            "run stuck-at bridging fault simulation", 0);
+		// ---------------------------------
     option.enroll("help", GetLongOpt::NoValue,
             "print this help summary", 0);
     option.enroll("logicsim", GetLongOpt::NoValue,
@@ -224,6 +228,14 @@ int main(int argc, char ** argv)
         }
         Circuit.TFAtpg();
     }
+		else if (option.retrieve("bfsim")) {
+			Circuit.PutGateIntoQueueByLevel();
+			Circuit.GenerateAllBFaultList();
+
+			//stuck-at bridging fault simulator
+			Circuit.InitPattern(option.retrieve("input"));
+			Circuit.BFaultSimVectors();
+		}
     else {
         Circuit.GenerateAllFaultList();
         Circuit.SortFaninByLevel();
@@ -233,7 +245,6 @@ int main(int argc, char ** argv)
             Circuit.InitPattern(option.retrieve("input"));
             Circuit.FaultSimVectors();
         }
-
         else {
             if (option.retrieve("bt")) {
                 Circuit.SetBackTrackLimit(atoi(option.retrieve("bt")));
