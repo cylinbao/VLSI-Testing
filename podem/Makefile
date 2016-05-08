@@ -59,13 +59,10 @@ clean:
 	@$(DEL_DIR)	 output input simulator
 
 c17:
-	./atpg -simulator c17.cc -input ../input/c17.input ../circuits/iscas85/c17.bench
-	g++ ./simulator/c17.cc -o ./simulator/c17
+	./atpg -bridging_fsim -input ../input/c17.input ../circuits/iscas85/c17.bench
 
 c880:
-	./atpg -simulator c880.cc -input ../input/c880.input ../circuits/iscas85/c880.bench
-	g++ ./simulator/c880.cc -o ./simulator/c880
+	./atpg -bridging_fsim -input ../input/c880.input ../circuits/iscas85/c880.bench
 
 c7552:
-	./atpg -simulator c7552.cc -input ../input/c7552.input ../circuits/iscas85/c7552.bench
-	g++ ./simulator/c7552.cc -o ./simulator/c7552
+	./atpg -bridging_fsim -input ../input/c7552.input ../circuits/iscas85/c7552.bench
