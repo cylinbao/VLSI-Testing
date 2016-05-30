@@ -141,6 +141,15 @@ class CIRCUIT
 			Pattern.Initialize(const_cast<char *>(pattern), PIlist.size(), "PI");
 		}
 
+		void openFile(string file_name) {
+			cout << "in function openFile" << endl;
+			ofs.open(file_name.c_str(), ofstream::out | ofstream::app);
+			if(!ofs.is_open())
+				cout << "Cannot open file: " << file_name << endl;
+			else
+				cout << "Successfully open file: " << file_name << endl;
+		}
+
 		void openOutputFile(string file_name) {
 			char str[] = "mkdir ";
 			strcat(str, xstr(OUTDIR));
@@ -224,6 +233,20 @@ class CIRCUIT
 		void BFaultSim();
 		void BFaultSimEvaluate(GATE* gptr);
 
+		// VLST-Testing Lab6
+		void AtpgRandomPattern();
+		void GenerateAllCPFaultListForFsim();
+		unsigned FaultSimRandomPattern();
+		void closeOfs() { 
+			if(ofs.is_open())
+				ofs.close(); 
+			Pattern.closeOfs();
+		}
+		void genRandomPatternOnly(string pattern_name, int number){
+			copyPItoPattern();
+			Pattern.genRandomPatternOnly(number);
+			Pattern.setPatterninput();
+		}
 			
 		//defined in circuit.cc
 		void Levelize();

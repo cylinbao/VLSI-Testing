@@ -52,7 +52,7 @@ lex.yy.cc: readcircuit.l readcircuit.y
 	flex readcircuit.l 
 	mv lex.yy.c lex.yy.cc
 
-.PHONY: clean c17 c880 c7552
+.PHONY: clean c17 c880 c7552 s35 s384 s385 b17
 clean:
 	@$(DEL_FILE) $(OBJECTS) $(TARGET)
 	@$(DEL_FILE) readcircuit.tab.cc readcircuit.tab.h lex.yy.cc
@@ -66,3 +66,19 @@ c880:
 
 c7552:
 	./atpg -bridging_fsim -input ../input/c7552.input ../circuits/iscas85/c7552.bench
+
+s35:
+	rm -f ./input/s35932_com-rp.input
+	./atpg -bt 1000 -random_pattern -output ./input/s35932_com-rp.input ../circuits/iscas89_com/s35932_com.bench
+
+s384:
+	rm -f ./input/s38417_com-rp.input
+	./atpg -bt 1000 -random_pattern -output ./input/s38417_com-rp.input ../circuits/iscas89_com/s38417_com.bench
+
+s385:
+	rm -f ./input/s38584_com-rp.input
+	./atpg -bt 1000 -random_pattern -output ./input/s38584_com-rp.input ../circuits/iscas89_com/s38584_com.bench
+
+b17:
+	rm -f ./input/b17-rp.input
+	./atpg -bt 1000 -random_pattern -output ./input/b17-rp.input ../circuits/b17.bench

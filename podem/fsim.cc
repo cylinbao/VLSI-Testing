@@ -63,6 +63,49 @@ void CIRCUIT::FaultSimVectors()
     return;
 }
 
+// fault simulation by random generated pattern
+unsigned CIRCUIT::FaultSimRandomPattern()
+{
+    cout << "Run stuck-at fault simulation with Random Pattern" << endl;
+    unsigned pattern_num(0);
+    if(!Pattern.eof()){ // Readin the first vector
+        //while(!Pattern.eof()){
+            ++pattern_num;
+						//cout << "pattern_num: " << pattern_num << endl;
+            Pattern.ReadNextPattern();
+            //fault-free simulation
+            SchedulePI();
+            LogicSim();
+            //single pattern parallel fault simulation
+            FaultSim();
+        //}
+    }
+
+    //compute fault coverage
+    unsigned total_num(0);
+    unsigned undetected_num(0), detected_num(0);
+    unsigned eqv_undetected_num(0), eqv_detected_num(0);
+    FAULT* fptr;
+    list<FAULT*>::iterator fite;
+    for (fite = Flist.begin();fite!=Flist.end();++fite) {
+        fptr = *fite;
+        switch (fptr->GetStatus()) {
+            case DETECTED:
+                ++eqv_detected_num;
+                detected_num += fptr->GetEqvFaultNum();
+                break;
+            default:
+                ++eqv_undetected_num;
+                undetected_num += fptr->GetEqvFaultNum();
+                break;
+        }
+    }
+    total_num = detected_num + undetected_num;
+		unsigned cov = 100*detected_num/double(total_num);
+
+    return cov;
+}
+
 //single pattern parallel fault simulation
 //parallel fault number is defined by PatternNum in typeemu.h
 void CIRCUIT::FaultSim()

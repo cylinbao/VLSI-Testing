@@ -67,10 +67,124 @@ void CIRCUIT::Atpg()
 
     if (option.retrieve("output")){
 	    for (i = 0;i<PIlist.size();++i) {
-		OutputStrm << "PI " << PIlist[i]->GetName() << " ";
+				OutputStrm << "PI " << PIlist[i]->GetName() << " ";
 	    }
 	    OutputStrm << endl;
     }
+		for (fite = Flist.begin(); fite != Flist.end();++fite) {
+			fptr = *fite;
+			if (fptr->GetStatus() == DETECTED) { continue; }
+			//run podem algorithm
+			status = Podem(fptr, total_backtrack_num);
+			switch (status) {
+				case TRUE:
+					fptr->SetStatus(DETECTED);
+					++pattern_num;
+					//run fault simulation for fault dropping
+					for (i = 0;i < PIlist.size();++i) { 
+						ScheduleFanout(PIlist[i]); 
+						if (option.retrieve("output")){ 
+							OutputStrm << PIlist[i]->GetValue();
+						}
+					}
+					if (option.retrieve("output")){
+						OutputStrm << endl;
+					}
+					for (i = PIlist.size();i<Netlist.size();++i) {
+						Netlist[i]->SetValue(X); 
+					}
+					LogicSim();
+					FaultSim();
+					break;
+				case CONFLICT:
+					fptr->SetStatus(REDUNDANT);
+					break;
+				case FALSE:
+					fptr->SetStatus(ABORT);
+					break;
+			}
+		} //end all faults
+
+    //compute fault coverage
+    unsigned total_num(0);
+    unsigned abort_num(0), redundant_num(0), detected_num(0);
+    unsigned eqv_abort_num(0), eqv_redundant_num(0), eqv_detected_num(0);
+    for (fite = Flist.begin();fite!=Flist.end();++fite) {
+        fptr = *fite;
+        switch (fptr->GetStatus()) {
+            case DETECTED:
+                ++eqv_detected_num;
+                detected_num += fptr->GetEqvFaultNum();
+                break;
+            case REDUNDANT:
+                ++eqv_redundant_num;
+                redundant_num += fptr->GetEqvFaultNum();
+                break;
+            case ABORT:
+                ++eqv_abort_num;
+                abort_num += fptr->GetEqvFaultNum();
+                break;
+            default:
+                cerr << "Unknown fault type exists" << endl;
+                break;
+        }
+    }
+    total_num = detected_num + abort_num + redundant_num;
+
+    cout.setf(ios::fixed);
+    cout.precision(2);
+    cout << "---------------------------------------" << endl;
+    cout << "Test pattern number = " << pattern_num << endl;
+    cout << "Total backtrack number = " << total_backtrack_num << endl;
+    cout << "---------------------------------------" << endl;
+    cout << "Total fault number = " << total_num << endl;
+    cout << "Detected fault number = " << detected_num << endl;
+    cout << "Undetected fault number = " << abort_num + redundant_num << endl;
+    cout << "Abort fault number = " << abort_num << endl;
+    cout << "Redundant fault number = " << redundant_num << endl;
+    cout << "---------------------------------------" << endl;
+    cout << "Total equivalent fault number = " << Flist.size() << endl;
+    cout << "Equivalent detected fault number = " << eqv_detected_num << endl;
+    cout << "Equivalent undetected fault number = " << eqv_abort_num + eqv_redundant_num << endl;
+    cout << "Equivalent abort fault number = " << eqv_abort_num << endl;
+    cout << "Equivalent redundant fault number = " << eqv_redundant_num << endl;
+    cout << "---------------------------------------" << endl;
+    cout << "Fault Coverge = " << 100*detected_num/double(total_num) << "%" << endl;
+    cout << "Equivalent FC = " << 100*eqv_detected_num/double(Flist.size()) << "%" << endl;
+    cout << "Fault Efficiency = " << 100*detected_num/double(total_num - redundant_num) << "%" << endl;
+    cout << "---------------------------------------" << endl;
+    return;
+}
+
+//stuck-at fualt PODEM ATPG (fault dropping)
+void CIRCUIT::AtpgRandomPattern()
+{
+    cout << "Run stuck-at fault ATPG" << endl;
+    unsigned i, total_backtrack_num(0), pattern_num(0);
+    ATPG_STATUS status;
+    FAULT* fptr;
+    list<FAULT*>::iterator fite;
+    
+    //Prepare the output files
+    ofstream OutputStrm;
+    if (option.retrieve("output")){
+        OutputStrm.open((char*)option.retrieve("output"),ios::out|ofstream::app);
+        if(!OutputStrm){
+              cout << "Unable to open output file: "
+                   << option.retrieve("output") << endl;
+              cout << "Unsaved output!\n";
+              exit(-1);
+        }
+    }
+
+		/*
+    if (option.retrieve("output")){
+	    for (i = 0;i<PIlist.size();++i) {
+				OutputStrm << "PI " << PIlist[i]->GetName() << " ";
+	    }
+	    OutputStrm << endl;
+    }
+		*/
 		for (fite = Flist.begin(); fite != Flist.end();++fite) {
 			fptr = *fite;
 			if (fptr->GetStatus() == DETECTED) { continue; }

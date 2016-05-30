@@ -56,6 +56,12 @@ int SetupOption(int argc, char ** argv)
     option.enroll("bridging_fsim", GetLongOpt::NoValue,
             "run stuck-at bridging fault simulation", 0);
 		// ---------------------------------
+		// Add options for VLSI-Testing lab6
+    option.enroll("check_point_fsim", GetLongOpt::NoValue,
+            "run stuck-at check_point fault simulation", 0);
+    option.enroll("random_pattern", GetLongOpt::NoValue,
+            "Use random patterns first and then atpg", 0);
+		// ---------------------------------
     option.enroll("help", GetLongOpt::NoValue,
             "print this help summary", 0);
     option.enroll("logicsim", GetLongOpt::NoValue,
@@ -201,6 +207,53 @@ int main(int argc, char ** argv)
 				Circuit.openOutputFile(output_name);
 				Circuit.OutputAllBFaultList();
     }
+		// ---------------------------
+		// Options operations for lab6
+    else if (option.retrieve("check_point_fsim")) {
+        //single pattern single transition-fault simulation
+        Circuit.GenerateAllCPFaultListForFsim();
+				
+        //Circuit.GenerateAllFaultList();
+        Circuit.SortFaninByLevel();
+        Circuit.MarkOutputGate();
+        if (option.retrieve("fsim")) {
+            //stuck-at fault simulator
+            Circuit.InitPattern(option.retrieve("input"));
+            Circuit.FaultSimVectors();
+        }
+        else {
+            if (option.retrieve("bt")) {
+                Circuit.SetBackTrackLimit(atoi(option.retrieve("bt")));
+            }
+            //stuck-at fualt ATPG
+            Circuit.Atpg();
+        }
+    }
+		else if (option.retrieve("random_pattern")) {
+        Circuit.GenerateAllFaultList();
+        Circuit.SortFaninByLevel();
+        Circuit.MarkOutputGate();
+				string pattern_name = (string) option.retrieve("output");
+				cout << "pattern name: " << pattern_name << endl;
+				Circuit.openFile(pattern_name);
+				Circuit.genRandomPattern(pattern_name, 1000);
+
+				unsigned coverage = 0;
+				int cnt = 0;
+
+				while (coverage <= 90 && cnt < 1000) {
+           //stuck-at fault simulator
+           coverage = Circuit.FaultSimRandomPattern();
+						
+					 cout << "Random Pattern #" << ++cnt << " Coverage: " 
+					 			<< coverage << "%\n";
+        }
+				if (option.retrieve("bt")) {
+				Circuit.SetBackTrackLimit(atoi(option.retrieve("bt")));
+				}
+				//stuck-at fualt ATPG after Random Pattern
+				Circuit.AtpgRandomPattern();
+		}
 		// ---------------------------
 		else if (option.retrieve("logicsim")) {
         //logic simulator

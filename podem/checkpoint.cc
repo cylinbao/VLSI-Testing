@@ -7,7 +7,7 @@ using namespace std;
 
 extern GetLongOpt option;
 
-//generate all stuck-at fault list
+//generate all stuck-at check-point fault list
 void CIRCUIT::GenerateAllCPFaultList()
 {
     cout << "Generate checkpoint fault list" << endl;
@@ -54,3 +54,41 @@ void CIRCUIT::CalculatePercentage()
 	cout << "Flist size = " << Flist.size() << endl;
 	cout << perc << "\% of faults have been collapsed\n";
 }
+
+//generate all stuck-at check-point fault list for Fsim
+void CIRCUIT::GenerateAllCPFaultListForFsim()
+{
+    cout << "Generate checkpoint fault list" << endl;
+    register unsigned i, j;
+    GATEFUNC fun;
+    GATEPTR gptr, fanout;
+    FAULT *fptr;
+    for (i = 0;i<No_Gate();++i) {
+        gptr = Netlist[i]; fun = gptr->GetFunction();
+				if (fun == G_PI) { 
+					//add stem stuck-at 0 fault to Flist
+					fptr = new FAULT(gptr, gptr, S0);
+					Flist.push_front(fptr);
+					//add stem stuck-at 1 fault to Flist
+					fptr = new FAULT(gptr, gptr, S1);
+					Flist.push_front(fptr);
+				}
+
+        if (gptr->No_Fanout() == 1) { continue; } //no branch faults
+
+        //add branch fault
+        for (j = 0;j< gptr->No_Fanout();++j) {
+            fanout = gptr->Fanout(j);
+            fptr = new FAULT(gptr, fanout, S0);
+            fptr->SetBranch(true);
+            Flist.push_front(fptr);
+            fptr = new FAULT(gptr, fanout, S1);
+            fptr->SetBranch(true);
+            Flist.push_front(fptr);
+        } //end all fanouts
+    } //end all gates
+    //copy Flist to undetected Flist (for fault simulation)
+    UFlist = Flist;
+    return;
+}
+

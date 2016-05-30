@@ -199,7 +199,7 @@ extern GATE* NameToGate(string);
 void PATTERN::Initialize(char* InFileName, int no_pi, string TAG)
 {
     patterninput.open(InFileName, ios::in);
-    if (!patterninput) {
+    if (!patterninput.is_open()) {
         cout << "Unable to open input pattern file: " << InFileName << endl;
         exit( -1);
     }

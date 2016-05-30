@@ -44,5 +44,11 @@ class PATTERN
 				void genRandomPatternUnknown(int pattern_number);
 				// VLSI-Testing lab3
 				vector<GATE*>* getInlistPtr() { return &inlist;}
+				// VLSI-Testing lab6
+				void genRandomPatternOnly(int pattern_number);
+				void closeOfs() {
+					if(ofs.is_open())
+						ofs.close();
+				}
 };
 #endif
